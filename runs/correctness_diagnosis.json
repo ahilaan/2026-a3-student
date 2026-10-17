@@ -1,0 +1,59 @@
+{
+  "submission_id": 12,
+  "status": "OK",
+  "files_ok": true,
+  "checks": [
+    {
+      "check": "fusion: RRF worked example",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fusion: CombSUM or CombMNZ (at least one correct)",
+      "ok": true,
+      "detail": "passed: CombSUM CombMNZ"
+    },
+    {
+      "check": "(d) pointwise loss = squared error",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "(a) RankNet loss values + numerical stability",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "(b) make_pairs: same-query, strictly ordered, preferred first, capped, reproducible",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "(c) one pairwise step raises s_preferred - s_other, and matches a hand SGD step (no gradient accumulation)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "pointwise step matches a hand SGD step",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "(f) training reproducible given the seed",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "train_model returns history with dev nDCG each epoch and honours early stopping",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "(e) pointwise & pairwise artifacts load and the pairwise model beats a single BM25 feature on DEV",
+      "ok": false,
+      "detail": "AssertionError: pairwise dev nDCG@10 0.1891 does not beat BM25-feature sort 0.2885"
+    }
+  ],
+  "pairwise_dev_ndcg": 0.18912252312777186,
+  "ltr_dev_ndcg": 0.26375664052018016
+}

@@ -3,3 +3,6 @@ __pycache__/
 .pytest_cache/
 tmp/
 2023CS10076.zip
+data/train/
+data/dev/
+data/cache/

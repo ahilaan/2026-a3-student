@@ -1,0 +1,21 @@
+{
+  "official_source": "https://www.microsoft.com/en-us/research/project/mslr/",
+  "download_url": "https://storage.googleapis.com/personalization-takehome/MSLR-WEB10K.zip",
+  "archive_md5": "97c5d4e7c171e475c91d7031e4fd8e79",
+  "archive_bytes": 1234144912,
+  "extracted_entries": [
+    "Fold1/train.txt",
+    "Fold1/vali.txt"
+  ],
+  "held_out_files_opened": false,
+  "prepared_files": {
+    "data\\train\\train.txt": {
+      "bytes": 838011150,
+      "sha256": "6eb3fae4e1186e1242a6520f53a98abdbcde5b926dd19a28e51239284b1d55dc"
+    },
+    "data\\dev\\vali.txt": {
+      "bytes": 272760099,
+      "sha256": "e86fb3fe7e8a5f16479da7ce04f783ae85735f17f66016786c3ffc797dd9d4db"
+    }
+  }
+}

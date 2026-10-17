@@ -1,0 +1,26 @@
+{
+  "goal": "Fix real-DEV learning floor, then improve leaderboard position",
+  "current_submission": 17,
+  "checks_passed": 9,
+  "checks_total": 10,
+  "cause": "Toy-trained pairwise model does not beat real-DEV BM25",
+  "required_authorized_files": [
+    "data/train/train.txt",
+    "data/dev/vali.txt"
+  ],
+  "public_archive_downloaded": false,
+  "new_submission_uploaded": true,
+  "next_steps": [
+    "Wait for submission #17 and verify its correctness result",
+    "Report real DEV metrics, artifact sizes, ZIP and exact test outcomes"
+  ],
+  "required_data_available": true,
+  "data_source": "checksum-verified official MSLR-WEB10K archive",
+  "held_out_files_opened": false,
+  "pointwise_real_dev_ndcg": 0.4247482873621245,
+  "pairwise_real_dev_ndcg": 0.4364209245373557,
+  "bm25_real_dev_ndcg": 0.28848678060708594,
+  "local_learning_floor_passes": true,
+  "current_submission_status": "queued",
+  "real_ltr_dev_ndcg": 0.4711961419084681
+}

@@ -1,59 +1,49 @@
 {
-  "python": "3.13.7",
-  "platform": "Windows-11-10.0.26200-SP0",
-  "packages": {
-    "numpy": "2.5.4",
-    "torch": "2.14.1",
-    "lightgbm": "4.7.0",
-    "pytest": "9.1.1"
+  "zip": "2023CS10076.zip",
+  "zip_bytes": 565443,
+  "zip_sha256": "65d39256a8d9a002a54d005e00a2f17e3d07a46a57383c66f71a689570b8c235",
+  "required_files": [
+    "submission/ranking.py",
+    "submission/fusion.py",
+    "submission/pointwise_pairwise.py",
+    "submission/recipe.py",
+    "submission/model.txt",
+    "submission/pointwise_model.pt",
+    "submission/pairwise_model.pt"
+  ],
+  "files": 54,
+  "dataset_files_included": false,
+  "artifact_sizes": {
+    "C:\\Users\\HP\\Downloads\\col764_a3\\2026-a3-student\\submission\\model.txt": 371739,
+    "C:\\Users\\HP\\Downloads\\col764_a3\\2026-a3-student\\submission\\pairwise_model.pt": 40483,
+    "C:\\Users\\HP\\Downloads\\col764_a3\\2026-a3-student\\submission\\pointwise_model.pt": 40493
   },
-  "artifacts": {
-    "submission\\model.txt": {
-      "sha256": "5cbbbee5e4f5b6410f35b8846227e26946f203dab8d48c4f6a52a57b642cc895",
-      "bytes": 184841,
-      "training_split": "data/toy/train.txt",
-      "real_mslr": false,
-      "num_features": 136,
-      "num_trees": 100
+  "real_dev": {
+    "features": "data/dev/vali.txt",
+    "rows": 235259,
+    "queries": 2000,
+    "artifact_sha256": {
+      "submission\\model.txt": "45154a242442d4423748f18a47eafd060aea88894c2433021ad2033e5e622668",
+      "submission\\pointwise_model.pt": "cfbff50b8290bb112912256e29b36dbd5f62669b66d0f69fb44f17c547279495",
+      "submission\\pairwise_model.pt": "61a43dddeda1e22e25075806300c53bb5e5305072c879af06a6632fc8425a537"
     },
-    "submission\\pointwise_model.pt": {
-      "sha256": "e1e1069cf13f29bb024623afcb81770f278289bcfa0b426f4f17d0d88ab40a9b",
-      "bytes": 40493,
-      "training_split": "data/toy/train.txt",
-      "real_mslr": false,
-      "config": {
-        "n_features": 136,
-        "hidden": [
-          64
-        ]
-      }
-    },
-    "submission\\pairwise_model.pt": {
-      "sha256": "ffb12cf84883f874865e8f34d8d86d3f74cb6e85b7d62198c67b30823f5462df",
-      "bytes": 40483,
-      "training_split": "data/toy/train.txt",
-      "real_mslr": false,
-      "config": {
-        "n_features": 136,
-        "hidden": [
-          64
-        ]
-      }
-    }
+    "prepare_seconds": 0.017922600000019884,
+    "ltr_ndcg@10": 0.47119614190846904,
+    "pointwise_ndcg@10": 0.4247482873621245,
+    "pairwise_ndcg@10": 0.4364209245373557,
+    "bm25_ndcg@10": 0.28848678060708594,
+    "pairwise_beats_bm25": true,
+    "ltr_beats_bm25": true,
+    "largest_query_seconds": 0.01907480000227224,
+    "passes": true
   },
-  "input_sha256": {
-    "data\\toy\\train.txt": "1b9d1d81030a157bdb04b6236cde3976869ca15099f02e688a0ef206571f227b",
-    "data\\toy\\vali.txt": "974559e8a16add368997105adb6af46103457bcde81b375111b9836e188ee4d0"
+  "tests": {
+    "handwritten_correctness": "7 passed",
+    "real_artifact_interface_contracts": "4 passed; synthetic accuracy test excluded from this contract-only run",
+    "direct_full_suite_with_real_artifacts": "52 passed, 1 failed (stock synthetic quality assumption)",
+    "isolated_unchanged_toy_smoke": "46 passed",
+    "isolated_unchanged_full_suite": "53 passed"
   },
-  "fresh_process_artifact_loads": true,
-  "all_toy_query_inference_repeatable": true,
-  "toy_timing_seconds": {
-    "prepare": 0.013464899966493249,
-    "max_fusion": 6.809993647038937e-05,
-    "max_ltr": 0.0009316001087427139
-  },
-  "correctness_tests_passed": 7,
-  "conformance_and_edge_tests_passed": 45,
-  "bash_smoke_test": "passed; 45 tests; toy artifact subsequently retrained to 100 trees",
-  "real_data_available": false
+  "data_provenance": "runs/mslr_data_provenance.json",
+  "cv": "runs/mslr_cv.json"
 }

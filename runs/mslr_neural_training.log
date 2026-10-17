@@ -1,0 +1,24 @@
+pointwise epoch 1: loss=0.597795 dev nDCG@10=0.396972
+pointwise epoch 2: loss=0.592542 dev nDCG@10=0.414896
+pointwise epoch 3: loss=0.568459 dev nDCG@10=0.416532
+pointwise epoch 4: loss=0.569805 dev nDCG@10=0.420117
+pointwise epoch 5: loss=0.589373 dev nDCG@10=0.417962
+pointwise epoch 6: loss=0.565907 dev nDCG@10=0.423305
+pointwise epoch 7: loss=0.568647 dev nDCG@10=0.424748
+pointwise epoch 8: loss=0.574763 dev nDCG@10=0.421182
+pointwise epoch 9: loss=0.565211 dev nDCG@10=0.419851
+pointwise epoch 10: loss=0.576996 dev nDCG@10=0.424695
+pointwise: epochs run = 10, final dev nDCG@10 = 0.4247 -> submission\pointwise_model.pt
+pairwise epoch 1: loss=0.606904 dev nDCG@10=0.417380
+pairwise epoch 2: loss=0.599062 dev nDCG@10=0.427821
+pairwise epoch 3: loss=0.595674 dev nDCG@10=0.424316
+pairwise epoch 4: loss=0.593095 dev nDCG@10=0.427024
+pairwise epoch 5: loss=0.591393 dev nDCG@10=0.429513
+pairwise epoch 6: loss=0.591067 dev nDCG@10=0.426201
+pairwise epoch 7: loss=0.589640 dev nDCG@10=0.430840
+pairwise epoch 8: loss=0.589115 dev nDCG@10=0.428656
+pairwise epoch 9: loss=0.588099 dev nDCG@10=0.436421
+pairwise epoch 10: loss=0.587252 dev nDCG@10=0.433011
+pairwise epoch 11: loss=0.587456 dev nDCG@10=0.431492
+pairwise epoch 12: loss=0.586889 dev nDCG@10=0.430956
+pairwise: epochs run = 12, final dev nDCG@10 = 0.4364 -> submission\pairwise_model.pt

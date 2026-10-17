@@ -1,0 +1,6 @@
+== Local sanity-check only -- NOT your real leaderboard score ==
+queries scored: 2000
+fuse_candidates()  nDCG@10: 0.2995   MAP@10: 0.1246
+rerank_with_ltr()  nDCG@10: 0.4712   MAP@10: 0.1506
+
+These are RAW numbers. The real Tracks A, B, C1, C2 percentile-rank each against the whole class (weights A10/B10/P10/C1 35/C2 35). C1 needs the hidden benchmarks and C2 hidden held-out data, so neither can be computed locally: use scripts/run_recipe.py (C1 dry run on synthetic transfer sets) and scripts/cv_lambdamart.py (your local train/validation gap within TRAIN).

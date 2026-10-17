@@ -1,157 +1,151 @@
-# First-pass submission notes
+# Real-data baseline submission notes
 
-Status as of 16 October 2026: implementation and synthetic checks completed.
-Real released `data/train/train.txt` and `data/dev/vali.txt` are absent. Every
-saved submission artifact is toy-trained and must be replaced before a real
-competition submission. No withheld data or additional relevance labels were
-obtained. The final assignment report has not been generated.
+Updated 17 October 2026. All three submitted model artifacts now use actual
+MSLR-WEB10K Fold1 TRAIN. This is a properly trained baseline; no advanced
+leaderboard optimization, DEV-gradient training or hidden-benchmark tuning was
+performed. The final 2-3-page assignment report has not been generated.
 
-## Data and artifact declarations
+## Data provenance and setup
 
-- `submission/model.txt`: LightGBM text, 136 features, 100 trees, seed 0;
-  gradients use only `data/toy/train.txt` (120 queries, 3000 rows). Tree count
-  selected using five query folds of that same synthetic TRAIN, without early
-  stopping. `data/toy/vali.txt` (40 queries, 1000 rows) used for reporting only.
-  This model was explicitly trained AFTER the smoke test's 30-tree toy model.
-- `submission/pointwise_model.pt`: toy TRAIN only; toy validation selects the
-  best epoch. Ran 20 epochs, restored epoch 20.
-- `submission/pairwise_model.pt`: toy TRAIN only, relevance-label preferences;
-  toy validation selects the best epoch. Ran 10 epochs, restored epoch 7.
-- Transfer recipe: each supplied TRAIN file supplies gradients; the supplied
-  validation file selects the best round. There is no train+validation refit.
-  Only the three provided synthetic transfer datasets were run locally.
-  Their temporary models were loaded and evaluated, then removed by the dry-run
-  runner. No real or hidden benchmark tuning was performed.
+The Microsoft dataset page publishes archive MD5
+`97c5d4e7c171e475c91d7031e4fd8e79`. Its current OneDrive endpoint returned HTTP
+403, "The request is blocked". The same 1,234,144,912-byte archive was downloaded
+from `https://storage.googleapis.com/personalization-takehome/MSLR-WEB10K.zip`.
+The full downloaded bytes matched Microsoft's published MD5 before extraction.
+Only `Fold1/train.txt` and `Fold1/vali.txt` were opened/extracted. No `test.txt`
+or file from another fold was opened, decompressed, processed or used.
 
-## Methods and configuration
+`scripts/setup_mslr.py` performs checksum verification, selective extraction and
+calls the existing `scripts/prepare_mslr.py`. Prepared data:
 
-Fusion implements unweighted textbook RRF, CombSUM and CombMNZ. Default
-`fuse_candidates()` uses RRF with c=60. Ranks start at 1, higher scores are
-better even when negative, and channel ties retain candidate order. CombSUM
-uses per-channel min-max normalization; constant channels contribute zero.
-CombMNZ multiplies that sum by the number of strictly positive normalized
-scores. No labels or fitted preprocessing enter fusion.
+- `data/train/train.txt`: 723,412 rows, 6,000 queries, 136 features, labels 0..4.
+- `data/dev/vali.txt`: 235,259 rows, 2,000 queries, 136 features, labels 0..4.
 
-Both neural networks use the staff `Standardizer` fitted only on TRAIN and the
-staff `ScoringNetwork`: actual input width -> 64 ReLU -> 1 score. Adam uses
-learning rate 0.001, batch size 1024, maximum 20 epochs, patience 3 and seed 0.
-Pointwise loss is mean squared error. RankNet is mean softplus of the negative
-preferred-minus-other score difference, without weighting or distillation.
-Python, NumPy and PyTorch are seeded; deterministic PyTorch operations and at
-most four CPU threads are used. Validation scores are evaluated over whole
-queries after each epoch; scoring in chunks bounds memory. The best weights
-are restored, and artifacts use the unchanged staff serialization format.
+`runs/mslr_data_provenance.json` records download provenance, selected archive
+entries and input SHA-256 hashes. `runs/mslr_split_stats.json` records aggregate
+split counts. Dataset/cache files are Git-ignored and excluded from the ZIP.
 
-Pair sampling is uniform without replacement over all unequal-label pairs in
-each query, capped at 300 per epoch. Cartesian label-bucket blocks and sampled
-integer offsets avoid constructing all possible document pairs. Preferred
-documents always occupy column 0. Queries may have noncontiguous source rows;
-all-tied queries contribute no pairs. Pairs are resampled and shuffled each epoch.
+## Training declarations and configuration
 
-LambdaMART uses `lambdarank`, nDCG@10, 15 leaves, learning rate 0.05,
+- `submission/model.txt`: LightGBM text, 200 trees, 15 leaves, seed 0. Gradients
+  use full Fold1 TRAIN only. Tree count was selected by five query folds within
+  TRAIN; DEV is reporting-only, with no early stopping or gradients on DEV.
+  A single full-TRAIN run fit the maximum swept count; CV selected all 200 trees.
+- `submission/pointwise_model.pt`: full Fold1 TRAIN relevance labels only;
+  Standardizer fitted on TRAIN; DEV selects epoch 7. Ran 10 epochs and restored
+  epoch 7 after patience 3.
+- `submission/pairwise_model.pt`: full Fold1 TRAIN relevance-label preferences
+  only; Standardizer fitted on TRAIN; DEV selects epoch 9. Ran 12 epochs and
+  restored epoch 9 after patience 3. No model-score distillation.
+- `submission/recipe.py`: staff-supplied TRAIN supplies gradients; supplied
+  validation selects the best iteration. No train+validation refit. Only the
+  provided synthetic transfer datasets were run locally; hidden data was not
+  sought or inspected.
+
+Both neural networks use the unchanged staff MLP/serialization: 136 inputs ->
+64 ReLU units -> 1 score, Adam at 0.001, batch size 1024, maximum 20 epochs,
+patience 3, seed 0 and at most four CPU threads. Pointwise minimizes mean squared
+error; pairwise uses plain mean softplus of the negative preferred-minus-other
+score difference. RankNet samples at most 300 distinct unequal-label pairs per
+query per epoch, preferred first. Label-bucket Cartesian offsets and Floyd
+sampling avoid constructing all possible pairs. Pairs are query-local,
+resampled and shuffled each epoch. Python/NumPy/PyTorch seeds are set, and best
+validation weights are restored.
+
+LambdaMART uses `lambdarank`, nDCG@10, learning rate 0.05,
 `min_data_in_leaf=50`, `lambda_l2=1`, feature fraction 0.8, bagging fraction 0.8
 and bagging frequency 1. Training/data/feature/bagging seeds are 0; deterministic
-row-wise mode is enabled. Offline training/CV and per-query predictions use one
-thread; the transfer recipe trains with four. No tree standardization or extra
-features are used. Shared fitting stably regroups features, labels and query IDs.
+row-wise mode is enabled. Offline tree training uses one CPU thread; transfer
+training uses four. No tree standardization or extra features were introduced.
+The transfer recipe uses at most 200 rounds and validation patience 30.
 
-Transfer uses one bounded run of at most 200 rounds, with early stopping after
-30 non-improving validation rounds, saving the best iteration. A two-pass reader
-handles sparse indices and trailing comments, infers a common width from both
-supplied files, and fills float32 arrays directly in query order. A 500k x 300
-feature matrix uses 600 MB; the implementation avoids retaining feature tuples
-for every row. The same reader supports offline CLIs. Maximum-scale runtime and
-peak memory have not been measured; only the supplied toy datasets were timed.
+Fusion remains hand-written unweighted RRF (default c=60), CombSUM and CombMNZ.
+Higher scores are better, ranks start at 1, ties preserve candidate order, and
+constant channels normalize to zero. No relevance labels enter fusion.
+Inference deduplicates candidates, checks feature width against the loaded
+model and ranks stably. Missing/corrupt artifacts and non-finite predictions
+raise clear exceptions. The staff harness and provided tests are unchanged.
 
-Inference loads the artifact once, checks feature width against that loaded
-model, deduplicates candidates, predicts with one thread and sorts stably.
-Missing/corrupt artifacts raise exceptions and clear any previously loaded
-model. Non-finite predictions raise a clear error.
+## Real TRAIN cross-validation
 
-## Recorded synthetic results
+Five query-grouped folds, seed 0, fixed tree counts, no early stopping on the
+reported validation folds. All rows of a query stay together; no preprocessing
+is fitted across folds. Each tree count was trained independently on four folds.
 
-These are synthetic validation results, not real DEV or leaderboard scores:
+- 50 trees: train mean 0.450769; validation mean 0.441080, population std 0.007464; uncapped validation/train ratio 0.978506.
+- 100 trees: train mean 0.468226; validation mean 0.454500, population std 0.006744; uncapped validation/train ratio 0.970687.
+- 200 trees: train mean 0.487034; validation mean 0.464036, population std 0.006981; uncapped validation/train ratio 0.952781.
 
-- Default RRF: nDCG@10 0.9341, MAP@10 0.8474.
-- Final 100-tree LambdaMART: nDCG@10 0.9456 (TRAIN nDCG@10 0.9917).
-- Pointwise: nDCG@10 0.9119.
-- RankNet: nDCG@10 0.9358; single whole-document BM25 feature: 0.9287.
-- Transfer validation nDCG@10: 40 features/labels 0..4: 0.9436;
-  90 features/labels 0..4: 0.9426; 250 features/labels 0..2: 0.9525.
-  The recorded JSON dry run took 1.0, 0.6 and 1.6 seconds respectively, well
-  below 1200 seconds locally. These timings do not establish maximum-scale speed.
+Selected 200 trees by strongest mean validation nDCG@10; differences within
+0.0001 would prefer fewer trees. Complete fold scores and parameters are saved
+in `runs/mslr_cv.json`.
 
-Five-fold grouped toy TRAIN CV, fixed tree counts, no early stopping:
+## Real DEV results
 
-- 50 trees: train mean 0.983244; validation mean 0.941386, population std
-  0.003293; uncapped validation/train ratio 0.957429.
-- 100 trees: train mean 0.992903; validation mean 0.942880, std 0.005198;
-  ratio 0.949619.
-- 200 trees: train mean 0.996693; validation mean 0.941207, std 0.004434;
-  ratio 0.944330.
+All results below use the 2,000 Fold1 validation queries, not toy data:
 
-The strongest mean selects 100 trees; differences within 0.0001 nDCG prefer the
-smaller model. This validates the CV pipeline only and does not select a real
-MSLR tree count. `runs/toy_cv.json` preserves every fold's scores and parameters;
-`runs/toy_harness.json`, `runs/toy_neural.json`, and `runs/toy_transfer.json`
-preserve evaluations. `submission/*_history.json` preserves neural epoch losses
-and validation scores. `runs/verification.json` records versions and artifact hashes.
+- RRF: nDCG@10 0.299457603; MAP@10 0.124636892.
+- LambdaMART: nDCG@10 0.471196142; MAP@10 0.150633605.
+- Pointwise: nDCG@10 0.424748287.
+- RankNet: nDCG@10 0.436420925.
+- Single whole-document BM25 feature: nDCG@10 0.288486781.
+
+Saved-artifact scores reproduced in fresh processes through the unchanged staff
+loader. RankNet beats BM25 and fixes the locally reproducible cause of the
+previous upload's 9/10 check. Final real-DEV harness and preflight reports are
+`runs/mslr_harness.json`, `runs/mslr_neural.json` and `runs/mslr_preflight.json`.
+No held-out score was computed locally.
+
+## Verification and the toy-test assumption
+
+- Required handwritten correctness tests: 7 passed.
+- Direct full suite with real-trained artifacts: 52 passed, 1 failed. The sole
+  failure is the stock `test_end_to_end_toy` assertion that LambdaMART scores
+  above 0.5 on synthetic data; the real-trained model scores 0.278058 there.
+  This synthetic accuracy assumption does not measure real-DEV model quality.
+- In a disposable extracted copy with a separately toy-trained LambdaMART
+  fixture, the unchanged Bash smoke test passed 46 tests and the unchanged
+  full suite passed all 53. No final real model was overwritten.
+- The actual real-data harness passed on all 2,000 queries. Preflight reloaded
+  every artifact, checked finite/repeatable scores and ranking contracts, and
+  verified both LambdaMART and RankNet beat BM25 on real DEV.
+- Both `.pt` files have only staff-compatible config/state_dict/standardizer
+  fields and a single hidden layer of width 64.
+
+CI validates committed model interface contracts, then runs all provided tests
+with their intended toy fixture, restoring the committed model afterward.
+It does not modify or weaken any harness/test assertion. Run the toy smoke test
+in a disposable copy, or before final real training: it writes a toy model.
 
 ## Reproduction
 
-Use an environment with the declared `requirements.txt`. Local checks ran on
-Windows with Python 3.13.7; Python 3.12/Ubuntu has not been exercised here.
-The implementation uses Python 3.12-compatible syntax and the allowed packages.
-Activate the local `.venv` if using the environment created during this work.
+Use the declared requirements. Local training/evaluation ran on Windows,
+Python 3.13.7, NumPy 2.5.4, PyTorch 2.14.1 and LightGBM 4.7.0. The source is
+Python 3.12-compatible; CI uses Ubuntu 24.04 / Python 3.12.
 
 ```bash
-python -m pytest tests/test_student_todos.py -q
-python -m pytest tests --ignore=tests/test_student_todos.py -q
-bash scripts/smoke_test.sh
-python scripts/cv_lambdamart.py --train data/toy --trees 50 100 200 --report-out runs/toy_cv.json
-python scripts/train_model.py --train data/toy --out submission/model.txt --trees 100 --seed 0
-python scripts/train_neural.py --kind both --train data/toy --dev data/toy --out-dir submission --seed 0
-python -m harness.run_harness --features data/toy/vali.txt --model submission/model.txt --report-out runs/toy_harness.json
-python scripts/evaluate_neural.py --features data/toy/vali.txt --report-out runs/toy_neural.json
-python scripts/run_recipe.py --report-out runs/toy_transfer.json
-```
-
-With authorized released real TRAIN and DEV files in place, rerun the following.
-Replace `SELECTED_TREES` with the tree count selected by the real TRAIN CV JSON;
-the placeholder is not a literal CLI value. Do not run the toy smoke test after
-producing the final real model.
-
-```bash
+python scripts/setup_mslr.py
 python scripts/cv_lambdamart.py --train data/train --trees 50 100 200 --report-out runs/mslr_cv.json
-python scripts/train_model.py --train data/train --dev data/dev --out submission/model.txt --trees SELECTED_TREES --seed 0
+python scripts/train_model.py --train data/train --out submission/model.txt --trees 200 --seed 0
 python scripts/train_neural.py --kind both --train data/train --dev data/dev --out-dir submission --seed 0
-python -m harness.run_harness --features data/dev/vali.txt --model submission/model.txt --report-out runs/mslr_dev.json
+python -m harness.run_harness --features data/dev/vali.txt --model submission/model.txt --report-out runs/mslr_harness.json
 python scripts/evaluate_neural.py --features data/dev/vali.txt --report-out runs/mslr_neural.json
+python scripts/preflight.py --features data/dev/vali.txt --report-out runs/mslr_preflight.json
+python scripts/build_submission.py
 ```
 
-Declare neural early stopping on real DEV once performed; real DEV labels should
-not supply training gradients. The requested real-data CV, training, metrics and
-real BM25 comparison are pending, not inferred from toy results. Verify the
-three final artifacts before packaging; exclude environment/cache and data files.
-
-## Next iteration
-
-First obtain the authorized released TRAIN/DEV splits and establish genuine
-metrics. Then use TRAIN query folds for modest tree regularization/round-count
-changes, inspect neural learning curves and the real BM25 comparison, and measure
-transfer resource use at larger synthetic sizes. No LambdaRank weighting,
-exotic architectures or exhaustive tuning was added in this pass.
+The ZIP builder verifies the seven required grader entries, preserves the
+starter directory layout and excludes datasets, archive/cache files, login
+cookies, Git metadata, environments and experiment outputs. Its size limit is
+50 MB. Epoch histories and experiment results remain in the repository for the
+later assignment report; they are not required model inputs.
 
 ## AI-use disclosure and provenance
 
-Codex assisted with repository inspection, implementation, testing and
-documentation. ChatGPT assisted with assignment analysis and preparation of the
-implementation prompt. The student must verify and complete all other personal
-disclosure details.
-
-Code/formula sources consulted: the supplied `a3-rankfusion-LTR.pdf` (version 1.5),
-the [course starter repository](https://github.com/col7364iitd/2026-a3-student),
-its `docs/RANKNET_PRIMER.md`, interface/grading/transfer/data documentation, and
-the unchanged harness implementations. RRF, min-max CombSUM/CombMNZ, squared
-error and RankNet formulas follow those materials. No external implementation
-was copied; LightGBM supplies the explicitly permitted LambdaMART objective.
+Codex assisted with inspection, downloading/setup, implementation, training,
+testing and documentation. ChatGPT assisted with assignment analysis and the
+implementation prompt. The student must verify any other personal disclosure
+details. Formulas/code sources were the supplied assignment PDF, course starter
+repository and its documentation/unchanged harness. Microsoft's dataset page
+supplied archive identity and split information. No external ranking
+implementation was copied; LightGBM supplies the permitted LambdaMART objective.

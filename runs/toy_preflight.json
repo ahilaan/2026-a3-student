@@ -1,0 +1,18 @@
+{
+  "features": "data/toy/vali.txt",
+  "rows": 1000,
+  "queries": 40,
+  "artifact_sha256": {
+    "submission\\model.txt": "5cbbbee5e4f5b6410f35b8846227e26946f203dab8d48c4f6a52a57b642cc895",
+    "submission\\pointwise_model.pt": "e1e1069cf13f29bb024623afcb81770f278289bcfa0b426f4f17d0d88ab40a9b",
+    "submission\\pairwise_model.pt": "ffb12cf84883f874865e8f34d8d86d3f74cb6e85b7d62198c67b30823f5462df"
+  },
+  "prepare_seconds": 0.01015689999985625,
+  "ltr_ndcg@10": 0.9455718724046216,
+  "pointwise_ndcg@10": 0.9118604580746392,
+  "pairwise_ndcg@10": 0.9358167081009844,
+  "bm25_ndcg@10": 0.9287107488307974,
+  "pairwise_beats_bm25": true,
+  "largest_query_seconds": 0.0003722000001289416,
+  "passes": true
+}

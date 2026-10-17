@@ -1,0 +1,9 @@
+{
+  "features": "data/dev/vali.txt",
+  "num_queries": 2000,
+  "num_features": 136,
+  "pointwise_ndcg@10": 0.4247482873621245,
+  "pairwise_ndcg@10": 0.4364209245373557,
+  "bm25_ndcg@10": 0.28848678060708594,
+  "pairwise_beats_bm25": true
+}

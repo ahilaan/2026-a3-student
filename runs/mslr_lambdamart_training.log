@@ -1,0 +1,2 @@
+trained on 6000 queries (train only) -> tmp/mslr_full_200.txt
+train nDCG@10 = 0.4832

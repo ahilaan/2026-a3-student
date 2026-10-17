@@ -1,0 +1,5 @@
+ trees    train      val  val std  val/train
+    50   0.4508   0.4411   0.0075     0.9785
+   100   0.4682   0.4545   0.0067     0.9707
+   200   0.4870   0.4640   0.0070     0.9528
+selected trees: 200 (near-tie tolerance 0.0001)

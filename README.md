@@ -6,6 +6,7 @@ Fuse four base rankers, then train pointwise / RankNet / LambdaMART rankers on M
 ```
 pip install -r requirements.txt
 bash scripts/smoke_test.sh                 # toy data, trains, runs the harness, runs tests
+python scripts/setup_mslr.py              # checksum-verified archive; extract ONLY Fold1 TRAIN/DEV
 python scripts/prepare_mslr.py --fold-dir <MSLR-WEB10K/Fold1>     # real data -> data/train, data/dev
 python scripts/run_recipe.py                      # Track C1 dry run on toy data (synthetic transfer sets; see docs/TRANSFER_TRACK.md)
 python scripts/cv_lambdamart.py --train data/train --trees 50 100 200 400   # local train-vs-validation gap
@@ -29,10 +30,14 @@ Docs: `docs/SUBMISSION_INTERFACE.md`, `docs/GRADING.md`, `docs/RANKNET_PRIMER.md
 ## Layout
 `harness/` metrics, I/O, CV, leaderboard formulas, runner (do not edit; staff run an identical copy) - `submission/` your entry - `scripts/` tooling - `data/toy/` and `data/toy_transfer/` synthetic data - `tests/`.
 
-The current `submission/model.txt` / `pointwise_model.pt` / `pairwise_model.pt` are trained on **synthetic toy TRAIN only**, not real MSLR. LambdaMART uses 100 trees selected by grouped CV on toy TRAIN; toy validation is reporting-only. Both neural models use toy validation for early stopping. No real TRAIN/DEV files were available. Replace these artifacts after authorized released data are supplied.
+The current `submission/model.txt`, `pointwise_model.pt`, and `pairwise_model.pt` are trained on **actual MSLR-WEB10K Fold1 TRAIN only** (723,412 rows / 6,000 queries). LambdaMART uses 200 trees selected by five-fold query-grouped CV within TRAIN. DEV (235,259 rows / 2,000 queries) is reporting-only for LambdaMART and selects the neural early-stopping epoch. No DEV labels supply training gradients. Only Fold1 TRAIN and validation were extracted from the checksum-verified dataset archive; no held-out file was opened.
+
+Real DEV nDCG@10: LambdaMART **0.471196**, pointwise **0.424748**, RankNet **0.436421**, single BM25 feature **0.288487**. RankNet now clears the learning floor that the previous toy-trained upload failed.
 
 The baseline uses all supplied features: an input-dimension -> 64 ReLU -> 1 MLP, Adam at 0.001, batches of 1024, up to 20 epochs and patience 3. RankNet samples up to 300 distinct pairs per query per epoch. LambdaMART uses 15 leaves, learning rate 0.05, minimum leaf size 50, L2=1, and feature/bagging fractions 0.8. The transfer recipe uses the same regularization, at most 200 rounds and validation patience 30, with four threads. CLI readers align sparse feature widths and group queries without retaining a large Python object per feature.
 
-Reproduction commands, split declarations, measured toy results and limitations are in [submission notes](docs/SUBMISSION_NOTES.md); JSON results are in `runs/`, and neural epoch histories accompany the artifacts. **Run the toy smoke test before final real-data training: it overwrites `submission/model.txt`.** Exclude `.venv/`, caches and data from the submission ZIP.
+Reproduction commands, split declarations, measured real DEV results and limitations are in [submission notes](docs/SUBMISSION_NOTES.md); JSON results are in `runs/`, and neural epoch histories accompany the artifacts. Run `python scripts/preflight.py` and `python scripts/build_submission.py` to verify the loaded models on real DEV and build the data-free `2023CS10076.zip`. **Run the toy smoke test before final real-data training: it overwrites `submission/model.txt`.** Exclude `.venv/`, caches and data from the submission ZIP.
 
 AI-use disclosure: Codex assisted with implementation, testing and documentation. ChatGPT assisted with assignment analysis and the implementation prompt. The student must verify and complete any other personal disclosure details. Code/formula sources consulted were the supplied assignment, starter repository and its documentation; no external implementation was copied.
+
+CI checks the committed models' interface contracts first, then runs the unchanged smoke/full tests with their toy-trained LambdaMART fixture in a disposable CI working copy. The stock `test_end_to_end_toy` assumes a toy-trained model and fails its synthetic accuracy threshold for the real-trained model; real artifact quality is checked on actual DEV. See the notes for exact test outcomes.
