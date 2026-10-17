@@ -1,0 +1,5 @@
+.venv/
+__pycache__/
+.pytest_cache/
+tmp/
+2023CS10076.zip

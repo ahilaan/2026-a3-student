@@ -1,0 +1,59 @@
+{
+  "python": "3.13.7",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "packages": {
+    "numpy": "2.5.4",
+    "torch": "2.14.1",
+    "lightgbm": "4.7.0",
+    "pytest": "9.1.1"
+  },
+  "artifacts": {
+    "submission\\model.txt": {
+      "sha256": "5cbbbee5e4f5b6410f35b8846227e26946f203dab8d48c4f6a52a57b642cc895",
+      "bytes": 184841,
+      "training_split": "data/toy/train.txt",
+      "real_mslr": false,
+      "num_features": 136,
+      "num_trees": 100
+    },
+    "submission\\pointwise_model.pt": {
+      "sha256": "e1e1069cf13f29bb024623afcb81770f278289bcfa0b426f4f17d0d88ab40a9b",
+      "bytes": 40493,
+      "training_split": "data/toy/train.txt",
+      "real_mslr": false,
+      "config": {
+        "n_features": 136,
+        "hidden": [
+          64
+        ]
+      }
+    },
+    "submission\\pairwise_model.pt": {
+      "sha256": "ffb12cf84883f874865e8f34d8d86d3f74cb6e85b7d62198c67b30823f5462df",
+      "bytes": 40483,
+      "training_split": "data/toy/train.txt",
+      "real_mslr": false,
+      "config": {
+        "n_features": 136,
+        "hidden": [
+          64
+        ]
+      }
+    }
+  },
+  "input_sha256": {
+    "data\\toy\\train.txt": "1b9d1d81030a157bdb04b6236cde3976869ca15099f02e688a0ef206571f227b",
+    "data\\toy\\vali.txt": "974559e8a16add368997105adb6af46103457bcde81b375111b9836e188ee4d0"
+  },
+  "fresh_process_artifact_loads": true,
+  "all_toy_query_inference_repeatable": true,
+  "toy_timing_seconds": {
+    "prepare": 0.013464899966493249,
+    "max_fusion": 6.809993647038937e-05,
+    "max_ltr": 0.0009316001087427139
+  },
+  "correctness_tests_passed": 7,
+  "conformance_and_edge_tests_passed": 45,
+  "bash_smoke_test": "passed; 45 tests; toy artifact subsequently retrained to 100 trees",
+  "real_data_available": false
+}

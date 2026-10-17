@@ -1,0 +1,36 @@
+name: Baseline checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      OMP_NUM_THREADS: "4"
+      MKL_NUM_THREADS: "4"
+      OPENBLAS_NUM_THREADS: "4"
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install allowed dependencies (CPU PyTorch)
+        run: |
+          python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install -r requirements.txt
+      - name: Correctness, conformance, and transfer tests
+        run: python -m pytest tests -q
+      - name: Load and evaluate submitted neural artifacts
+        run: python scripts/evaluate_neural.py --features data/toy/vali.txt
+      - name: Repository smoke test
+        run: bash scripts/smoke_test.sh
+      - name: Synthetic transfer dry runs
+        run: python scripts/run_recipe.py

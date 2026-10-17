@@ -22,11 +22,12 @@ def group_sizes(qids):
     return sizes
 
 
-def default_params(num_leaves=31, learning_rate=0.05, min_data_in_leaf=50, lambda_l2=1.0, seed=0, **extra):
+def default_params(num_leaves=15, learning_rate=0.05, min_data_in_leaf=50, lambda_l2=1.0, seed=0, **extra):
     p = {
         "objective": "lambdarank", "metric": "ndcg", "eval_at": [10], "num_leaves": num_leaves,
         "learning_rate": learning_rate, "min_data_in_leaf": min_data_in_leaf, "lambda_l2": lambda_l2,
         "feature_fraction": 0.8, "bagging_fraction": 0.8, "bagging_freq": 1, "seed": seed,
+        "data_random_seed": seed, "feature_fraction_seed": seed, "bagging_seed": seed,
         "deterministic": True, "force_row_wise": True, "verbose": -1, "num_threads": 1,
     }
     p.update(extra)
@@ -35,8 +36,15 @@ def default_params(num_leaves=31, learning_rate=0.05, min_data_in_leaf=50, lambd
 
 def fit(X, y, qids, params, num_trees):
     import lightgbm as lgb
-    return lgb.train(params, lgb.Dataset(X, label=y, group=group_sizes(qids)), num_boost_round=num_trees)
+    # Regroup stably even if a caller supplies interleaved query rows. Move
+    # features and labels with the IDs, preserving document order within a query.
+    codes = {}
+    groups = np.array([codes.setdefault(q, len(codes)) for q in qids])
+    order = np.argsort(groups, kind="stable")
+    qids = np.asarray(qids)[order]
+    return lgb.train(params, lgb.Dataset(np.asarray(X)[order], label=np.asarray(y)[order],
+                                       group=group_sizes(qids)), num_boost_round=num_trees)
 
 
 def ndcg10(model, X, y, qids):
-    return mean_ndcg_from_scores(model.predict(X), y, qids, k=10)
+    return mean_ndcg_from_scores(model.predict(X, num_threads=1), y, qids, k=10)

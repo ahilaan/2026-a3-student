@@ -1,0 +1,93 @@
+{
+  "train_path": "data/toy\\train.txt",
+  "folds": 5,
+  "seed": 0,
+  "params": {
+    "objective": "lambdarank",
+    "metric": "ndcg",
+    "eval_at": [
+      10
+    ],
+    "num_leaves": 15,
+    "learning_rate": 0.05,
+    "min_data_in_leaf": 50,
+    "lambda_l2": 1.0,
+    "feature_fraction": 0.8,
+    "bagging_fraction": 0.8,
+    "bagging_freq": 1,
+    "seed": 0,
+    "data_random_seed": 0,
+    "feature_fraction_seed": 0,
+    "bagging_seed": 0,
+    "deterministic": true,
+    "force_row_wise": true,
+    "verbose": -1,
+    "num_threads": 1
+  },
+  "results": [
+    {
+      "trees": 50,
+      "train_mean": 0.9832444771516089,
+      "validation_mean": 0.9413863346633222,
+      "validation_std": 0.0032933020485609657,
+      "validation_train_ratio": 0.9574285506189195,
+      "train_folds": [
+        0.9816258944138782,
+        0.980348783688235,
+        0.9857483958900725,
+        0.9838790049375881,
+        0.9846203068282712
+      ],
+      "validation_folds": [
+        0.9405008402732374,
+        0.9393984260891859,
+        0.9438824059302422,
+        0.9369278643117501,
+        0.946222136712196
+      ]
+    },
+    {
+      "trees": 100,
+      "train_mean": 0.992903376550829,
+      "validation_mean": 0.9428803839113312,
+      "validation_std": 0.00519847826553193,
+      "validation_train_ratio": 0.9496194757507332,
+      "train_folds": [
+        0.9935696282971862,
+        0.99290312401722,
+        0.992826498565342,
+        0.9925039697482853,
+        0.9927136621261118
+      ],
+      "validation_folds": [
+        0.9420158508932239,
+        0.9426756132085571,
+        0.9400180519589454,
+        0.9371517326543036,
+        0.9525406708416265
+      ]
+    },
+    {
+      "trees": 200,
+      "train_mean": 0.9966931786062088,
+      "validation_mean": 0.9412069591394696,
+      "validation_std": 0.004433920783341361,
+      "validation_train_ratio": 0.9443296887570436,
+      "train_folds": [
+        0.996359053185317,
+        0.9963678556650103,
+        0.9966254155378006,
+        0.9970568226412478,
+        0.9970567460016677
+      ],
+      "validation_folds": [
+        0.9418499390023131,
+        0.9397884007910028,
+        0.9381588329179743,
+        0.9368231342313312,
+        0.9494144887547268
+      ]
+    }
+  ],
+  "selected_trees": 100
+}

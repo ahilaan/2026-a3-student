@@ -1,0 +1,29 @@
+[
+  {
+    "train": "C:\\Users\\HP\\Downloads\\col764_a3\\2026-a3-student\\scripts\\..\\data\\toy_transfer\\a_40_features_labels0-4\\train.txt",
+    "validation": "C:\\Users\\HP\\Downloads\\col764_a3\\2026-a3-student\\scripts\\..\\data\\toy_transfer\\a_40_features_labels0-4\\vali.txt",
+    "seed": 0,
+    "ndcg@10": 0.9436380699456709,
+    "map@10": 0.8781346234012901,
+    "train_seconds": 1.0053948001004755,
+    "num_eval_queries": 50
+  },
+  {
+    "train": "C:\\Users\\HP\\Downloads\\col764_a3\\2026-a3-student\\scripts\\..\\data\\toy_transfer\\b_90_features_labels0-4\\train.txt",
+    "validation": "C:\\Users\\HP\\Downloads\\col764_a3\\2026-a3-student\\scripts\\..\\data\\toy_transfer\\b_90_features_labels0-4\\vali.txt",
+    "seed": 0,
+    "ndcg@10": 0.9425578377119562,
+    "map@10": 0.8721661944536945,
+    "train_seconds": 0.625480700051412,
+    "num_eval_queries": 50
+  },
+  {
+    "train": "C:\\Users\\HP\\Downloads\\col764_a3\\2026-a3-student\\scripts\\..\\data\\toy_transfer\\c_250_features_labels0-2\\train.txt",
+    "validation": "C:\\Users\\HP\\Downloads\\col764_a3\\2026-a3-student\\scripts\\..\\data\\toy_transfer\\c_250_features_labels0-2\\vali.txt",
+    "seed": 0,
+    "ndcg@10": 0.9524559557595653,
+    "map@10": 0.9050502771038486,
+    "train_seconds": 1.6271912998054177,
+    "num_eval_queries": 50
+  }
+]

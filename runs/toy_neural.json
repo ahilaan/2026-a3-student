@@ -1,0 +1,9 @@
+{
+  "features": "data/toy/vali.txt",
+  "num_queries": 40,
+  "num_features": 136,
+  "pointwise_ndcg@10": 0.9118604580746392,
+  "pairwise_ndcg@10": 0.9358167081009844,
+  "bm25_ndcg@10": 0.9287107488307974,
+  "pairwise_beats_bm25": true
+}

@@ -8,6 +8,7 @@ only check that your recipe is dimension-agnostic, label-agnostic, fast and dete
 """
 import argparse
 import glob
+import json
 import os
 import sys
 import tempfile
@@ -23,18 +24,25 @@ def main():
     ap.add_argument("--train", default=None)
     ap.add_argument("--vali", default=None)
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--report-out", help="optional JSON of synthetic transfer results")
     args = ap.parse_args()
     if args.train:
         pairs = [(args.train, args.vali or args.train)]
     else:
         root = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data", "toy_transfer")
         pairs = [(os.path.join(d, "train.txt"), os.path.join(d, "vali.txt")) for d in sorted(glob.glob(os.path.join(root, "*")))]
+    results = []
     for train, vali in pairs:
         with tempfile.TemporaryDirectory() as d:
             r = run_recipe_and_evaluate(train, vali, vali, os.path.join(d, "recipe_model.txt"), args.seed)
         flag = "  WARNING: over the 20-minute cap" if r["train_seconds"] > CAP_SECONDS else ""
         print(f"{os.path.basename(os.path.dirname(train)):<28} trained in {r['train_seconds']:5.1f}s (cap {CAP_SECONDS}s)  "
               f"vali nDCG@10 = {r['ndcg@10']:.4f}{flag}")
+        results.append({"train": train, "validation": vali, "seed": args.seed, **r})
+    if args.report_out:
+        os.makedirs(os.path.dirname(args.report_out) or ".", exist_ok=True)
+        with open(args.report_out, "w", encoding="utf-8") as f:
+            json.dump(results, f, indent=2)
 
 
 if __name__ == "__main__":

@@ -2,8 +2,8 @@
 
     python scripts/train_neural.py --kind both --train data/train --dev data/dev --out-dir submission
 
-Calls train_model() from submission/pointwise_pairwise.py -- it will raise NotImplementedError until you have
-written the TODOs. Early stopping on --dev counts as tuning against dev (it makes your dev score optimistic); declare that in your submission notes (Section 10).
+Calls train_model() from submission/pointwise_pairwise.py. Early stopping on --dev counts as tuning against dev
+(it makes your dev score optimistic); declare that in your submission notes (Section 10).
 """
 import os
 import sys
@@ -11,8 +11,9 @@ import sys
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 
 import argparse
+import json
 
-from harness.feature_io import read_svmlight_ltr, stack
+from scripts.ltr_data import load_splits
 from submission.pointwise_pairwise import dev_ndcg, make_scorer, save_scorer, train_model
 
 
@@ -35,8 +36,7 @@ def main():
     ap.add_argument("--hidden", type=int, nargs="+", default=[64],
                     help="hidden layer widths, e.g. --hidden 128 64 (at most 3 layers of at most 256 units)")
     args = ap.parse_args()
-    train = stack(read_svmlight_ltr(_resolve(args.train, "train.txt")))
-    dev = stack(read_svmlight_ltr(_resolve(args.dev, "vali.txt")))
+    train, dev = load_splits(_resolve(args.train, "train.txt"), _resolve(args.dev, "vali.txt"))
     os.makedirs(args.out_dir, exist_ok=True)
     for kind in (["pointwise", "pairwise"] if args.kind == "both" else [args.kind]):
         net, std, hist = train_model(kind, train, dev, seed=args.seed, epochs=args.epochs, batch_size=args.batch_size,
@@ -44,6 +44,8 @@ def main():
                                      hidden=args.hidden, verbose=True)
         path = os.path.join(args.out_dir, f"{kind}_model.pt")
         save_scorer(path, net, std, args.hidden)
+        with open(os.path.join(args.out_dir, f"{kind}_history.json"), "w", encoding="utf-8") as f:
+            json.dump({"options": vars(args), "history": hist}, f, indent=2)
         print(f"{kind}: epochs run = {len(hist)}, final dev nDCG@10 = {dev_ndcg(make_scorer(net, std), *dev):.4f} -> {path}")
 
 

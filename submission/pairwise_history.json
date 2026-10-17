@@ -1,0 +1,69 @@
+{
+  "options": {
+    "kind": "both",
+    "train": "data/toy",
+    "dev": "data/toy",
+    "out_dir": "submission",
+    "seed": 0,
+    "epochs": 20,
+    "batch_size": 1024,
+    "lr": 0.001,
+    "pairs_per_query": 300,
+    "patience": 3,
+    "hidden": [
+      64
+    ]
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.5636793291839801,
+      "dev_ndcg@10": 0.7978638101285505
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.3664143616621046,
+      "dev_ndcg@10": 0.8645910206480252
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.2369214686191776,
+      "dev_ndcg@10": 0.9024032614626393
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.162565508119294,
+      "dev_ndcg@10": 0.9238620077359275
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.12212501127538324,
+      "dev_ndcg@10": 0.9242366600691783
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.09823703593701123,
+      "dev_ndcg@10": 0.9287833102607618
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.08271576727030786,
+      "dev_ndcg@10": 0.9358167081009844
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.07169260686919617,
+      "dev_ndcg@10": 0.933271786219039
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.06304209530892556,
+      "dev_ndcg@10": 0.9352414858436304
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.0563074129020176,
+      "dev_ndcg@10": 0.9352890033418081
+    }
+  ]
+}
