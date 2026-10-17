@@ -1,0 +1,4337 @@
+{
+  "fit_split": "TRAIN only",
+  "tune_queries": 4800,
+  "confirmation_queries": 1200,
+  "family": "minmax",
+  "constant": 0.5,
+  "weights": {
+    "bm25_whole_document": 2.0,
+    "bm25_title": 1.0,
+    "lmir_dir_whole_document": 1.0,
+    "lmir_jm_whole_document": 0.0
+  },
+  "tune_ndcg@10": 0.30160760872256165,
+  "confirmation_ndcg@10": 0.2910428094340435,
+  "candidates": [
+    {
+      "family": "rrf",
+      "constant": 0,
+      "weights": [
+        0.0,
+        0.0,
+        0.0,
+        4.0
+      ],
+      "tune": 0.26219303739741995,
+      "confirmation": 0.26174085884078363
+    },
+    {
+      "family": "rrf",
+      "constant": 0,
+      "weights": [
+        0.0,
+        0.0,
+        1.0,
+        3.0
+      ],
+      "tune": 0.2676474999054969,
+      "confirmation": 0.267566877169555
+    },
+    {
+      "family": "rrf",
+      "constant": 0,
+      "weights": [
+        0.0,
+        0.0,
+        2.0,
+        2.0
+      ],
+      "tune": 0.27325046130629965,
+      "confirmation": 0.27154358596134753
+    },
+    {
+      "family": "rrf",
+      "constant": 0,
+      "weights": [
+        0.0,
+        0.0,
+        3.0,
+        1.0
+      ],
+      "tune": 0.27653658810743714,
+      "confirmation": 0.27221411683504104
+    },
+    {
+      "family": "rrf",
+      "constant": 0,
+      "weights": [
+        0.0,
+        0.0,
+        4.0,
+        0.0
+      ],
+      "tune": 0.27734525456835346,
+      "confirmation": 0.2719884005600378
+    },
+    {
+      "family": "rrf",
+      "constant": 0,
+      "weights": [
+        0.0,
+        1.0,
+        0.0,
+        3.0
+      ],
+      "tune": 0.27095630066065335,
+      "confirmation": 0.2688329952821987
+    },
+    {
+      "family": "rrf",
+      "constant": 0,
+      "weights": [
+        0.0,
+        1.0,
+        1.0,
+        2.0
+      ],
+      "tune": 0.2760175543876114,
+      "confirmation": 0.274277014190204
+    },
+    {
+      "family": "rrf",
+      "constant": 0,
+      "weights": [
+        0.0,
+        1.0,
+        2.0,
+        1.0
+      ],
+      "tune": 0.28155226764815394,
+      "confirmation": 0.27779749966303346
+    },
+    {
+      "family": "rrf",
+      "constant": 0,
+      "weights": [
+        0.0,
+        1.0,
+        3.0,
+        0.0
+      ],
+      "tune": 0.2827991969506888,
+      "confirmation": 0.27754282313224116
+    },
+    {
+      "family": "rrf",
+      "constant": 0,
+      "weights": [
+        0.0,
+        2.0,
+        0.0,
+        2.0
+      ],
+      "tune": 0.2783635187354561,
+      "confirmation": 0.27135995984428424
+    },
+    {
+      "family": "rrf",
+      "constant": 0,
+      "weights": [
+        0.0,
+        2.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.2847046873222931,
+      "confirmation": 0.27812527900144074
+    },
+    {
+      "family": "rrf",
+      "constant": 0,
+      "weights": [
+        0.0,
+        2.0,
+        2.0,
+        0.0
+      ],
+      "tune": 0.28744620049771685,
+      "confirmation": 0.2802314340690924
+    },
+    {
+      "family": "rrf",
+      "constant": 0,
+      "weights": [
+        0.0,
+        3.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.28420397821625004,
+      "confirmation": 0.27433942237264186
+    },
+    {
+      "family": "rrf",
+      "constant": 0,
+      "weights": [
+        0.0,
+        3.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.2869531307086335,
+      "confirmation": 0.27708630958508684
+    },
+    {
+      "family": "rrf",
+      "constant": 0,
+      "weights": [
+        0.0,
+        4.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.2842941855308534,
+      "confirmation": 0.27078400462189234
+    },
+    {
+      "family": "rrf",
+      "constant": 0,
+      "weights": [
+        1.0,
+        0.0,
+        0.0,
+        3.0
+      ],
+      "tune": 0.26761566661856945,
+      "confirmation": 0.26536510718540596
+    },
+    {
+      "family": "rrf",
+      "constant": 0,
+      "weights": [
+        1.0,
+        0.0,
+        1.0,
+        2.0
+      ],
+      "tune": 0.2741646904606931,
+      "confirmation": 0.27156721162604314
+    },
+    {
+      "family": "rrf",
+      "constant": 0,
+      "weights": [
+        1.0,
+        0.0,
+        2.0,
+        1.0
+      ],
+      "tune": 0.2787084833248937,
+      "confirmation": 0.27331445801777293
+    },
+    {
+      "family": "rrf",
+      "constant": 0,
+      "weights": [
+        1.0,
+        0.0,
+        3.0,
+        0.0
+      ],
+      "tune": 0.2803328308412342,
+      "confirmation": 0.27318326918899927
+    },
+    {
+      "family": "rrf",
+      "constant": 0,
+      "weights": [
+        1.0,
+        1.0,
+        0.0,
+        2.0
+      ],
+      "tune": 0.27675812496812496,
+      "confirmation": 0.2726571968646314
+    },
+    {
+      "family": "rrf",
+      "constant": 0,
+      "weights": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.28359149083567026,
+      "confirmation": 0.28027885799608454
+    },
+    {
+      "family": "rrf",
+      "constant": 0,
+      "weights": [
+        1.0,
+        1.0,
+        2.0,
+        0.0
+      ],
+      "tune": 0.2865027806086255,
+      "confirmation": 0.28041190955585354
+    },
+    {
+      "family": "rrf",
+      "constant": 0,
+      "weights": [
+        1.0,
+        2.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.2858621236835006,
+      "confirmation": 0.27729360801276126
+    },
+    {
+      "family": "rrf",
+      "constant": 0,
+      "weights": [
+        1.0,
+        2.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.28989444443503526,
+      "confirmation": 0.28172796145293383
+    },
+    {
+      "family": "rrf",
+      "constant": 0,
+      "weights": [
+        1.0,
+        3.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.2876933734987429,
+      "confirmation": 0.2773265597429408
+    },
+    {
+      "family": "rrf",
+      "constant": 0,
+      "weights": [
+        2.0,
+        0.0,
+        0.0,
+        2.0
+      ],
+      "tune": 0.27488923573571866,
+      "confirmation": 0.2704229383128212
+    },
+    {
+      "family": "rrf",
+      "constant": 0,
+      "weights": [
+        2.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.28055709238980236,
+      "confirmation": 0.2760993571006382
+    },
+    {
+      "family": "rrf",
+      "constant": 0,
+      "weights": [
+        2.0,
+        0.0,
+        2.0,
+        0.0
+      ],
+      "tune": 0.2844684330512875,
+      "confirmation": 0.27749168817035885
+    },
+    {
+      "family": "rrf",
+      "constant": 0,
+      "weights": [
+        2.0,
+        1.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.28302550860910053,
+      "confirmation": 0.2784753632417828
+    },
+    {
+      "family": "rrf",
+      "constant": 0,
+      "weights": [
+        2.0,
+        1.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.2887466464194526,
+      "confirmation": 0.282478130753107
+    },
+    {
+      "family": "rrf",
+      "constant": 0,
+      "weights": [
+        2.0,
+        2.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.2905904897602403,
+      "confirmation": 0.2805098592192248
+    },
+    {
+      "family": "rrf",
+      "constant": 0,
+      "weights": [
+        3.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.2805908039416295,
+      "confirmation": 0.27406180512637934
+    },
+    {
+      "family": "rrf",
+      "constant": 0,
+      "weights": [
+        3.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.28573607501901616,
+      "confirmation": 0.27751894242760733
+    },
+    {
+      "family": "rrf",
+      "constant": 0,
+      "weights": [
+        3.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.2880516770747709,
+      "confirmation": 0.28149922557964613
+    },
+    {
+      "family": "rrf",
+      "constant": 0,
+      "weights": [
+        4.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.285234628787707,
+      "confirmation": 0.2767135828940634
+    },
+    {
+      "family": "rrf",
+      "constant": 0,
+      "weights": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.28359149083567026,
+      "confirmation": 0.28027885799608454
+    },
+    {
+      "family": "rrf",
+      "constant": 5,
+      "weights": [
+        0.0,
+        0.0,
+        0.0,
+        4.0
+      ],
+      "tune": 0.26219303739741995,
+      "confirmation": 0.26174085884078363
+    },
+    {
+      "family": "rrf",
+      "constant": 5,
+      "weights": [
+        0.0,
+        0.0,
+        1.0,
+        3.0
+      ],
+      "tune": 0.2679796166600944,
+      "confirmation": 0.26741596969004955
+    },
+    {
+      "family": "rrf",
+      "constant": 5,
+      "weights": [
+        0.0,
+        0.0,
+        2.0,
+        2.0
+      ],
+      "tune": 0.2771550754899276,
+      "confirmation": 0.27470762677217736
+    },
+    {
+      "family": "rrf",
+      "constant": 5,
+      "weights": [
+        0.0,
+        0.0,
+        3.0,
+        1.0
+      ],
+      "tune": 0.27902160489511635,
+      "confirmation": 0.27578172355023933
+    },
+    {
+      "family": "rrf",
+      "constant": 5,
+      "weights": [
+        0.0,
+        0.0,
+        4.0,
+        0.0
+      ],
+      "tune": 0.27734525456835346,
+      "confirmation": 0.2719884005600378
+    },
+    {
+      "family": "rrf",
+      "constant": 5,
+      "weights": [
+        0.0,
+        1.0,
+        0.0,
+        3.0
+      ],
+      "tune": 0.2688912906257397,
+      "confirmation": 0.26576484486048957
+    },
+    {
+      "family": "rrf",
+      "constant": 5,
+      "weights": [
+        0.0,
+        1.0,
+        1.0,
+        2.0
+      ],
+      "tune": 0.27876341954575423,
+      "confirmation": 0.27529556021280555
+    },
+    {
+      "family": "rrf",
+      "constant": 5,
+      "weights": [
+        0.0,
+        1.0,
+        2.0,
+        1.0
+      ],
+      "tune": 0.28733498517046613,
+      "confirmation": 0.28225514216239245
+    },
+    {
+      "family": "rrf",
+      "constant": 5,
+      "weights": [
+        0.0,
+        1.0,
+        3.0,
+        0.0
+      ],
+      "tune": 0.28508320252096586,
+      "confirmation": 0.27822097924447237
+    },
+    {
+      "family": "rrf",
+      "constant": 5,
+      "weights": [
+        0.0,
+        2.0,
+        0.0,
+        2.0
+      ],
+      "tune": 0.2802253393906555,
+      "confirmation": 0.2748587865364051
+    },
+    {
+      "family": "rrf",
+      "constant": 5,
+      "weights": [
+        0.0,
+        2.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.28963996144950166,
+      "confirmation": 0.2832889025622914
+    },
+    {
+      "family": "rrf",
+      "constant": 5,
+      "weights": [
+        0.0,
+        2.0,
+        2.0,
+        0.0
+      ],
+      "tune": 0.2921478667970221,
+      "confirmation": 0.28527084595715846
+    },
+    {
+      "family": "rrf",
+      "constant": 5,
+      "weights": [
+        0.0,
+        3.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.2847014692830615,
+      "confirmation": 0.2739208408519161
+    },
+    {
+      "family": "rrf",
+      "constant": 5,
+      "weights": [
+        0.0,
+        3.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.28821717193286667,
+      "confirmation": 0.2765263428622829
+    },
+    {
+      "family": "rrf",
+      "constant": 5,
+      "weights": [
+        0.0,
+        4.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.2842941855308534,
+      "confirmation": 0.27078400462189234
+    },
+    {
+      "family": "rrf",
+      "constant": 5,
+      "weights": [
+        1.0,
+        0.0,
+        0.0,
+        3.0
+      ],
+      "tune": 0.2687506199461247,
+      "confirmation": 0.2670569510829328
+    },
+    {
+      "family": "rrf",
+      "constant": 5,
+      "weights": [
+        1.0,
+        0.0,
+        1.0,
+        2.0
+      ],
+      "tune": 0.27715207467182074,
+      "confirmation": 0.27339652732951714
+    },
+    {
+      "family": "rrf",
+      "constant": 5,
+      "weights": [
+        1.0,
+        0.0,
+        2.0,
+        1.0
+      ],
+      "tune": 0.2835289243919362,
+      "confirmation": 0.27685195184396616
+    },
+    {
+      "family": "rrf",
+      "constant": 5,
+      "weights": [
+        1.0,
+        0.0,
+        3.0,
+        0.0
+      ],
+      "tune": 0.2811837056372326,
+      "confirmation": 0.27491526251113724
+    },
+    {
+      "family": "rrf",
+      "constant": 5,
+      "weights": [
+        1.0,
+        1.0,
+        0.0,
+        2.0
+      ],
+      "tune": 0.27926983807098615,
+      "confirmation": 0.27265748296323883
+    },
+    {
+      "family": "rrf",
+      "constant": 5,
+      "weights": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.2884101443005887,
+      "confirmation": 0.28385452284364304
+    },
+    {
+      "family": "rrf",
+      "constant": 5,
+      "weights": [
+        1.0,
+        1.0,
+        2.0,
+        0.0
+      ],
+      "tune": 0.29183375379878823,
+      "confirmation": 0.2853854632568656
+    },
+    {
+      "family": "rrf",
+      "constant": 5,
+      "weights": [
+        1.0,
+        2.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.2887735673131934,
+      "confirmation": 0.281389856511666
+    },
+    {
+      "family": "rrf",
+      "constant": 5,
+      "weights": [
+        1.0,
+        2.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.294796129536996,
+      "confirmation": 0.2862892878181665
+    },
+    {
+      "family": "rrf",
+      "constant": 5,
+      "weights": [
+        1.0,
+        3.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.2885269576916647,
+      "confirmation": 0.27711053810702985
+    },
+    {
+      "family": "rrf",
+      "constant": 5,
+      "weights": [
+        2.0,
+        0.0,
+        0.0,
+        2.0
+      ],
+      "tune": 0.2765749407266225,
+      "confirmation": 0.2709932111660504
+    },
+    {
+      "family": "rrf",
+      "constant": 5,
+      "weights": [
+        2.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.28391751983172087,
+      "confirmation": 0.27724170994856434
+    },
+    {
+      "family": "rrf",
+      "constant": 5,
+      "weights": [
+        2.0,
+        0.0,
+        2.0,
+        0.0
+      ],
+      "tune": 0.2867310140167772,
+      "confirmation": 0.2786506107032114
+    },
+    {
+      "family": "rrf",
+      "constant": 5,
+      "weights": [
+        2.0,
+        1.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.2865372834199858,
+      "confirmation": 0.277487824385928
+    },
+    {
+      "family": "rrf",
+      "constant": 5,
+      "weights": [
+        2.0,
+        1.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.2935274944560247,
+      "confirmation": 0.2835826351752325
+    },
+    {
+      "family": "rrf",
+      "constant": 5,
+      "weights": [
+        2.0,
+        2.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.29310783519870637,
+      "confirmation": 0.2829638468498955
+    },
+    {
+      "family": "rrf",
+      "constant": 5,
+      "weights": [
+        3.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.2827926878175099,
+      "confirmation": 0.2742919607079511
+    },
+    {
+      "family": "rrf",
+      "constant": 5,
+      "weights": [
+        3.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.28760900542985424,
+      "confirmation": 0.2780534003689614
+    },
+    {
+      "family": "rrf",
+      "constant": 5,
+      "weights": [
+        3.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.2900942177381503,
+      "confirmation": 0.2815212226622923
+    },
+    {
+      "family": "rrf",
+      "constant": 5,
+      "weights": [
+        4.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.285234628787707,
+      "confirmation": 0.2767135828940634
+    },
+    {
+      "family": "rrf",
+      "constant": 5,
+      "weights": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.2884101443005887,
+      "confirmation": 0.28385452284364304
+    },
+    {
+      "family": "rrf",
+      "constant": 20,
+      "weights": [
+        0.0,
+        0.0,
+        0.0,
+        4.0
+      ],
+      "tune": 0.26219303739741995,
+      "confirmation": 0.26174085884078363
+    },
+    {
+      "family": "rrf",
+      "constant": 20,
+      "weights": [
+        0.0,
+        0.0,
+        1.0,
+        3.0
+      ],
+      "tune": 0.2702109608583957,
+      "confirmation": 0.27031429596426754
+    },
+    {
+      "family": "rrf",
+      "constant": 20,
+      "weights": [
+        0.0,
+        0.0,
+        2.0,
+        2.0
+      ],
+      "tune": 0.28121127238697674,
+      "confirmation": 0.27507010609864624
+    },
+    {
+      "family": "rrf",
+      "constant": 20,
+      "weights": [
+        0.0,
+        0.0,
+        3.0,
+        1.0
+      ],
+      "tune": 0.28033765824934204,
+      "confirmation": 0.2758222275010791
+    },
+    {
+      "family": "rrf",
+      "constant": 20,
+      "weights": [
+        0.0,
+        0.0,
+        4.0,
+        0.0
+      ],
+      "tune": 0.27734525456835346,
+      "confirmation": 0.2719884005600378
+    },
+    {
+      "family": "rrf",
+      "constant": 20,
+      "weights": [
+        0.0,
+        1.0,
+        0.0,
+        3.0
+      ],
+      "tune": 0.2694360679781605,
+      "confirmation": 0.26971259492164823
+    },
+    {
+      "family": "rrf",
+      "constant": 20,
+      "weights": [
+        0.0,
+        1.0,
+        1.0,
+        2.0
+      ],
+      "tune": 0.2820981435099661,
+      "confirmation": 0.2789363760652779
+    },
+    {
+      "family": "rrf",
+      "constant": 20,
+      "weights": [
+        0.0,
+        1.0,
+        2.0,
+        1.0
+      ],
+      "tune": 0.2909646051552275,
+      "confirmation": 0.28551427738401247
+    },
+    {
+      "family": "rrf",
+      "constant": 20,
+      "weights": [
+        0.0,
+        1.0,
+        3.0,
+        0.0
+      ],
+      "tune": 0.28778506374639135,
+      "confirmation": 0.28263647845715717
+    },
+    {
+      "family": "rrf",
+      "constant": 20,
+      "weights": [
+        0.0,
+        2.0,
+        0.0,
+        2.0
+      ],
+      "tune": 0.2817637990768982,
+      "confirmation": 0.2749667855082756
+    },
+    {
+      "family": "rrf",
+      "constant": 20,
+      "weights": [
+        0.0,
+        2.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.29263755953486353,
+      "confirmation": 0.2858259413725033
+    },
+    {
+      "family": "rrf",
+      "constant": 20,
+      "weights": [
+        0.0,
+        2.0,
+        2.0,
+        0.0
+      ],
+      "tune": 0.2968432317520626,
+      "confirmation": 0.2888147210048916
+    },
+    {
+      "family": "rrf",
+      "constant": 20,
+      "weights": [
+        0.0,
+        3.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.2851773702819266,
+      "confirmation": 0.2758271894543793
+    },
+    {
+      "family": "rrf",
+      "constant": 20,
+      "weights": [
+        0.0,
+        3.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.28953025226788975,
+      "confirmation": 0.2781806221328446
+    },
+    {
+      "family": "rrf",
+      "constant": 20,
+      "weights": [
+        0.0,
+        4.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.2842941855308534,
+      "confirmation": 0.27078400462189234
+    },
+    {
+      "family": "rrf",
+      "constant": 20,
+      "weights": [
+        1.0,
+        0.0,
+        0.0,
+        3.0
+      ],
+      "tune": 0.2702335412803564,
+      "confirmation": 0.268094962521106
+    },
+    {
+      "family": "rrf",
+      "constant": 20,
+      "weights": [
+        1.0,
+        0.0,
+        1.0,
+        2.0
+      ],
+      "tune": 0.27976140701290875,
+      "confirmation": 0.27404107986672116
+    },
+    {
+      "family": "rrf",
+      "constant": 20,
+      "weights": [
+        1.0,
+        0.0,
+        2.0,
+        1.0
+      ],
+      "tune": 0.2857028590222095,
+      "confirmation": 0.27801083720374326
+    },
+    {
+      "family": "rrf",
+      "constant": 20,
+      "weights": [
+        1.0,
+        0.0,
+        3.0,
+        0.0
+      ],
+      "tune": 0.28300351755419256,
+      "confirmation": 0.2764656289681046
+    },
+    {
+      "family": "rrf",
+      "constant": 20,
+      "weights": [
+        1.0,
+        1.0,
+        0.0,
+        2.0
+      ],
+      "tune": 0.280840130135194,
+      "confirmation": 0.27623128086382404
+    },
+    {
+      "family": "rrf",
+      "constant": 20,
+      "weights": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.2921098535105815,
+      "confirmation": 0.2860875770443254
+    },
+    {
+      "family": "rrf",
+      "constant": 20,
+      "weights": [
+        1.0,
+        1.0,
+        2.0,
+        0.0
+      ],
+      "tune": 0.2950451459441915,
+      "confirmation": 0.2872874771719571
+    },
+    {
+      "family": "rrf",
+      "constant": 20,
+      "weights": [
+        1.0,
+        2.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.2918248580606181,
+      "confirmation": 0.2825084719034665
+    },
+    {
+      "family": "rrf",
+      "constant": 20,
+      "weights": [
+        1.0,
+        2.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.2988190478017824,
+      "confirmation": 0.28904833916847955
+    },
+    {
+      "family": "rrf",
+      "constant": 20,
+      "weights": [
+        1.0,
+        3.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.2901935465136824,
+      "confirmation": 0.27741700338834524
+    },
+    {
+      "family": "rrf",
+      "constant": 20,
+      "weights": [
+        2.0,
+        0.0,
+        0.0,
+        2.0
+      ],
+      "tune": 0.2777547787001297,
+      "confirmation": 0.2722610109642522
+    },
+    {
+      "family": "rrf",
+      "constant": 20,
+      "weights": [
+        2.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.2852116786585232,
+      "confirmation": 0.2768186476999518
+    },
+    {
+      "family": "rrf",
+      "constant": 20,
+      "weights": [
+        2.0,
+        0.0,
+        2.0,
+        0.0
+      ],
+      "tune": 0.28856535321962395,
+      "confirmation": 0.2795306639029599
+    },
+    {
+      "family": "rrf",
+      "constant": 20,
+      "weights": [
+        2.0,
+        1.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.2888813159366957,
+      "confirmation": 0.2804035354052959
+    },
+    {
+      "family": "rrf",
+      "constant": 20,
+      "weights": [
+        2.0,
+        1.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.29569543934074316,
+      "confirmation": 0.28702099548122323
+    },
+    {
+      "family": "rrf",
+      "constant": 20,
+      "weights": [
+        2.0,
+        2.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.2958085425685464,
+      "confirmation": 0.2852627406297053
+    },
+    {
+      "family": "rrf",
+      "constant": 20,
+      "weights": [
+        3.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.28378141591429784,
+      "confirmation": 0.27434312501910196
+    },
+    {
+      "family": "rrf",
+      "constant": 20,
+      "weights": [
+        3.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.28793249340468674,
+      "confirmation": 0.277589883444906
+    },
+    {
+      "family": "rrf",
+      "constant": 20,
+      "weights": [
+        3.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.29184629172606347,
+      "confirmation": 0.28357875770374547
+    },
+    {
+      "family": "rrf",
+      "constant": 20,
+      "weights": [
+        4.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.285234628787707,
+      "confirmation": 0.2767135828940634
+    },
+    {
+      "family": "rrf",
+      "constant": 20,
+      "weights": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.2921098535105815,
+      "confirmation": 0.2860875770443254
+    },
+    {
+      "family": "rrf",
+      "constant": 60,
+      "weights": [
+        0.0,
+        0.0,
+        0.0,
+        4.0
+      ],
+      "tune": 0.26219303739741995,
+      "confirmation": 0.26174085884078363
+    },
+    {
+      "family": "rrf",
+      "constant": 60,
+      "weights": [
+        0.0,
+        0.0,
+        1.0,
+        3.0
+      ],
+      "tune": 0.27292820832630993,
+      "confirmation": 0.2705801115144318
+    },
+    {
+      "family": "rrf",
+      "constant": 60,
+      "weights": [
+        0.0,
+        0.0,
+        2.0,
+        2.0
+      ],
+      "tune": 0.2821901830915885,
+      "confirmation": 0.2746953044529095
+    },
+    {
+      "family": "rrf",
+      "constant": 60,
+      "weights": [
+        0.0,
+        0.0,
+        3.0,
+        1.0
+      ],
+      "tune": 0.2803886675808527,
+      "confirmation": 0.27491586147929026
+    },
+    {
+      "family": "rrf",
+      "constant": 60,
+      "weights": [
+        0.0,
+        0.0,
+        4.0,
+        0.0
+      ],
+      "tune": 0.27734525456835346,
+      "confirmation": 0.2719884005600378
+    },
+    {
+      "family": "rrf",
+      "constant": 60,
+      "weights": [
+        0.0,
+        1.0,
+        0.0,
+        3.0
+      ],
+      "tune": 0.27216937345900905,
+      "confirmation": 0.2711183761069999
+    },
+    {
+      "family": "rrf",
+      "constant": 60,
+      "weights": [
+        0.0,
+        1.0,
+        1.0,
+        2.0
+      ],
+      "tune": 0.28693732745555395,
+      "confirmation": 0.28054865058421025
+    },
+    {
+      "family": "rrf",
+      "constant": 60,
+      "weights": [
+        0.0,
+        1.0,
+        2.0,
+        1.0
+      ],
+      "tune": 0.2934597922498979,
+      "confirmation": 0.285133463628814
+    },
+    {
+      "family": "rrf",
+      "constant": 60,
+      "weights": [
+        0.0,
+        1.0,
+        3.0,
+        0.0
+      ],
+      "tune": 0.291093345285951,
+      "confirmation": 0.2845750078060077
+    },
+    {
+      "family": "rrf",
+      "constant": 60,
+      "weights": [
+        0.0,
+        2.0,
+        0.0,
+        2.0
+      ],
+      "tune": 0.2824329049502736,
+      "confirmation": 0.27275924131837015
+    },
+    {
+      "family": "rrf",
+      "constant": 60,
+      "weights": [
+        0.0,
+        2.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.2938700013680842,
+      "confirmation": 0.2851789380482529
+    },
+    {
+      "family": "rrf",
+      "constant": 60,
+      "weights": [
+        0.0,
+        2.0,
+        2.0,
+        0.0
+      ],
+      "tune": 0.29735671988388984,
+      "confirmation": 0.287726882024845
+    },
+    {
+      "family": "rrf",
+      "constant": 60,
+      "weights": [
+        0.0,
+        3.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.28570157081709624,
+      "confirmation": 0.2753395321960561
+    },
+    {
+      "family": "rrf",
+      "constant": 60,
+      "weights": [
+        0.0,
+        3.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.29331128489898345,
+      "confirmation": 0.2810874915579561
+    },
+    {
+      "family": "rrf",
+      "constant": 60,
+      "weights": [
+        0.0,
+        4.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.2842941855308534,
+      "confirmation": 0.27078400462189234
+    },
+    {
+      "family": "rrf",
+      "constant": 60,
+      "weights": [
+        1.0,
+        0.0,
+        0.0,
+        3.0
+      ],
+      "tune": 0.27134399963318145,
+      "confirmation": 0.26925376860333383
+    },
+    {
+      "family": "rrf",
+      "constant": 60,
+      "weights": [
+        1.0,
+        0.0,
+        1.0,
+        2.0
+      ],
+      "tune": 0.2818589040403872,
+      "confirmation": 0.2745722452633587
+    },
+    {
+      "family": "rrf",
+      "constant": 60,
+      "weights": [
+        1.0,
+        0.0,
+        2.0,
+        1.0
+      ],
+      "tune": 0.2861363680293761,
+      "confirmation": 0.2781046036522381
+    },
+    {
+      "family": "rrf",
+      "constant": 60,
+      "weights": [
+        1.0,
+        0.0,
+        3.0,
+        0.0
+      ],
+      "tune": 0.2841215914730923,
+      "confirmation": 0.27720167828533954
+    },
+    {
+      "family": "rrf",
+      "constant": 60,
+      "weights": [
+        1.0,
+        1.0,
+        0.0,
+        2.0
+      ],
+      "tune": 0.2840837459323074,
+      "confirmation": 0.2778131512639775
+    },
+    {
+      "family": "rrf",
+      "constant": 60,
+      "weights": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.2943873947632301,
+      "confirmation": 0.28529659298414684
+    },
+    {
+      "family": "rrf",
+      "constant": 60,
+      "weights": [
+        1.0,
+        1.0,
+        2.0,
+        0.0
+      ],
+      "tune": 0.29678663857187654,
+      "confirmation": 0.28866988633964547
+    },
+    {
+      "family": "rrf",
+      "constant": 60,
+      "weights": [
+        1.0,
+        2.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.2912884321457625,
+      "confirmation": 0.28035422036499724
+    },
+    {
+      "family": "rrf",
+      "constant": 60,
+      "weights": [
+        1.0,
+        2.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.29906535889671454,
+      "confirmation": 0.28739386532472067
+    },
+    {
+      "family": "rrf",
+      "constant": 60,
+      "weights": [
+        1.0,
+        3.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.2921532911353243,
+      "confirmation": 0.27816324867501163
+    },
+    {
+      "family": "rrf",
+      "constant": 60,
+      "weights": [
+        2.0,
+        0.0,
+        0.0,
+        2.0
+      ],
+      "tune": 0.27860060932296854,
+      "confirmation": 0.2711787904584655
+    },
+    {
+      "family": "rrf",
+      "constant": 60,
+      "weights": [
+        2.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.2856896188316524,
+      "confirmation": 0.276334023423894
+    },
+    {
+      "family": "rrf",
+      "constant": 60,
+      "weights": [
+        2.0,
+        0.0,
+        2.0,
+        0.0
+      ],
+      "tune": 0.2889440288369445,
+      "confirmation": 0.27857395324423495
+    },
+    {
+      "family": "rrf",
+      "constant": 60,
+      "weights": [
+        2.0,
+        1.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.29164157865405255,
+      "confirmation": 0.28285083008366546
+    },
+    {
+      "family": "rrf",
+      "constant": 60,
+      "weights": [
+        2.0,
+        1.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.29712478300734074,
+      "confirmation": 0.2890961245351491
+    },
+    {
+      "family": "rrf",
+      "constant": 60,
+      "weights": [
+        2.0,
+        2.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.29633738475539834,
+      "confirmation": 0.2832810586350508
+    },
+    {
+      "family": "rrf",
+      "constant": 60,
+      "weights": [
+        3.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.28388829057858544,
+      "confirmation": 0.2743419806011124
+    },
+    {
+      "family": "rrf",
+      "constant": 60,
+      "weights": [
+        3.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.2886999297973755,
+      "confirmation": 0.27849407216934924
+    },
+    {
+      "family": "rrf",
+      "constant": 60,
+      "weights": [
+        3.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.2940989803719107,
+      "confirmation": 0.284480366804362
+    },
+    {
+      "family": "rrf",
+      "constant": 60,
+      "weights": [
+        4.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.285234628787707,
+      "confirmation": 0.2767135828940634
+    },
+    {
+      "family": "rrf",
+      "constant": 60,
+      "weights": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.2943873947632301,
+      "confirmation": 0.28529659298414684
+    },
+    {
+      "family": "rrf",
+      "constant": 100,
+      "weights": [
+        0.0,
+        0.0,
+        0.0,
+        4.0
+      ],
+      "tune": 0.26219303739741995,
+      "confirmation": 0.26174085884078363
+    },
+    {
+      "family": "rrf",
+      "constant": 100,
+      "weights": [
+        0.0,
+        0.0,
+        1.0,
+        3.0
+      ],
+      "tune": 0.2747393561940613,
+      "confirmation": 0.27109012067076527
+    },
+    {
+      "family": "rrf",
+      "constant": 100,
+      "weights": [
+        0.0,
+        0.0,
+        2.0,
+        2.0
+      ],
+      "tune": 0.28215139125478933,
+      "confirmation": 0.2745870661602034
+    },
+    {
+      "family": "rrf",
+      "constant": 100,
+      "weights": [
+        0.0,
+        0.0,
+        3.0,
+        1.0
+      ],
+      "tune": 0.28062764217102565,
+      "confirmation": 0.2743010457961722
+    },
+    {
+      "family": "rrf",
+      "constant": 100,
+      "weights": [
+        0.0,
+        0.0,
+        4.0,
+        0.0
+      ],
+      "tune": 0.27734525456835346,
+      "confirmation": 0.2719884005600378
+    },
+    {
+      "family": "rrf",
+      "constant": 100,
+      "weights": [
+        0.0,
+        1.0,
+        0.0,
+        3.0
+      ],
+      "tune": 0.27287056496556633,
+      "confirmation": 0.2711052660736788
+    },
+    {
+      "family": "rrf",
+      "constant": 100,
+      "weights": [
+        0.0,
+        1.0,
+        1.0,
+        2.0
+      ],
+      "tune": 0.28864824751738655,
+      "confirmation": 0.2815043856132744
+    },
+    {
+      "family": "rrf",
+      "constant": 100,
+      "weights": [
+        0.0,
+        1.0,
+        2.0,
+        1.0
+      ],
+      "tune": 0.2935493782605508,
+      "confirmation": 0.285221622105966
+    },
+    {
+      "family": "rrf",
+      "constant": 100,
+      "weights": [
+        0.0,
+        1.0,
+        3.0,
+        0.0
+      ],
+      "tune": 0.29231230245569706,
+      "confirmation": 0.28500912617136753
+    },
+    {
+      "family": "rrf",
+      "constant": 100,
+      "weights": [
+        0.0,
+        2.0,
+        0.0,
+        2.0
+      ],
+      "tune": 0.282524090659877,
+      "confirmation": 0.27229899517962264
+    },
+    {
+      "family": "rrf",
+      "constant": 100,
+      "weights": [
+        0.0,
+        2.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.29432397691335527,
+      "confirmation": 0.2852674943406412
+    },
+    {
+      "family": "rrf",
+      "constant": 100,
+      "weights": [
+        0.0,
+        2.0,
+        2.0,
+        0.0
+      ],
+      "tune": 0.29698075265725504,
+      "confirmation": 0.28725349002285455
+    },
+    {
+      "family": "rrf",
+      "constant": 100,
+      "weights": [
+        0.0,
+        3.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.2854833855945386,
+      "confirmation": 0.2752942697203608
+    },
+    {
+      "family": "rrf",
+      "constant": 100,
+      "weights": [
+        0.0,
+        3.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.2944451921162355,
+      "confirmation": 0.28112332136308216
+    },
+    {
+      "family": "rrf",
+      "constant": 100,
+      "weights": [
+        0.0,
+        4.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.2842941855308534,
+      "confirmation": 0.27078400462189234
+    },
+    {
+      "family": "rrf",
+      "constant": 100,
+      "weights": [
+        1.0,
+        0.0,
+        0.0,
+        3.0
+      ],
+      "tune": 0.27192500958216176,
+      "confirmation": 0.26920131964515576
+    },
+    {
+      "family": "rrf",
+      "constant": 100,
+      "weights": [
+        1.0,
+        0.0,
+        1.0,
+        2.0
+      ],
+      "tune": 0.28222975723327515,
+      "confirmation": 0.2747267098626905
+    },
+    {
+      "family": "rrf",
+      "constant": 100,
+      "weights": [
+        1.0,
+        0.0,
+        2.0,
+        1.0
+      ],
+      "tune": 0.2862657684676545,
+      "confirmation": 0.27741706797465626
+    },
+    {
+      "family": "rrf",
+      "constant": 100,
+      "weights": [
+        1.0,
+        0.0,
+        3.0,
+        0.0
+      ],
+      "tune": 0.28458988308613525,
+      "confirmation": 0.27751272134717064
+    },
+    {
+      "family": "rrf",
+      "constant": 100,
+      "weights": [
+        1.0,
+        1.0,
+        0.0,
+        2.0
+      ],
+      "tune": 0.2846251221695144,
+      "confirmation": 0.27899636336520384
+    },
+    {
+      "family": "rrf",
+      "constant": 100,
+      "weights": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.2950352754718638,
+      "confirmation": 0.2858191238789303
+    },
+    {
+      "family": "rrf",
+      "constant": 100,
+      "weights": [
+        1.0,
+        1.0,
+        2.0,
+        0.0
+      ],
+      "tune": 0.29751674732032063,
+      "confirmation": 0.2895291457815872
+    },
+    {
+      "family": "rrf",
+      "constant": 100,
+      "weights": [
+        1.0,
+        2.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.291577874332034,
+      "confirmation": 0.28013432381083525
+    },
+    {
+      "family": "rrf",
+      "constant": 100,
+      "weights": [
+        1.0,
+        2.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.2993173431052496,
+      "confirmation": 0.2878046262754251
+    },
+    {
+      "family": "rrf",
+      "constant": 100,
+      "weights": [
+        1.0,
+        3.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.2927880060547005,
+      "confirmation": 0.27828637987756316
+    },
+    {
+      "family": "rrf",
+      "constant": 100,
+      "weights": [
+        2.0,
+        0.0,
+        0.0,
+        2.0
+      ],
+      "tune": 0.2786342011073833,
+      "confirmation": 0.2713686566428182
+    },
+    {
+      "family": "rrf",
+      "constant": 100,
+      "weights": [
+        2.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.2857966037328417,
+      "confirmation": 0.27700876036683303
+    },
+    {
+      "family": "rrf",
+      "constant": 100,
+      "weights": [
+        2.0,
+        0.0,
+        2.0,
+        0.0
+      ],
+      "tune": 0.2892604827024306,
+      "confirmation": 0.27854189275307395
+    },
+    {
+      "family": "rrf",
+      "constant": 100,
+      "weights": [
+        2.0,
+        1.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.2918403412595005,
+      "confirmation": 0.2831593150027698
+    },
+    {
+      "family": "rrf",
+      "constant": 100,
+      "weights": [
+        2.0,
+        1.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.29779609254250616,
+      "confirmation": 0.2893932085633984
+    },
+    {
+      "family": "rrf",
+      "constant": 100,
+      "weights": [
+        2.0,
+        2.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.29642274106835903,
+      "confirmation": 0.28235666584380614
+    },
+    {
+      "family": "rrf",
+      "constant": 100,
+      "weights": [
+        3.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.28414439469534014,
+      "confirmation": 0.2745891323896183
+    },
+    {
+      "family": "rrf",
+      "constant": 100,
+      "weights": [
+        3.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.28875177779231403,
+      "confirmation": 0.2792274111331963
+    },
+    {
+      "family": "rrf",
+      "constant": 100,
+      "weights": [
+        3.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.2946859536910878,
+      "confirmation": 0.28498289894504913
+    },
+    {
+      "family": "rrf",
+      "constant": 100,
+      "weights": [
+        4.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.285234628787707,
+      "confirmation": 0.2767135828940634
+    },
+    {
+      "family": "rrf",
+      "constant": 100,
+      "weights": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.2950352754718638,
+      "confirmation": 0.2858191238789303
+    },
+    {
+      "family": "rrf",
+      "constant": 300,
+      "weights": [
+        0.0,
+        0.0,
+        0.0,
+        4.0
+      ],
+      "tune": 0.26219303739741995,
+      "confirmation": 0.26174085884078363
+    },
+    {
+      "family": "rrf",
+      "constant": 300,
+      "weights": [
+        0.0,
+        0.0,
+        1.0,
+        3.0
+      ],
+      "tune": 0.2763684878247362,
+      "confirmation": 0.2712689133073332
+    },
+    {
+      "family": "rrf",
+      "constant": 300,
+      "weights": [
+        0.0,
+        0.0,
+        2.0,
+        2.0
+      ],
+      "tune": 0.2821577427569257,
+      "confirmation": 0.27459800041270943
+    },
+    {
+      "family": "rrf",
+      "constant": 300,
+      "weights": [
+        0.0,
+        0.0,
+        3.0,
+        1.0
+      ],
+      "tune": 0.2808207757221066,
+      "confirmation": 0.2741116712241247
+    },
+    {
+      "family": "rrf",
+      "constant": 300,
+      "weights": [
+        0.0,
+        0.0,
+        4.0,
+        0.0
+      ],
+      "tune": 0.27734525456835346,
+      "confirmation": 0.2719884005600378
+    },
+    {
+      "family": "rrf",
+      "constant": 300,
+      "weights": [
+        0.0,
+        1.0,
+        0.0,
+        3.0
+      ],
+      "tune": 0.2737789355943533,
+      "confirmation": 0.2708448753784911
+    },
+    {
+      "family": "rrf",
+      "constant": 300,
+      "weights": [
+        0.0,
+        1.0,
+        1.0,
+        2.0
+      ],
+      "tune": 0.2907093200113792,
+      "confirmation": 0.28092618618132403
+    },
+    {
+      "family": "rrf",
+      "constant": 300,
+      "weights": [
+        0.0,
+        1.0,
+        2.0,
+        1.0
+      ],
+      "tune": 0.294442558511006,
+      "confirmation": 0.28395139047359563
+    },
+    {
+      "family": "rrf",
+      "constant": 300,
+      "weights": [
+        0.0,
+        1.0,
+        3.0,
+        0.0
+      ],
+      "tune": 0.29320992762485737,
+      "confirmation": 0.285355783609993
+    },
+    {
+      "family": "rrf",
+      "constant": 300,
+      "weights": [
+        0.0,
+        2.0,
+        0.0,
+        2.0
+      ],
+      "tune": 0.28234612346769117,
+      "confirmation": 0.27186930494114303
+    },
+    {
+      "family": "rrf",
+      "constant": 300,
+      "weights": [
+        0.0,
+        2.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.29516095645963786,
+      "confirmation": 0.28543575303567975
+    },
+    {
+      "family": "rrf",
+      "constant": 300,
+      "weights": [
+        0.0,
+        2.0,
+        2.0,
+        0.0
+      ],
+      "tune": 0.2965634215980828,
+      "confirmation": 0.2864608866003119
+    },
+    {
+      "family": "rrf",
+      "constant": 300,
+      "weights": [
+        0.0,
+        3.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.285574153917114,
+      "confirmation": 0.2758681153134129
+    },
+    {
+      "family": "rrf",
+      "constant": 300,
+      "weights": [
+        0.0,
+        3.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.2954514970786492,
+      "confirmation": 0.2826632976881002
+    },
+    {
+      "family": "rrf",
+      "constant": 300,
+      "weights": [
+        0.0,
+        4.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.2842941855308534,
+      "confirmation": 0.27078400462189234
+    },
+    {
+      "family": "rrf",
+      "constant": 300,
+      "weights": [
+        1.0,
+        0.0,
+        0.0,
+        3.0
+      ],
+      "tune": 0.27218502941451383,
+      "confirmation": 0.2686971987813185
+    },
+    {
+      "family": "rrf",
+      "constant": 300,
+      "weights": [
+        1.0,
+        0.0,
+        1.0,
+        2.0
+      ],
+      "tune": 0.28275390188901006,
+      "confirmation": 0.27461097237680643
+    },
+    {
+      "family": "rrf",
+      "constant": 300,
+      "weights": [
+        1.0,
+        0.0,
+        2.0,
+        1.0
+      ],
+      "tune": 0.2861613878976989,
+      "confirmation": 0.27748704429594884
+    },
+    {
+      "family": "rrf",
+      "constant": 300,
+      "weights": [
+        1.0,
+        0.0,
+        3.0,
+        0.0
+      ],
+      "tune": 0.28501399757346924,
+      "confirmation": 0.2777689281559489
+    },
+    {
+      "family": "rrf",
+      "constant": 300,
+      "weights": [
+        1.0,
+        1.0,
+        0.0,
+        2.0
+      ],
+      "tune": 0.28582371324858197,
+      "confirmation": 0.278367268686282
+    },
+    {
+      "family": "rrf",
+      "constant": 300,
+      "weights": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.2955108020170702,
+      "confirmation": 0.28512252684453643
+    },
+    {
+      "family": "rrf",
+      "constant": 300,
+      "weights": [
+        1.0,
+        1.0,
+        2.0,
+        0.0
+      ],
+      "tune": 0.2983401232950179,
+      "confirmation": 0.28904180399094775
+    },
+    {
+      "family": "rrf",
+      "constant": 300,
+      "weights": [
+        1.0,
+        2.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.2919858612346092,
+      "confirmation": 0.27986630787349187
+    },
+    {
+      "family": "rrf",
+      "constant": 300,
+      "weights": [
+        1.0,
+        2.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.2991024272785331,
+      "confirmation": 0.287985999240145
+    },
+    {
+      "family": "rrf",
+      "constant": 300,
+      "weights": [
+        1.0,
+        3.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.29363585346434123,
+      "confirmation": 0.2789079043193806
+    },
+    {
+      "family": "rrf",
+      "constant": 300,
+      "weights": [
+        2.0,
+        0.0,
+        0.0,
+        2.0
+      ],
+      "tune": 0.2787615916132759,
+      "confirmation": 0.2716330141460819
+    },
+    {
+      "family": "rrf",
+      "constant": 300,
+      "weights": [
+        2.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.28612097992619057,
+      "confirmation": 0.27705736087529154
+    },
+    {
+      "family": "rrf",
+      "constant": 300,
+      "weights": [
+        2.0,
+        0.0,
+        2.0,
+        0.0
+      ],
+      "tune": 0.28917978050210746,
+      "confirmation": 0.2784379362702342
+    },
+    {
+      "family": "rrf",
+      "constant": 300,
+      "weights": [
+        2.0,
+        1.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.29226100857410564,
+      "confirmation": 0.28255316180947093
+    },
+    {
+      "family": "rrf",
+      "constant": 300,
+      "weights": [
+        2.0,
+        1.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.2986383429940633,
+      "confirmation": 0.2890911801853011
+    },
+    {
+      "family": "rrf",
+      "constant": 300,
+      "weights": [
+        2.0,
+        2.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.29635238571690903,
+      "confirmation": 0.2826143977906398
+    },
+    {
+      "family": "rrf",
+      "constant": 300,
+      "weights": [
+        3.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.2842495965392129,
+      "confirmation": 0.274716544404732
+    },
+    {
+      "family": "rrf",
+      "constant": 300,
+      "weights": [
+        3.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.28895383727040663,
+      "confirmation": 0.2794785611954047
+    },
+    {
+      "family": "rrf",
+      "constant": 300,
+      "weights": [
+        3.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.2952136268166096,
+      "confirmation": 0.28522114897534756
+    },
+    {
+      "family": "rrf",
+      "constant": 300,
+      "weights": [
+        4.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.285234628787707,
+      "confirmation": 0.2767135828940634
+    },
+    {
+      "family": "rrf",
+      "constant": 300,
+      "weights": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.2955108020170702,
+      "confirmation": 0.28512252684453643
+    },
+    {
+      "family": "rrf",
+      "constant": 1000,
+      "weights": [
+        0.0,
+        0.0,
+        0.0,
+        4.0
+      ],
+      "tune": 0.26219303739741995,
+      "confirmation": 0.26174085884078363
+    },
+    {
+      "family": "rrf",
+      "constant": 1000,
+      "weights": [
+        0.0,
+        0.0,
+        1.0,
+        3.0
+      ],
+      "tune": 0.2765089914484261,
+      "confirmation": 0.2721091159435653
+    },
+    {
+      "family": "rrf",
+      "constant": 1000,
+      "weights": [
+        0.0,
+        0.0,
+        2.0,
+        2.0
+      ],
+      "tune": 0.28212944353126174,
+      "confirmation": 0.2746777370366712
+    },
+    {
+      "family": "rrf",
+      "constant": 1000,
+      "weights": [
+        0.0,
+        0.0,
+        3.0,
+        1.0
+      ],
+      "tune": 0.28067569983091095,
+      "confirmation": 0.27396245403053965
+    },
+    {
+      "family": "rrf",
+      "constant": 1000,
+      "weights": [
+        0.0,
+        0.0,
+        4.0,
+        0.0
+      ],
+      "tune": 0.27734525456835346,
+      "confirmation": 0.2719884005600378
+    },
+    {
+      "family": "rrf",
+      "constant": 1000,
+      "weights": [
+        0.0,
+        1.0,
+        0.0,
+        3.0
+      ],
+      "tune": 0.2740402339376453,
+      "confirmation": 0.2701494947031053
+    },
+    {
+      "family": "rrf",
+      "constant": 1000,
+      "weights": [
+        0.0,
+        1.0,
+        1.0,
+        2.0
+      ],
+      "tune": 0.29110876593534996,
+      "confirmation": 0.28071003133600386
+    },
+    {
+      "family": "rrf",
+      "constant": 1000,
+      "weights": [
+        0.0,
+        1.0,
+        2.0,
+        1.0
+      ],
+      "tune": 0.29443752699051773,
+      "confirmation": 0.2846069044293169
+    },
+    {
+      "family": "rrf",
+      "constant": 1000,
+      "weights": [
+        0.0,
+        1.0,
+        3.0,
+        0.0
+      ],
+      "tune": 0.2933395127302689,
+      "confirmation": 0.28532322105655855
+    },
+    {
+      "family": "rrf",
+      "constant": 1000,
+      "weights": [
+        0.0,
+        2.0,
+        0.0,
+        2.0
+      ],
+      "tune": 0.2823252362624346,
+      "confirmation": 0.27198531905743634
+    },
+    {
+      "family": "rrf",
+      "constant": 1000,
+      "weights": [
+        0.0,
+        2.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.2954416667934453,
+      "confirmation": 0.28482098683643275
+    },
+    {
+      "family": "rrf",
+      "constant": 1000,
+      "weights": [
+        0.0,
+        2.0,
+        2.0,
+        0.0
+      ],
+      "tune": 0.29645314252078164,
+      "confirmation": 0.28649196550123185
+    },
+    {
+      "family": "rrf",
+      "constant": 1000,
+      "weights": [
+        0.0,
+        3.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.2855262764378366,
+      "confirmation": 0.2752931175029613
+    },
+    {
+      "family": "rrf",
+      "constant": 1000,
+      "weights": [
+        0.0,
+        3.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.2958891125411403,
+      "confirmation": 0.2827616026924171
+    },
+    {
+      "family": "rrf",
+      "constant": 1000,
+      "weights": [
+        0.0,
+        4.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.2842941855308534,
+      "confirmation": 0.27078400462189234
+    },
+    {
+      "family": "rrf",
+      "constant": 1000,
+      "weights": [
+        1.0,
+        0.0,
+        0.0,
+        3.0
+      ],
+      "tune": 0.2722571859086234,
+      "confirmation": 0.2685218145625554
+    },
+    {
+      "family": "rrf",
+      "constant": 1000,
+      "weights": [
+        1.0,
+        0.0,
+        1.0,
+        2.0
+      ],
+      "tune": 0.28284663840457963,
+      "confirmation": 0.2748156534851051
+    },
+    {
+      "family": "rrf",
+      "constant": 1000,
+      "weights": [
+        1.0,
+        0.0,
+        2.0,
+        1.0
+      ],
+      "tune": 0.28608431933633893,
+      "confirmation": 0.2776310931259606
+    },
+    {
+      "family": "rrf",
+      "constant": 1000,
+      "weights": [
+        1.0,
+        0.0,
+        3.0,
+        0.0
+      ],
+      "tune": 0.2850213137589351,
+      "confirmation": 0.2777902082635978
+    },
+    {
+      "family": "rrf",
+      "constant": 1000,
+      "weights": [
+        1.0,
+        1.0,
+        0.0,
+        2.0
+      ],
+      "tune": 0.2860474411082719,
+      "confirmation": 0.2776024839037081
+    },
+    {
+      "family": "rrf",
+      "constant": 1000,
+      "weights": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.2956017368555325,
+      "confirmation": 0.28529545497601844
+    },
+    {
+      "family": "rrf",
+      "constant": 1000,
+      "weights": [
+        1.0,
+        1.0,
+        2.0,
+        0.0
+      ],
+      "tune": 0.2982497657754242,
+      "confirmation": 0.2888846427813495
+    },
+    {
+      "family": "rrf",
+      "constant": 1000,
+      "weights": [
+        1.0,
+        2.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.2917643417113055,
+      "confirmation": 0.2796952945773502
+    },
+    {
+      "family": "rrf",
+      "constant": 1000,
+      "weights": [
+        1.0,
+        2.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.2994791872917902,
+      "confirmation": 0.287174671526749
+    },
+    {
+      "family": "rrf",
+      "constant": 1000,
+      "weights": [
+        1.0,
+        3.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.2936147750572074,
+      "confirmation": 0.27840153471135737
+    },
+    {
+      "family": "rrf",
+      "constant": 1000,
+      "weights": [
+        2.0,
+        0.0,
+        0.0,
+        2.0
+      ],
+      "tune": 0.2788280027885387,
+      "confirmation": 0.27152052359695966
+    },
+    {
+      "family": "rrf",
+      "constant": 1000,
+      "weights": [
+        2.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.2861115865493061,
+      "confirmation": 0.27683856752144864
+    },
+    {
+      "family": "rrf",
+      "constant": 1000,
+      "weights": [
+        2.0,
+        0.0,
+        2.0,
+        0.0
+      ],
+      "tune": 0.28919776960394594,
+      "confirmation": 0.27845131899626185
+    },
+    {
+      "family": "rrf",
+      "constant": 1000,
+      "weights": [
+        2.0,
+        1.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.2924803873985568,
+      "confirmation": 0.28218281360579833
+    },
+    {
+      "family": "rrf",
+      "constant": 1000,
+      "weights": [
+        2.0,
+        1.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.29844986163138587,
+      "confirmation": 0.28870062292543786
+    },
+    {
+      "family": "rrf",
+      "constant": 1000,
+      "weights": [
+        2.0,
+        2.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.29646485104991777,
+      "confirmation": 0.28224609079476043
+    },
+    {
+      "family": "rrf",
+      "constant": 1000,
+      "weights": [
+        3.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.28418907911933006,
+      "confirmation": 0.27473833387831686
+    },
+    {
+      "family": "rrf",
+      "constant": 1000,
+      "weights": [
+        3.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.2889806646601522,
+      "confirmation": 0.27975726066459605
+    },
+    {
+      "family": "rrf",
+      "constant": 1000,
+      "weights": [
+        3.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.2955185274353075,
+      "confirmation": 0.28516029359274103
+    },
+    {
+      "family": "rrf",
+      "constant": 1000,
+      "weights": [
+        4.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.285234628787707,
+      "confirmation": 0.2767135828940634
+    },
+    {
+      "family": "rrf",
+      "constant": 1000,
+      "weights": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.2956017368555325,
+      "confirmation": 0.28529545497601844
+    },
+    {
+      "family": "minmax",
+      "constant": 0.5,
+      "weights": [
+        0.0,
+        0.0,
+        0.0,
+        4.0
+      ],
+      "tune": 0.26219303739741995,
+      "confirmation": 0.26174085884078363
+    },
+    {
+      "family": "minmax",
+      "constant": 0.5,
+      "weights": [
+        0.0,
+        0.0,
+        1.0,
+        3.0
+      ],
+      "tune": 0.2741259574364345,
+      "confirmation": 0.26963012537796976
+    },
+    {
+      "family": "minmax",
+      "constant": 0.5,
+      "weights": [
+        0.0,
+        0.0,
+        2.0,
+        2.0
+      ],
+      "tune": 0.28087666602761646,
+      "confirmation": 0.2747056417140115
+    },
+    {
+      "family": "minmax",
+      "constant": 0.5,
+      "weights": [
+        0.0,
+        0.0,
+        3.0,
+        1.0
+      ],
+      "tune": 0.27990882442415554,
+      "confirmation": 0.27510676003089796
+    },
+    {
+      "family": "minmax",
+      "constant": 0.5,
+      "weights": [
+        0.0,
+        0.0,
+        4.0,
+        0.0
+      ],
+      "tune": 0.27734525456835346,
+      "confirmation": 0.2719884005600378
+    },
+    {
+      "family": "minmax",
+      "constant": 0.5,
+      "weights": [
+        0.0,
+        1.0,
+        0.0,
+        3.0
+      ],
+      "tune": 0.27939604129080386,
+      "confirmation": 0.2725583011509726
+    },
+    {
+      "family": "minmax",
+      "constant": 0.5,
+      "weights": [
+        0.0,
+        1.0,
+        1.0,
+        2.0
+      ],
+      "tune": 0.2926195086092419,
+      "confirmation": 0.283641529127537
+    },
+    {
+      "family": "minmax",
+      "constant": 0.5,
+      "weights": [
+        0.0,
+        1.0,
+        2.0,
+        1.0
+      ],
+      "tune": 0.2973215792471972,
+      "confirmation": 0.29089783988525114
+    },
+    {
+      "family": "minmax",
+      "constant": 0.5,
+      "weights": [
+        0.0,
+        1.0,
+        3.0,
+        0.0
+      ],
+      "tune": 0.2980587239530289,
+      "confirmation": 0.29273354858202394
+    },
+    {
+      "family": "minmax",
+      "constant": 0.5,
+      "weights": [
+        0.0,
+        2.0,
+        0.0,
+        2.0
+      ],
+      "tune": 0.28739952877373537,
+      "confirmation": 0.2754924520795481
+    },
+    {
+      "family": "minmax",
+      "constant": 0.5,
+      "weights": [
+        0.0,
+        2.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.2958033814411902,
+      "confirmation": 0.2844894318512929
+    },
+    {
+      "family": "minmax",
+      "constant": 0.5,
+      "weights": [
+        0.0,
+        2.0,
+        2.0,
+        0.0
+      ],
+      "tune": 0.2985890646605293,
+      "confirmation": 0.2859188759871563
+    },
+    {
+      "family": "minmax",
+      "constant": 0.5,
+      "weights": [
+        0.0,
+        3.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.2906153378541637,
+      "confirmation": 0.2775119539140267
+    },
+    {
+      "family": "minmax",
+      "constant": 0.5,
+      "weights": [
+        0.0,
+        3.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.29554915763391726,
+      "confirmation": 0.2797356141743097
+    },
+    {
+      "family": "minmax",
+      "constant": 0.5,
+      "weights": [
+        0.0,
+        4.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.2842941855308534,
+      "confirmation": 0.27078400462189234
+    },
+    {
+      "family": "minmax",
+      "constant": 0.5,
+      "weights": [
+        1.0,
+        0.0,
+        0.0,
+        3.0
+      ],
+      "tune": 0.269311488483885,
+      "confirmation": 0.2684799339190363
+    },
+    {
+      "family": "minmax",
+      "constant": 0.5,
+      "weights": [
+        1.0,
+        0.0,
+        1.0,
+        2.0
+      ],
+      "tune": 0.28062813547911875,
+      "confirmation": 0.2733308472746779
+    },
+    {
+      "family": "minmax",
+      "constant": 0.5,
+      "weights": [
+        1.0,
+        0.0,
+        2.0,
+        1.0
+      ],
+      "tune": 0.28597653008303625,
+      "confirmation": 0.27756320505403603
+    },
+    {
+      "family": "minmax",
+      "constant": 0.5,
+      "weights": [
+        1.0,
+        0.0,
+        3.0,
+        0.0
+      ],
+      "tune": 0.2845927809172681,
+      "confirmation": 0.2770537276799121
+    },
+    {
+      "family": "minmax",
+      "constant": 0.5,
+      "weights": [
+        1.0,
+        1.0,
+        0.0,
+        2.0
+      ],
+      "tune": 0.2865601358624845,
+      "confirmation": 0.2778081671646108
+    },
+    {
+      "family": "minmax",
+      "constant": 0.5,
+      "weights": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.2980477481745234,
+      "confirmation": 0.2878253663244254
+    },
+    {
+      "family": "minmax",
+      "constant": 0.5,
+      "weights": [
+        1.0,
+        1.0,
+        2.0,
+        0.0
+      ],
+      "tune": 0.300795341841108,
+      "confirmation": 0.2934207602054779
+    },
+    {
+      "family": "minmax",
+      "constant": 0.5,
+      "weights": [
+        1.0,
+        2.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.29395168069811395,
+      "confirmation": 0.280040147599168
+    },
+    {
+      "family": "minmax",
+      "constant": 0.5,
+      "weights": [
+        1.0,
+        2.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.29977313736048816,
+      "confirmation": 0.284854658999804
+    },
+    {
+      "family": "minmax",
+      "constant": 0.5,
+      "weights": [
+        1.0,
+        3.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.29470402872530355,
+      "confirmation": 0.28009896210453844
+    },
+    {
+      "family": "minmax",
+      "constant": 0.5,
+      "weights": [
+        2.0,
+        0.0,
+        0.0,
+        2.0
+      ],
+      "tune": 0.2754257212818797,
+      "confirmation": 0.26968905799259485
+    },
+    {
+      "family": "minmax",
+      "constant": 0.5,
+      "weights": [
+        2.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.28606551972722405,
+      "confirmation": 0.2765939210189637
+    },
+    {
+      "family": "minmax",
+      "constant": 0.5,
+      "weights": [
+        2.0,
+        0.0,
+        2.0,
+        0.0
+      ],
+      "tune": 0.28762799904531033,
+      "confirmation": 0.2807155592575903
+    },
+    {
+      "family": "minmax",
+      "constant": 0.5,
+      "weights": [
+        2.0,
+        1.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.2929818877443203,
+      "confirmation": 0.2807159201643639
+    },
+    {
+      "family": "minmax",
+      "constant": 0.5,
+      "weights": [
+        2.0,
+        1.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.30160760872256165,
+      "confirmation": 0.2910428094340435
+    },
+    {
+      "family": "minmax",
+      "constant": 0.5,
+      "weights": [
+        2.0,
+        2.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.29831046940781125,
+      "confirmation": 0.2823214539936904
+    },
+    {
+      "family": "minmax",
+      "constant": 0.5,
+      "weights": [
+        3.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.2798655611349148,
+      "confirmation": 0.2720764252537027
+    },
+    {
+      "family": "minmax",
+      "constant": 0.5,
+      "weights": [
+        3.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.28970312059938536,
+      "confirmation": 0.28060609719992835
+    },
+    {
+      "family": "minmax",
+      "constant": 0.5,
+      "weights": [
+        3.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.297019946820352,
+      "confirmation": 0.2852662235235338
+    },
+    {
+      "family": "minmax",
+      "constant": 0.5,
+      "weights": [
+        4.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.285234628787707,
+      "confirmation": 0.2767135828940634
+    },
+    {
+      "family": "minmax",
+      "constant": 0.5,
+      "weights": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.2980477481745234,
+      "confirmation": 0.2878253663244254
+    },
+    {
+      "family": "minmax",
+      "constant": 1,
+      "weights": [
+        0.0,
+        0.0,
+        0.0,
+        4.0
+      ],
+      "tune": 0.26219303739741995,
+      "confirmation": 0.26174085884078363
+    },
+    {
+      "family": "minmax",
+      "constant": 1,
+      "weights": [
+        0.0,
+        0.0,
+        1.0,
+        3.0
+      ],
+      "tune": 0.2738706981543624,
+      "confirmation": 0.2709750201665195
+    },
+    {
+      "family": "minmax",
+      "constant": 1,
+      "weights": [
+        0.0,
+        0.0,
+        2.0,
+        2.0
+      ],
+      "tune": 0.2806566161761648,
+      "confirmation": 0.2752052494578916
+    },
+    {
+      "family": "minmax",
+      "constant": 1,
+      "weights": [
+        0.0,
+        0.0,
+        3.0,
+        1.0
+      ],
+      "tune": 0.2797411226675979,
+      "confirmation": 0.2750842124841286
+    },
+    {
+      "family": "minmax",
+      "constant": 1,
+      "weights": [
+        0.0,
+        0.0,
+        4.0,
+        0.0
+      ],
+      "tune": 0.27734525456835346,
+      "confirmation": 0.2719884005600378
+    },
+    {
+      "family": "minmax",
+      "constant": 1,
+      "weights": [
+        0.0,
+        1.0,
+        0.0,
+        3.0
+      ],
+      "tune": 0.2802710072703646,
+      "confirmation": 0.27294184067251226
+    },
+    {
+      "family": "minmax",
+      "constant": 1,
+      "weights": [
+        0.0,
+        1.0,
+        1.0,
+        2.0
+      ],
+      "tune": 0.29245445061291464,
+      "confirmation": 0.2832055349925692
+    },
+    {
+      "family": "minmax",
+      "constant": 1,
+      "weights": [
+        0.0,
+        1.0,
+        2.0,
+        1.0
+      ],
+      "tune": 0.2973316444272836,
+      "confirmation": 0.29039435717221607
+    },
+    {
+      "family": "minmax",
+      "constant": 1,
+      "weights": [
+        0.0,
+        1.0,
+        3.0,
+        0.0
+      ],
+      "tune": 0.29700039685079327,
+      "confirmation": 0.2913712148612223
+    },
+    {
+      "family": "minmax",
+      "constant": 1,
+      "weights": [
+        0.0,
+        2.0,
+        0.0,
+        2.0
+      ],
+      "tune": 0.28766301741192835,
+      "confirmation": 0.27728032831976035
+    },
+    {
+      "family": "minmax",
+      "constant": 1,
+      "weights": [
+        0.0,
+        2.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.29632542945257956,
+      "confirmation": 0.28554470747068883
+    },
+    {
+      "family": "minmax",
+      "constant": 1,
+      "weights": [
+        0.0,
+        2.0,
+        2.0,
+        0.0
+      ],
+      "tune": 0.29890136659626276,
+      "confirmation": 0.2860896534771482
+    },
+    {
+      "family": "minmax",
+      "constant": 1,
+      "weights": [
+        0.0,
+        3.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.29071720763521913,
+      "confirmation": 0.2776442732687439
+    },
+    {
+      "family": "minmax",
+      "constant": 1,
+      "weights": [
+        0.0,
+        3.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.2952816494893711,
+      "confirmation": 0.27968746437883263
+    },
+    {
+      "family": "minmax",
+      "constant": 1,
+      "weights": [
+        0.0,
+        4.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.2842941855308534,
+      "confirmation": 0.27078400462189234
+    },
+    {
+      "family": "minmax",
+      "constant": 1,
+      "weights": [
+        1.0,
+        0.0,
+        0.0,
+        3.0
+      ],
+      "tune": 0.2695545222943531,
+      "confirmation": 0.2683516141447246
+    },
+    {
+      "family": "minmax",
+      "constant": 1,
+      "weights": [
+        1.0,
+        0.0,
+        1.0,
+        2.0
+      ],
+      "tune": 0.2806631194741898,
+      "confirmation": 0.2733813090089074
+    },
+    {
+      "family": "minmax",
+      "constant": 1,
+      "weights": [
+        1.0,
+        0.0,
+        2.0,
+        1.0
+      ],
+      "tune": 0.2858931574726795,
+      "confirmation": 0.2773310123282398
+    },
+    {
+      "family": "minmax",
+      "constant": 1,
+      "weights": [
+        1.0,
+        0.0,
+        3.0,
+        0.0
+      ],
+      "tune": 0.2845478090802829,
+      "confirmation": 0.27683000545962355
+    },
+    {
+      "family": "minmax",
+      "constant": 1,
+      "weights": [
+        1.0,
+        1.0,
+        0.0,
+        2.0
+      ],
+      "tune": 0.2867202876251903,
+      "confirmation": 0.27726210982721256
+    },
+    {
+      "family": "minmax",
+      "constant": 1,
+      "weights": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.2983035508037544,
+      "confirmation": 0.28753436504981045
+    },
+    {
+      "family": "minmax",
+      "constant": 1,
+      "weights": [
+        1.0,
+        1.0,
+        2.0,
+        0.0
+      ],
+      "tune": 0.3011217491616811,
+      "confirmation": 0.29369343099811973
+    },
+    {
+      "family": "minmax",
+      "constant": 1,
+      "weights": [
+        1.0,
+        2.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.294414059528369,
+      "confirmation": 0.2814642956009319
+    },
+    {
+      "family": "minmax",
+      "constant": 1,
+      "weights": [
+        1.0,
+        2.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.2997853081517255,
+      "confirmation": 0.28648009664816637
+    },
+    {
+      "family": "minmax",
+      "constant": 1,
+      "weights": [
+        1.0,
+        3.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.2949130447162242,
+      "confirmation": 0.27976872515283174
+    },
+    {
+      "family": "minmax",
+      "constant": 1,
+      "weights": [
+        2.0,
+        0.0,
+        0.0,
+        2.0
+      ],
+      "tune": 0.27584480245489484,
+      "confirmation": 0.26987914185420375
+    },
+    {
+      "family": "minmax",
+      "constant": 1,
+      "weights": [
+        2.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.2859608905877101,
+      "confirmation": 0.2766671628294006
+    },
+    {
+      "family": "minmax",
+      "constant": 1,
+      "weights": [
+        2.0,
+        0.0,
+        2.0,
+        0.0
+      ],
+      "tune": 0.28781014143173206,
+      "confirmation": 0.2805139240922151
+    },
+    {
+      "family": "minmax",
+      "constant": 1,
+      "weights": [
+        2.0,
+        1.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.29281683147401905,
+      "confirmation": 0.2809352850120454
+    },
+    {
+      "family": "minmax",
+      "constant": 1,
+      "weights": [
+        2.0,
+        1.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.3014002170890456,
+      "confirmation": 0.29099875216765536
+    },
+    {
+      "family": "minmax",
+      "constant": 1,
+      "weights": [
+        2.0,
+        2.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.2986021805883869,
+      "confirmation": 0.2836218169915652
+    },
+    {
+      "family": "minmax",
+      "constant": 1,
+      "weights": [
+        3.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.2797572625107436,
+      "confirmation": 0.27186259257269607
+    },
+    {
+      "family": "minmax",
+      "constant": 1,
+      "weights": [
+        3.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.2896180108489148,
+      "confirmation": 0.2804502623294468
+    },
+    {
+      "family": "minmax",
+      "constant": 1,
+      "weights": [
+        3.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.2977633146109636,
+      "confirmation": 0.2860423602762776
+    },
+    {
+      "family": "minmax",
+      "constant": 1,
+      "weights": [
+        4.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.285234628787707,
+      "confirmation": 0.2767135828940634
+    },
+    {
+      "family": "minmax",
+      "constant": 1,
+      "weights": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.2983035508037544,
+      "confirmation": 0.28753436504981045
+    },
+    {
+      "family": "minmax",
+      "constant": 2,
+      "weights": [
+        0.0,
+        0.0,
+        0.0,
+        4.0
+      ],
+      "tune": 0.26219303739741995,
+      "confirmation": 0.26174085884078363
+    },
+    {
+      "family": "minmax",
+      "constant": 2,
+      "weights": [
+        0.0,
+        0.0,
+        1.0,
+        3.0
+      ],
+      "tune": 0.2731802569936058,
+      "confirmation": 0.2709220069075043
+    },
+    {
+      "family": "minmax",
+      "constant": 2,
+      "weights": [
+        0.0,
+        0.0,
+        2.0,
+        2.0
+      ],
+      "tune": 0.28027437989405196,
+      "confirmation": 0.275386278874773
+    },
+    {
+      "family": "minmax",
+      "constant": 2,
+      "weights": [
+        0.0,
+        0.0,
+        3.0,
+        1.0
+      ],
+      "tune": 0.27983962851492633,
+      "confirmation": 0.2748097251948589
+    },
+    {
+      "family": "minmax",
+      "constant": 2,
+      "weights": [
+        0.0,
+        0.0,
+        4.0,
+        0.0
+      ],
+      "tune": 0.27734525456835346,
+      "confirmation": 0.2719884005600378
+    },
+    {
+      "family": "minmax",
+      "constant": 2,
+      "weights": [
+        0.0,
+        1.0,
+        0.0,
+        3.0
+      ],
+      "tune": 0.2789297362698928,
+      "confirmation": 0.271909339097575
+    },
+    {
+      "family": "minmax",
+      "constant": 2,
+      "weights": [
+        0.0,
+        1.0,
+        1.0,
+        2.0
+      ],
+      "tune": 0.29011698393579927,
+      "confirmation": 0.2831362875846363
+    },
+    {
+      "family": "minmax",
+      "constant": 2,
+      "weights": [
+        0.0,
+        1.0,
+        2.0,
+        1.0
+      ],
+      "tune": 0.2960630855134595,
+      "confirmation": 0.2884919866039441
+    },
+    {
+      "family": "minmax",
+      "constant": 2,
+      "weights": [
+        0.0,
+        1.0,
+        3.0,
+        0.0
+      ],
+      "tune": 0.29352798171452016,
+      "confirmation": 0.2877659128872573
+    },
+    {
+      "family": "minmax",
+      "constant": 2,
+      "weights": [
+        0.0,
+        2.0,
+        0.0,
+        2.0
+      ],
+      "tune": 0.28826645141617074,
+      "confirmation": 0.27807023818026894
+    },
+    {
+      "family": "minmax",
+      "constant": 2,
+      "weights": [
+        0.0,
+        2.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.2970566751445771,
+      "confirmation": 0.2861883068694735
+    },
+    {
+      "family": "minmax",
+      "constant": 2,
+      "weights": [
+        0.0,
+        2.0,
+        2.0,
+        0.0
+      ],
+      "tune": 0.29963609825018195,
+      "confirmation": 0.2878670386277896
+    },
+    {
+      "family": "minmax",
+      "constant": 2,
+      "weights": [
+        0.0,
+        3.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.2903983735786554,
+      "confirmation": 0.277543747294439
+    },
+    {
+      "family": "minmax",
+      "constant": 2,
+      "weights": [
+        0.0,
+        3.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.2950274380817424,
+      "confirmation": 0.2802134802851886
+    },
+    {
+      "family": "minmax",
+      "constant": 2,
+      "weights": [
+        0.0,
+        4.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.2842941855308534,
+      "confirmation": 0.27078400462189234
+    },
+    {
+      "family": "minmax",
+      "constant": 2,
+      "weights": [
+        1.0,
+        0.0,
+        0.0,
+        3.0
+      ],
+      "tune": 0.2694838413479474,
+      "confirmation": 0.267928459948437
+    },
+    {
+      "family": "minmax",
+      "constant": 2,
+      "weights": [
+        1.0,
+        0.0,
+        1.0,
+        2.0
+      ],
+      "tune": 0.27997993821679895,
+      "confirmation": 0.2740938347837341
+    },
+    {
+      "family": "minmax",
+      "constant": 2,
+      "weights": [
+        1.0,
+        0.0,
+        2.0,
+        1.0
+      ],
+      "tune": 0.2855322850457131,
+      "confirmation": 0.2781031933798345
+    },
+    {
+      "family": "minmax",
+      "constant": 2,
+      "weights": [
+        1.0,
+        0.0,
+        3.0,
+        0.0
+      ],
+      "tune": 0.2842340386906874,
+      "confirmation": 0.27700578140499477
+    },
+    {
+      "family": "minmax",
+      "constant": 2,
+      "weights": [
+        1.0,
+        1.0,
+        0.0,
+        2.0
+      ],
+      "tune": 0.28639053211258375,
+      "confirmation": 0.27820327828083324
+    },
+    {
+      "family": "minmax",
+      "constant": 2,
+      "weights": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.2970208967539101,
+      "confirmation": 0.28697763630429607
+    },
+    {
+      "family": "minmax",
+      "constant": 2,
+      "weights": [
+        1.0,
+        1.0,
+        2.0,
+        0.0
+      ],
+      "tune": 0.29878732309603273,
+      "confirmation": 0.29350109092059334
+    },
+    {
+      "family": "minmax",
+      "constant": 2,
+      "weights": [
+        1.0,
+        2.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.2951438303609753,
+      "confirmation": 0.2826958699362685
+    },
+    {
+      "family": "minmax",
+      "constant": 2,
+      "weights": [
+        1.0,
+        2.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.3002270056236024,
+      "confirmation": 0.28734527015890016
+    },
+    {
+      "family": "minmax",
+      "constant": 2,
+      "weights": [
+        1.0,
+        3.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.2956692678093165,
+      "confirmation": 0.28043598373983414
+    },
+    {
+      "family": "minmax",
+      "constant": 2,
+      "weights": [
+        2.0,
+        0.0,
+        0.0,
+        2.0
+      ],
+      "tune": 0.2755220048535976,
+      "confirmation": 0.2700408584792518
+    },
+    {
+      "family": "minmax",
+      "constant": 2,
+      "weights": [
+        2.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.2855601200966535,
+      "confirmation": 0.27682848647621616
+    },
+    {
+      "family": "minmax",
+      "constant": 2,
+      "weights": [
+        2.0,
+        0.0,
+        2.0,
+        0.0
+      ],
+      "tune": 0.28774536143287643,
+      "confirmation": 0.28042234342845407
+    },
+    {
+      "family": "minmax",
+      "constant": 2,
+      "weights": [
+        2.0,
+        1.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.2930643233135505,
+      "confirmation": 0.2812818644601354
+    },
+    {
+      "family": "minmax",
+      "constant": 2,
+      "weights": [
+        2.0,
+        1.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.3011208635304978,
+      "confirmation": 0.2912977616517892
+    },
+    {
+      "family": "minmax",
+      "constant": 2,
+      "weights": [
+        2.0,
+        2.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.29964865977691185,
+      "confirmation": 0.28474320221193156
+    },
+    {
+      "family": "minmax",
+      "constant": 2,
+      "weights": [
+        3.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "tune": 0.27991430236022213,
+      "confirmation": 0.27187085884991985
+    },
+    {
+      "family": "minmax",
+      "constant": 2,
+      "weights": [
+        3.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "tune": 0.28978450533166356,
+      "confirmation": 0.2811898477170654
+    },
+    {
+      "family": "minmax",
+      "constant": 2,
+      "weights": [
+        3.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.297750062039744,
+      "confirmation": 0.2861774554459814
+    },
+    {
+      "family": "minmax",
+      "constant": 2,
+      "weights": [
+        4.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "tune": 0.285234628787707,
+      "confirmation": 0.2767135828940634
+    },
+    {
+      "family": "minmax",
+      "constant": 2,
+      "weights": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "tune": 0.2970208967539101,
+      "confirmation": 0.28697763630429607
+    }
+  ]
+}

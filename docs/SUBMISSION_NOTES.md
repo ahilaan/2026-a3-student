@@ -1,4 +1,61 @@
-# Real-data baseline submission notes
+# Submission notes
+
+## Current optimization candidate (18 October 2026)
+
+This section supersedes the historical baseline descriptions below. The tree
+and pointwise artifacts are retained from baseline #17. Their split declarations
+and configurations below still apply. The current fusion and pairwise model
+have changed as follows. Expanded tree CV is running separately; experimental
+models are never loaded implicitly at inference.
+
+Fusion was tuned using TRAIN only: 4,800 tuning and 1,200 reserved confirmation
+queries, seed 0, all documents of a query together. A finite grid compared
+weighted RRF constants 0/5/20/60/100/300/1000 and weighted min-max CombSUM powers
+0.5/1/2. Nonnegative integer weights sum to four. The selected square-root
+min-max rule weights whole-document BM25=2, title BM25=1, Dirichlet LMIR=1 and
+JM LMIR=0. Tuning nDCG@10=0.301608; confirmation=0.291043. Constants were fixed
+before DEV evaluation. Real DEV nDCG@10=0.309807338, MAP@10=0.130272851.
+The graded textbook fusion functions retain their definitions.
+
+The current pairwise artifact is a staff-compatible 136 -> 128 ReLU -> 64 ReLU
+-> 1 MLP. Full TRAIN relevance-label preferences supply gradients, TRAIN fits
+the standardizer, DEV selects neural epochs/configurations. No DEV gradients or
+distillation. Initial AdamW run: learning rate 0.001, weight decay 0.0001, batch
+2048, maximum 400 sampled pairs/query/epoch, seed 0; best epoch 3. Fine-tuning
+starts there with learning rate 0.0002, weight decay 0.001, training-only input
+dropout 0.03 and patience 5; the selected checkpoint is fine-tuning epoch 2.
+Real DEV nDCG@10=0.445577828, reproduced through the unchanged staff loader.
+
+The separate optional loss in scripts/optimize_neural.py is nDCG-weighted
+RankNet, expressly allowed by the assignment. Sampled unequal-label pairs touch
+the current top 20; weights are absolute swap delta-nDCG@10 divided by their
+query mean, plus 0.1 to retain a lower-rank learning signal. The graded
+ranknet_loss, pointwise loss, sampler and optimizer steps remain textbook.
+Dropout adds no inference layers; the staff artifact format is unchanged.
+
+Expanded LambdaMART CV compares 15/31/63 leaves and fixed 200/400/800 prefixes of
+an 800-tree fit in each TRAIN query fold. No reported fold supplies early
+stopping. Results are saved after each fit in runs/optimization/tree_cv.json.
+The currently shipped 200-tree model retains its completed baseline CV below.
+Each tree fit uses at most four threads; neural fits use two.
+
+Reproduce tuning with scripts/optimize_rankers.py (modes cache/fusion/trees).
+The script caches only the explicitly released TRAIN/DEV files, excluded from
+the ZIP. Reproduce neural training with:
+
+```bash
+python scripts/optimize_neural.py --name lambda128x64 --threads 2
+python scripts/optimize_neural.py --name lambda128x64_finetune --threads 2 --lr 0.0002 --weight-decay 0.001 --input-dropout 0.03 --init data/cache/optimization/lambda128x64/pairwise_model.pt
+```
+
+Fresh correctness/interface checks pass 55 tests with the stock toy-accuracy
+test deselected. CI also runs that unchanged test with its intended toy fixture.
+Normal aggregate portal feedback is used to assess submissions, respecting the
+10-minute cooldown and one-active-submission limit. No held-out file or hidden
+benchmark identity was sought, opened, processed or used. Codex also assisted
+with the optimization code and experiments described here.
+
+## Historical real-data baseline (#17)
 
 Updated 17 October 2026. All three submitted model artifacts now use actual
 MSLR-WEB10K Fold1 TRAIN. This is a properly trained baseline; no advanced

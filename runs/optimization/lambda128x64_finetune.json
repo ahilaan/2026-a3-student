@@ -1,0 +1,70 @@
+{
+  "args": {
+    "name": "lambda128x64_finetune",
+    "hidden": [
+      128,
+      64
+    ],
+    "loss": "lambda",
+    "lr": 0.0002,
+    "weight_decay": 0.001,
+    "input_dropout": 0.03,
+    "pairs": 400,
+    "batch_size": 2048,
+    "epochs": 30,
+    "patience": 5,
+    "seed": 0,
+    "threads": 2,
+    "init": "data/cache/optimization/lambda128x64/pairwise_model.pt"
+  },
+  "gradients": "Fold1 TRAIN relevance labels only",
+  "standardizer": "TRAIN only",
+  "selection": "best DEV nDCG@10 epoch",
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.4483930220730102,
+      "dev_ndcg@10": 0.43862860332551085,
+      "pairs": 2165009
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.4372506837096723,
+      "dev_ndcg@10": 0.4455778279773657,
+      "pairs": 2163629
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.4318845729872124,
+      "dev_ndcg@10": 0.44019389990684665,
+      "pairs": 2165141
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.4283115102008913,
+      "dev_ndcg@10": 0.4437403593322677,
+      "pairs": 2164608
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.4226192801812107,
+      "dev_ndcg@10": 0.44134513552235205,
+      "pairs": 2164774
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.42037604249972205,
+      "dev_ndcg@10": 0.43960663577998865,
+      "pairs": 2165312
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.4161392721876528,
+      "dev_ndcg@10": 0.4386036795846362,
+      "pairs": 2164853
+    }
+  ],
+  "best_epoch": 2,
+  "best_dev_ndcg@10": 0.4455778279773657,
+  "reloaded_dev_ndcg@10": 0.4455778279773657
+}

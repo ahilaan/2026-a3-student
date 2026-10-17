@@ -1,0 +1,10 @@
+{
+  "files": 57,
+  "bytes": 638047,
+  "sha256": "dd5e31c4aec780adf395516f090d4fba8ac9012e95c2bcca69014509ac3eba93",
+  "models": {
+    "submission\\model.txt": "45154a242442d4423748f18a47eafd060aea88894c2433021ad2033e5e622668",
+    "submission\\pointwise_model.pt": "cfbff50b8290bb112912256e29b36dbd5f62669b66d0f69fb44f17c547279495",
+    "submission\\pairwise_model.pt": "91d3c2a55fe28c50b38784d0b0f82cce6c2ffdb1dc8fabea266f11b9131bc3c7"
+  }
+}

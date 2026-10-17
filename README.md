@@ -2,6 +2,14 @@
 
 Fuse four base rankers, then train pointwise / RankNet / LambdaMART rankers on MSLR-WEB10K Fold1 without overfitting. Full spec: the assignment PDF. Held-out data is **not** here and must not be sought (honor code).
 
+Current optimization declarations and measured results are in
+[submission notes](docs/SUBMISSION_NOTES.md). The first optimization candidate
+uses TRAIN-tuned weighted square-root CombSUM (DEV nDCG@10 0.309807) and a
+128/64-unit label-trained LambdaRank MLP (DEV 0.445578). The tree and pointwise
+models below remain the validated real-data baseline while expanded TRAIN CV
+runs. No held-out labels are used; DEV selects neural epochs but supplies no
+training gradients.
+
 ## Quick start
 ```
 pip install -r requirements.txt

@@ -71,3 +71,20 @@ def combmnz_scores(base_scores: Dict[str, Dict[str, float]],
             totals[doc] += score
             counts[doc] += score > 0.0
     return {d: totals[d] * counts[d] for d in base_scores}
+
+
+def weighted_power_combsum(base_scores, weights, power=0.5):
+    """TRAIN-tuned weighted fusion with a concave min-max normalization.
+
+    The textbook functions above retain their original definitions. Constants
+    and channel weights are selected offline using released TRAIN queries.
+    """
+    fused = {doc: 0.0 for doc in base_scores}
+    for channel in _channels(base_scores, None):
+        weight = weights.get(channel, 1.0)
+        if weight == 0:
+            continue
+        normalized = minmax_normalize({doc: scores[channel] for doc, scores in base_scores.items()})
+        for doc, value in normalized.items():
+            fused[doc] += weight * value ** power
+    return fused
