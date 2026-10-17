@@ -1,84 +1,111 @@
 # Submission notes
 
-## Current optimization candidate (18 October 2026)
+## Current query-relative candidate (18 October 2026)
 
-This section supersedes the historical baseline descriptions below. The current
-LambdaMART artifact has 200 trees and 31 leaves, trained on full TRAIN only.
-Other hyperparameters and the pointwise artifact retain baseline #17 settings.
-DEV remains reporting-only for the tree. The fixed 200-tree prefix is saved
-from the full-TRAIN 800-round fit; no reported fold supplies early stopping.
-Experimental models are never loaded implicitly.
+This section supersedes the historical baseline below. All artifact gradients
+use released MSLR-WEB10K Fold1 TRAIN only. No held-out file, other fold, hidden
+benchmark identity or hidden version construction was consulted. DEV supplies
+neural epoch/configuration selection and reports tree quality; no DEV gradients.
 
-The 31-leaf five-fold TRAIN sweep gives validation means 0.469399 (200),
-0.473163 (400), 0.473860 (800); corresponding validation/TRAIN ratios are
-0.906412, 0.854637, 0.783787. The shorter model trades some validation accuracy
-for a smaller fit gap. The public aggregate C2 score also regressed for the
-800-tree/15-leaf upload (#22: 0.346337 versus #20: 0.357101), motivating this
-regularization choice. Only normal portal aggregates were consulted; no held-out
-labels or hidden construction details were sought. Current tree DEV=0.477777411.
+The current LambdaMART artifact uses 400 trees, 15 leaves, learning rate 0.05,
+minimum leaf size 50, L2=1, feature and bagging fractions 0.8, bagging frequency
+1, deterministic row-wise training, four threads, seed 0. Each provided feature
+is retained and its within-query average-tie percentile is appended. Constant
+columns and single-document queries get zero percentiles. This label-free,
+query-local transform fits no corpus statistics; all documents of a query stay
+together. The real 136-column input therefore produces 272 tree inputs, but
+neither inference nor the feature transform hard-codes that dimensionality.
+The model's raw_/qrank_ feature schema explicitly declares preprocessing.
+Inference helpers are inside required ranking.py, with no extra runtime file.
+Raw-feature models remain supported by their explicit ordinary feature schema.
+No dataset name, query ID or input distribution selects the preprocessing.
 
-Completed five-query-fold TRAIN sweep (mean validation nDCG@10 / population
-standard deviation / uncapped validation-to-training ratio): 200 trees
-0.464036 / 0.006981 / 0.952781; 400 trees 0.469620 / 0.007361 / 0.919540;
-800 trees 0.472344 / 0.007172 / 0.868185. All five folds prefer 800 trees over
-200. Counts are fixed; no reported fold supplies early stopping. This screened
-full-TRAIN fit scores 0.480942371 on real DEV, versus baseline 0.471196142.
-The generic transfer recipe now allows 800 rounds with validation patience 50;
-its gradients still use only the supplied training file and it uses four threads.
+Completed five-query-fold TRAIN sweep, seed 0, fixed counts, no early stopping
+on a reported fold (validation mean / population std / validation-TRAIN ratio):
 
-Fusion was tuned using TRAIN only: 4,800 tuning and 1,200 reserved confirmation
-queries, seed 0, all documents of a query together. A finite grid compared
-weighted RRF constants 0/5/20/60/100/300/1000 and weighted min-max CombSUM powers
-0.5/1/2. Nonnegative integer weights sum to four. The initial square-root rule
-weights whole-document BM25=2, title BM25=1, Dirichlet LMIR=1, JM LMIR=0,
-giving tuning 0.301608 and confirmation 0.291043. A finer TRAIN-only grid
-(integer weights summing to eight and powers 0.25/0.5/0.75/1/1.5/2) selected
-power 1.5 and weights 2/3/3/0: tuning 0.302205, confirmation 0.292748.
-A predeclared TRAIN-only adoption rule required tuning gain >=0.0005 and
-confirmation improvement; this passed before DEV was read. Current DEV
-nDCG@10=0.309080471, MAP@10=0.129081911, slightly below the initial rule but
-within the same leaderboard bands. No DEV score chose fusion settings.
-The graded textbook fusion functions retain their definitions.
+- 100 trees: 0.460784 / 0.006551 / 0.972331.
+- 200 trees: 0.470400 / 0.007418 / 0.950846.
+- 400 trees: 0.474710 / 0.007516 / 0.909374.
 
-The current pairwise artifact is a staff-compatible 136 -> 128 ReLU -> 64 ReLU
--> 1 MLP. Full TRAIN relevance-label preferences supply gradients, TRAIN fits
-the standardizer, DEV selects neural epochs/configurations. No DEV gradients or
-distillation. Initial AdamW run: learning rate 0.001, weight decay 0.0001, batch
-2048, maximum 400 sampled pairs/query/epoch, seed 0; best epoch 3. Fine-tuning
-starts there with learning rate 0.0002, weight decay 0.001, training-only input
-dropout 0.03 and patience 5; the selected checkpoint is fine-tuning epoch 2.
-Real DEV nDCG@10=0.445577828, reproduced through the unchanged staff loader.
+400 trees has the strongest mean validation score. Its fit gap is smaller than
+raw-feature long models (31 leaves / 800 trees: validation 0.473860, ratio
+0.783787). The public aggregate C2 regression in upload #22 also motivates
+controlling fit rather than maximizing TRAIN accuracy. C2 aggregate feedback
+was read through the normal portal; no held-out labels were used locally.
+Full configurations and all five fold scores are in runs/optimization/.
 
-The separate optional loss in scripts/optimize_neural.py is nDCG-weighted
-RankNet, expressly allowed by the assignment. Sampled unequal-label pairs touch
-the current top 20; weights are absolute swap delta-nDCG@10 divided by their
-query mean, plus 0.1 to retain a lower-rank learning signal. The graded
-ranknet_loss, pointwise loss, sampler and optimizer steps remain textbook.
-Dropout adds no inference layers; the staff artifact format is unchanged.
+The pointwise artifact is retained from baseline #17: TRAIN-fitted standardizer,
+136 -> 64 ReLU -> 1 MLP, MSE, Adam 0.001, batch 1024, best DEV epoch 7 of 10.
+The pairwise artifact is a staff-compatible 136 -> 128 ReLU -> 64 ReLU -> 1
+MLP, TRAIN relevance-label preferences and TRAIN-fitted standardization only.
+DEV selects epochs/configurations. Initial AdamW 0.001, weight decay 0.0001,
+batch 2048, at most 400 sampled pairs/query/epoch, seed 0: best epoch 3.
+Fine-tuning from there uses learning rate 0.0002, weight decay 0.001,
+training-only input dropout 0.03, patience 5: best fine-tuning epoch 2.
+Both runs use two CPU threads. Dropout adds no inference layers. No distillation.
+The separate optional neural loss is nDCG-weighted RankNet, explicitly permitted
+by the assignment: pairs touch the current top 20; weights are absolute swap
+delta-nDCG@10 normalized by the query mean, plus 0.1. Graded losses and optimizer
+steps retain their textbook definitions and signatures. The artifact format is
+the unchanged staff config/state_dict/standardizer MLP format.
 
-Expanded LambdaMART CV compares 15/31/63 leaves and fixed 200/400/800 prefixes of
-an 800-tree fit in each TRAIN query fold. No reported fold supplies early
-stopping. Results are saved after each fit in runs/optimization/tree_cv.json.
-The currently shipped 200-tree/31-leaf model uses completed query CV above.
-Each tree fit uses at most four threads; neural fits use two.
+Fusion tuning uses TRAIN only: 4,800 tuning and 1,200 reserved confirmation
+queries, seed 0. A finite grid compared RRF constants, min-max powers and
+nonnegative channel weights. A finer grid selected power 1.5, weights
+whole-document BM25=2, title BM25=3, Dirichlet LMIR=3, JM LMIR=0. Tuning nDCG
+0.302205 and confirmation 0.292748 passed a predeclared adoption rule before
+DEV evaluation: tuning gain >=0.0005 and confirmation improvement over the
+initial rule. Subsequent DEV 0.309080 is slightly below the initial rule's
+0.309807, within the same leaderboard bands. DEV did not choose fusion settings.
+The graded RRF, CombSUM and CombMNZ definitions remain unchanged.
 
-Reproduce tuning with scripts/optimize_rankers.py (modes cache/fusion/trees).
-The script caches only the explicitly released TRAIN/DEV files, excluded from
-the ZIP. Reproduce neural training with:
+Current real DEV nDCG@10: LambdaMART 0.482551116, pointwise 0.424748287,
+pairwise 0.445577828, BM25 0.288486781; fusion 0.309080471 and MAP 0.129081911.
+Fresh staff-loader preflight confirms finite/repeatable scores and runtime.
+The largest query takes approximately 0.03 seconds. The transfer recipe remains
+a generic raw-feature LambdaMART, 15 leaves, at most 800 rounds and validation
+patience 50, using only its two supplied files and four threads. It writes an
+ordinary raw-feature schema accepted by the same prepare/rerank functions.
+All three provided synthetic transfer dry runs passed; hidden data was not sought.
+
+Upload #23 exposed a bitwise reproducibility issue: inheriting incoming OpenMP
+thread state can change weights by about 3e-7 despite an identical seed. The
+graded train_model helper now fixes one CPU thread. Regression tests exercise
+both pointwise and pairwise training across different incoming thread states.
+Offline optimized artifacts retain their explicitly fixed two-thread path.
+The correction was uploaded separately as #24 for server confirmation.
+
+Reproduction:
 
 ```bash
+python scripts/setup_mslr.py
+python scripts/optimize_rankers.py cache
+python scripts/optimize_rankers.py fusion
+python scripts/optimize_rankers.py fusion --fine
+python scripts/cv_query_features.py
+python scripts/cv_query_features.py --full --trees 400
 python scripts/optimize_neural.py --name lambda128x64 --threads 2
 python scripts/optimize_neural.py --name lambda128x64_finetune --threads 2 --lr 0.0002 --weight-decay 0.001 --input-dropout 0.03 --init data/cache/optimization/lambda128x64/pairwise_model.pt
 ```
 
-Fresh correctness/interface checks pass 55 tests with the stock toy-accuracy
-test deselected. CI also runs that unchanged test with its intended toy fixture.
-Normal aggregate portal feedback is used to assess submissions, respecting the
-10-minute cooldown and one-active-submission limit. No held-out file or hidden
-benchmark identity was sought, opened, processed or used. Codex also assisted
-with the optimization code and experiments described here.
+Training outputs live under data/cache/optimization/ and are promoted explicitly
+after validation. Run scripts/preflight.py and scripts/build_submission.py on
+the promoted artifacts. ZIPs include all seven grader entries, preserve the
+repository layout and exclude datasets, caches, run outputs, credentials, Git
+metadata and environments. The portal's cooldown uses server time (the local
+clock runs ahead); only one team submission is active at once. Provided harness
+and tests are unchanged. CI runs all original tests with their intended toy
+fixture and also validates the committed real-artifact interface. The separate
+post-competition 2-3-page report has not been generated.
+
+Codex assisted with setup, implementation, experiments, testing and documentation;
+ChatGPT assisted with assignment analysis and the implementation prompt. The
+student must complete any other personal disclosure. Sources: supplied assignment,
+starter code/docs and Microsoft dataset page. No external ranking implementation
+was copied; LightGBM supplies the explicitly permitted tree ranking objective.
 
 ## Historical real-data baseline (#17)
+
 
 Updated 17 October 2026. All three submitted model artifacts now use actual
 MSLR-WEB10K Fold1 TRAIN. This is a properly trained baseline; no advanced

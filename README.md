@@ -2,14 +2,15 @@
 
 Fuse four base rankers, then train pointwise / RankNet / LambdaMART rankers on MSLR-WEB10K Fold1 without overfitting. Full spec: the assignment PDF. Held-out data is **not** here and must not be sought (honor code).
 
-Current optimization declarations and measured results are in
-[submission notes](docs/SUBMISSION_NOTES.md). The current candidate uses
-TRAIN-tuned power-1.5 weighted CombSUM (DEV nDCG@10 0.309080), a 128/64-unit
-label-trained LambdaRank MLP (DEV 0.445578), and a 200-tree/31-leaf LambdaMART
-(DEV 0.477777). Five TRAIN query folds quantify the tree's fit/generalization
-tradeoff; normal aggregate C2 feedback motivates shorter training. Pointwise
-remains the validated baseline. No held-out labels are used; DEV selects neural
-epochs but supplies no training gradients.
+Current declarations and results are in [submission notes](docs/SUBMISSION_NOTES.md).
+The current candidate is a 400-tree/15-leaf LambdaMART with generic raw-plus-query-
+percentile features (real DEV nDCG@10 0.482551), a label-trained 128/64-unit
+LambdaRank MLP (0.445578), and the validated pointwise baseline (0.424748).
+Five TRAIN query folds select the tree count. Fusion is TRAIN-tuned weighted
+power CombSUM (0.309080). No held-out labels are used; DEV selects neural epochs
+but supplies no training gradients. The graded training helper fixes one CPU
+thread for bitwise seed reproducibility; optimized neural artifact training uses
+its explicitly declared two threads.
 
 ## Quick start
 ```
@@ -39,7 +40,7 @@ Docs: `docs/SUBMISSION_INTERFACE.md`, `docs/GRADING.md`, `docs/RANKNET_PRIMER.md
 ## Layout
 `harness/` metrics, I/O, CV, leaderboard formulas, runner (do not edit; staff run an identical copy) - `submission/` your entry - `scripts/` tooling - `data/toy/` and `data/toy_transfer/` synthetic data - `tests/`.
 
-The current `submission/model.txt`, `pointwise_model.pt`, and `pairwise_model.pt` are trained on **actual MSLR-WEB10K Fold1 TRAIN only** (723,412 rows / 6,000 queries). LambdaMART uses 200 trees selected by five-fold query-grouped CV within TRAIN. DEV (235,259 rows / 2,000 queries) is reporting-only for LambdaMART and selects the neural early-stopping epoch. No DEV labels supply training gradients. Only Fold1 TRAIN and validation were extracted from the checksum-verified dataset archive; no held-out file was opened.
+The original real-data baseline `submission/model.txt`, `pointwise_model.pt`, and `pairwise_model.pt` are trained on **actual MSLR-WEB10K Fold1 TRAIN only** (723,412 rows / 6,000 queries). LambdaMART uses 200 trees selected by five-fold query-grouped CV within TRAIN. DEV (235,259 rows / 2,000 queries) is reporting-only for LambdaMART and selects the neural early-stopping epoch. No DEV labels supply training gradients. Only Fold1 TRAIN and validation were extracted from the checksum-verified dataset archive; no held-out file was opened.
 
 Real DEV nDCG@10: LambdaMART **0.471196**, pointwise **0.424748**, RankNet **0.436421**, single BM25 feature **0.288487**. RankNet now clears the learning floor that the previous toy-trained upload failed.
 

@@ -182,7 +182,10 @@ def train_model(kind: str, train, dev, *, seed: int = 0, epochs: int = 20, batch
     if len(y) != len(X) or len(q) != len(X) or len(yd) != len(Xd) or len(qd) != len(Xd):
         raise ValueError("features, labels and query IDs must have matching row counts")
     set_seed(seed)
-    torch.set_num_threads(min(4, torch.get_num_threads()))
+    # A caller (including another numerical library) can alter OpenMP's current
+    # thread count. Inheriting it changes floating-point reduction order and
+    # breaks the bitwise same-seed contract. Use one fixed CPU training path.
+    torch.set_num_threads(1)
     standardizer = Standardizer().fit(X)              # fit on TRAIN only
     Xt = torch.from_numpy(standardizer.transform(X))
     yt = torch.from_numpy(np.asarray(y, dtype=np.float32))

@@ -1,31 +1,6 @@
 """Generic, label-free query-relative features for optional tree models."""
 import numpy as np
-
-
-def feature_names(width):
-    return [f"raw_{i}" for i in range(width)] + [f"qrank_{i}" for i in range(width)]
-
-
-def augment_query(X):
-    """Append average-tie ascending percentiles within this candidate query.
-
-    Constant features and single-document queries have percentile zero.
-    Equal values receive equal percentiles, independent of candidate order.
-    Original values remain available so trees can retain absolute context.
-    """
-    X = np.asarray(X, dtype=np.float32)
-    if X.ndim != 2:
-        raise ValueError("query features must be a matrix")
-    n, width = X.shape
-    result = np.zeros((n, 2 * width), dtype=np.float32)
-    result[:, :width] = X
-    if n > 1:
-        for col in range(width):
-            values, inverse, counts = np.unique(X[:, col], return_inverse=True, return_counts=True)
-            if len(values) > 1:
-                average = np.cumsum(counts) - (counts + 1) / 2
-                result[:, width + col] = average[inverse] / (n - 1)
-    return result
+from submission.ranking import _augment_query as augment_query, _query_feature_names as feature_names
 
 
 def augment_grouped(X, qids):

@@ -39,7 +39,14 @@ def check(features_path, model_dir, *, data=None):
     ranking.prepare(str(paths[0]))
     result["prepare_seconds"] = time.perf_counter() - start
     model = lgb.Booster(model_file=str(paths[0]))
-    predicted = model.predict(X, num_threads=4)
+    if ranking._QUERY_RANK_FEATURES:
+        from submission.query_features import augment_grouped
+        tree_X = augment_grouped(X, q)
+    else:
+        tree_X = X
+    predicted = model.predict(tree_X, num_threads=4)
+    result["tree_feature_schema"] = "raw_plus_query_percentiles" if ranking._QUERY_RANK_FEATURES else "raw"
+    del tree_X
     if not np.isfinite(predicted).all():
         raise ValueError("non-finite LambdaMART scores")
     result["ltr_ndcg@10"] = mean_ndcg_from_scores(predicted, y, q)

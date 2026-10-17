@@ -9,6 +9,7 @@ from scripts.blend_neural import blend
 from harness.neural import ScoringNetwork, make_scorer, save_scorer, load_scorer
 from harness.preprocessing import Standardizer
 from scripts.blend_trees import blend_models
+from submission import pointwise_pairwise as pp
 
 
 def test_weighted_loss_matches_manual_and_has_finite_gradients():
@@ -76,3 +77,17 @@ def test_tree_blend_roundtrip_preserves_convex_scores(tmp_path):
     expected = 0.25*models[0].predict(probe, num_iteration=3, num_threads=2)
     expected += 0.75*models[1].predict(probe, num_iteration=4, num_threads=2)
     np.testing.assert_allclose(loaded.predict(probe, num_threads=2), expected, atol=1e-12, rtol=1e-12)
+
+
+@pytest.mark.parametrize('kind', ['pointwise', 'pairwise'])
+def test_same_seed_is_independent_of_incoming_cpu_thread_state(kind):
+    from harness.feature_io import read_svmlight_ltr, stack
+    train = stack(read_svmlight_ltr('data/toy/train.txt'))
+    dev = stack(read_svmlight_ltr('data/toy/vali.txt'))
+    networks = []
+    for incoming in (1, 4):
+        torch.set_num_threads(incoming)
+        network, _, _ = pp.train_model(kind, train, dev, seed=3, epochs=2)
+        networks.append(network)
+    for first, second in zip(networks[0].parameters(), networks[1].parameters()):
+        assert torch.equal(first, second)
