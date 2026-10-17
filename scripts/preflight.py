@@ -24,9 +24,12 @@ from scripts.ltr_data import load_splits
 from submission import ranking
 
 
-def check(features_path, model_dir):
+def check(features_path, model_dir, *, data=None):
     torch.set_num_threads(4)
-    (X, y, q), _ = load_splits(features_path)
+    if data is None:
+        (X, y, q), _ = load_splits(features_path)
+    else:
+        X, y, q = data
     if X.shape[1] != 136:
         raise ValueError(f"MSLR DEV must have 136 features, got {X.shape[1]}")
     paths = [Path(model_dir) / name for name in ("model.txt", "pointwise_model.pt", "pairwise_model.pt")]

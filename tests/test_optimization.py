@@ -5,6 +5,9 @@ import torch
 
 from scripts.optimize_neural import lambda_pairs, weighted_ranknet_loss
 from submission.fusion import weighted_power_combsum
+from scripts.blend_neural import blend
+from harness.neural import ScoringNetwork, make_scorer, save_scorer, load_scorer
+from harness.preprocessing import Standardizer
 
 
 def test_weighted_loss_matches_manual_and_has_finite_gradients():
@@ -33,3 +36,17 @@ def test_power_fusion_ignores_disabled_channel_and_handles_constants():
               "b": {"x": 1., "y": -5., "z": 0.},
               "c": {"x": 4., "y": -5., "z": -100.}}
     assert weighted_power_combsum(scores, {"x": 2., "y": 3., "z": 0.}) == {"a": 0., "b": 1., "c": 2.}
+
+
+def test_blend_staff_loader_reproduces_weighted_original_scores(tmp_path):
+    rng = np.random.RandomState(1)
+    X = rng.randn(20, 7).astype(np.float32)
+    std = Standardizer().fit(X)
+    a, b = ScoringNetwork(7, [8, 5]), ScoringNetwork(7, [9, 6])
+    pa, pb, pc = [tmp_path / (n + ".pt") for n in ("a", "b", "combined")]
+    save_scorer(str(pa), a, std)
+    save_scorer(str(pb), b, std)
+    network, standardizer = blend(pa, pb, 0.25)
+    save_scorer(str(pc), network, standardizer)
+    expected = 0.25 * make_scorer(a, std)(X) + 0.75 * make_scorer(b, std)(X)
+    np.testing.assert_allclose(load_scorer(str(pc))(X), expected, atol=1e-6, rtol=1e-5)

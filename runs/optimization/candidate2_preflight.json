@@ -1,0 +1,19 @@
+{
+  "features": "data/dev/vali.txt",
+  "rows": 235259,
+  "queries": 2000,
+  "artifact_sha256": {
+    "submission\\model.txt": "ebbe5477b5aa3f7c85f7aed08e3d45107e0fe7fca9599aaf3e935eefea9d62ea",
+    "submission\\pointwise_model.pt": "cfbff50b8290bb112912256e29b36dbd5f62669b66d0f69fb44f17c547279495",
+    "submission\\pairwise_model.pt": "91d3c2a55fe28c50b38784d0b0f82cce6c2ffdb1dc8fabea266f11b9131bc3c7"
+  },
+  "prepare_seconds": 0.037984799997502705,
+  "ltr_ndcg@10": 0.48094237067274986,
+  "pointwise_ndcg@10": 0.4247482873621245,
+  "pairwise_ndcg@10": 0.4455778279773657,
+  "bm25_ndcg@10": 0.28848678060708594,
+  "pairwise_beats_bm25": true,
+  "ltr_beats_bm25": true,
+  "largest_query_seconds": 0.10670749999917462,
+  "passes": true
+}

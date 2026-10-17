@@ -1,0 +1,22 @@
+{
+  "id": 22,
+  "filename": "2023CS10076.zip",
+  "status": "queued",
+  "message": "Waiting for the grader",
+  "submitted_at": "2026-10-17T19:01:46+00:00",
+  "finished_at": null,
+  "grade_status": null,
+  "files_ok": null,
+  "missing_files": [],
+  "fusion_ndcg": null,
+  "fusion_map": null,
+  "ltr_dev_ndcg": null,
+  "pairwise_dev_ndcg": null,
+  "pairwise_status": null,
+  "pairwise_heldout_ndcg": null,
+  "c2_mean": null,
+  "checks_passed": null,
+  "checks_total": null,
+  "checks": [],
+  "counts_on_leaderboard": false
+}

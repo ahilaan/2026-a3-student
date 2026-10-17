@@ -111,6 +111,6 @@ def train(train_path: str, vali_path: str, out_model_path: str, seed: int = 0) -
     validation = lgb.Dataset(Xv, label=yv, group=vali_groups, reference=training)
     # A single bounded run, no search or train+validation refit. Only TRAIN
     # labels supply gradients; validation chooses the best iteration.
-    booster = lgb.train(params, training, num_boost_round=200, valid_sets=[validation],
-                        callbacks=[lgb.early_stopping(30, first_metric_only=True, verbose=False)])
+    booster = lgb.train(params, training, num_boost_round=800, valid_sets=[validation],
+                        callbacks=[lgb.early_stopping(50, first_metric_only=True, verbose=False)])
     booster.save_model(out_model_path)

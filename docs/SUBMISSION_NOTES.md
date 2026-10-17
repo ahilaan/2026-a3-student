@@ -2,11 +2,20 @@
 
 ## Current optimization candidate (18 October 2026)
 
-This section supersedes the historical baseline descriptions below. The tree
-and pointwise artifacts are retained from baseline #17. Their split declarations
-and configurations below still apply. The current fusion and pairwise model
-have changed as follows. Expanded tree CV is running separately; experimental
-models are never loaded implicitly at inference.
+This section supersedes the historical baseline descriptions below. The current
+LambdaMART artifact has 800 trees and 15 leaves, trained on full TRAIN only.
+Other hyperparameters and the pointwise artifact retain baseline #17 settings.
+DEV remains reporting-only for the tree. Expanded comparisons with 31 and 63
+leaves run separately; experimental models are never loaded implicitly.
+
+Completed five-query-fold TRAIN sweep (mean validation nDCG@10 / population
+standard deviation / uncapped validation-to-training ratio): 200 trees
+0.464036 / 0.006981 / 0.952781; 400 trees 0.469620 / 0.007361 / 0.919540;
+800 trees 0.472344 / 0.007172 / 0.868185. All five folds prefer 800 trees over
+200. Counts are fixed; no reported fold supplies early stopping. The selected
+full-TRAIN fit scores 0.480942371 on real DEV, versus baseline 0.471196142.
+The generic transfer recipe now allows 800 rounds with validation patience 50;
+its gradients still use only the supplied training file and it uses four threads.
 
 Fusion was tuned using TRAIN only: 4,800 tuning and 1,200 reserved confirmation
 queries, seed 0, all documents of a query together. A finite grid compared
@@ -36,7 +45,7 @@ Dropout adds no inference layers; the staff artifact format is unchanged.
 Expanded LambdaMART CV compares 15/31/63 leaves and fixed 200/400/800 prefixes of
 an 800-tree fit in each TRAIN query fold. No reported fold supplies early
 stopping. Results are saved after each fit in runs/optimization/tree_cv.json.
-The currently shipped 200-tree model retains its completed baseline CV below.
+The currently shipped 800-tree model uses the completed 15-leaf CV above.
 Each tree fit uses at most four threads; neural fits use two.
 
 Reproduce tuning with scripts/optimize_rankers.py (modes cache/fusion/trees).

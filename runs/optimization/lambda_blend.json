@@ -1,0 +1,24 @@
+{
+  "sources": [
+    "data/cache/optimization/lambda128x64/pairwise_model.pt",
+    "data/cache/optimization/lambda128x64_finetune/pairwise_model.pt"
+  ],
+  "selection": "DEV only; no gradient fitting",
+  "scores": [
+    {
+      "first_weight": 0.25,
+      "dev_ndcg@10": 0.44514048854596205,
+      "path": "C:\\Users\\HP\\Downloads\\col764_a3\\2026-a3-student\\data\\cache\\optimization\\lambda_blend\\blend_0.25.pt"
+    },
+    {
+      "first_weight": 0.5,
+      "dev_ndcg@10": 0.44433237116479046,
+      "path": "C:\\Users\\HP\\Downloads\\col764_a3\\2026-a3-student\\data\\cache\\optimization\\lambda_blend\\blend_0.5.pt"
+    },
+    {
+      "first_weight": 0.75,
+      "dev_ndcg@10": 0.44127846674466303,
+      "path": "C:\\Users\\HP\\Downloads\\col764_a3\\2026-a3-student\\data\\cache\\optimization\\lambda_blend\\blend_0.75.pt"
+    }
+  ]
+}

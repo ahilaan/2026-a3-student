@@ -1,22 +1,73 @@
 {
   "id": 17,
   "filename": "2023CS10076.zip",
-  "status": "running",
-  "message": "Grading on the benchmark (this can take up to ~45 minutes)",
+  "status": "success",
+  "message": "Graded",
   "submitted_at": "2026-10-17T18:21:21+00:00",
-  "finished_at": null,
-  "grade_status": null,
-  "files_ok": null,
+  "finished_at": "2026-10-17T18:26:19+00:00",
+  "grade_status": "OK",
+  "files_ok": true,
   "missing_files": [],
-  "fusion_ndcg": null,
-  "fusion_map": null,
-  "ltr_dev_ndcg": null,
-  "pairwise_dev_ndcg": null,
-  "pairwise_status": null,
-  "pairwise_heldout_ndcg": null,
-  "c2_mean": null,
-  "checks_passed": null,
-  "checks_total": null,
-  "checks": [],
-  "counts_on_leaderboard": false
+  "fusion_ndcg": 0.2994576030495318,
+  "fusion_map": 0.1246368916157123,
+  "ltr_dev_ndcg": 0.4711961419084688,
+  "pairwise_dev_ndcg": 0.4364209245373557,
+  "pairwise_status": "OK",
+  "pairwise_heldout_ndcg": 0.42204574862319416,
+  "c2_mean": 0.3571005180865656,
+  "checks_passed": 10,
+  "checks_total": 10,
+  "checks": [
+    {
+      "check": "fusion: RRF worked example",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "fusion: CombSUM or CombMNZ (at least one correct)",
+      "ok": true,
+      "detail": "passed: CombSUM CombMNZ"
+    },
+    {
+      "check": "(d) pointwise loss = squared error",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "(a) RankNet loss values + numerical stability",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "(b) make_pairs: same-query, strictly ordered, preferred first, capped, reproducible",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "(c) one pairwise step raises s_preferred - s_other, and matches a hand SGD step (no gradient accumulation)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "pointwise step matches a hand SGD step",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "(f) training reproducible given the seed",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "train_model returns history with dev nDCG each epoch and honours early stopping",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "(e) pointwise & pairwise artifacts load and the pairwise model beats a single BM25 feature on DEV",
+      "ok": true,
+      "detail": "bm25=0.2885 pairwise=0.4364 pointwise=0.4247"
+    }
+  ],
+  "counts_on_leaderboard": true
 }

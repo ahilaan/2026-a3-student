@@ -1,0 +1,404 @@
+{
+  "split": "Fold1 TRAIN only",
+  "folds": 5,
+  "seed": 0,
+  "selection": "fixed tree counts; no early stopping on reported folds",
+  "fits": [
+    {
+      "config": "leaves15",
+      "params": {
+        "objective": "lambdarank",
+        "metric": "ndcg",
+        "eval_at": [
+          10
+        ],
+        "num_leaves": 15,
+        "learning_rate": 0.05,
+        "min_data_in_leaf": 50,
+        "lambda_l2": 1,
+        "feature_fraction": 0.8,
+        "bagging_fraction": 0.8,
+        "bagging_freq": 1,
+        "seed": 0,
+        "data_random_seed": 0,
+        "feature_fraction_seed": 0,
+        "bagging_seed": 0,
+        "deterministic": true,
+        "force_row_wise": true,
+        "verbose": -1,
+        "num_threads": 4
+      },
+      "fold": 0,
+      "seconds": 99.46767529999852,
+      "scores": [
+        {
+          "trees": 200,
+          "train": 0.48400351297027633,
+          "validation": 0.4774702311473908
+        },
+        {
+          "trees": 400,
+          "train": 0.5073205124026927,
+          "validation": 0.4837135191902514
+        },
+        {
+          "trees": 800,
+          "train": 0.5418291708957041,
+          "validation": 0.4861477262199091
+        }
+      ]
+    },
+    {
+      "config": "leaves31",
+      "params": {
+        "objective": "lambdarank",
+        "metric": "ndcg",
+        "eval_at": [
+          10
+        ],
+        "num_leaves": 31,
+        "learning_rate": 0.05,
+        "min_data_in_leaf": 50,
+        "lambda_l2": 1,
+        "feature_fraction": 0.8,
+        "bagging_fraction": 0.8,
+        "bagging_freq": 1,
+        "seed": 0,
+        "data_random_seed": 0,
+        "feature_fraction_seed": 0,
+        "bagging_seed": 0,
+        "deterministic": true,
+        "force_row_wise": true,
+        "verbose": -1,
+        "num_threads": 4
+      },
+      "fold": 0,
+      "seconds": 130.2512553000015,
+      "scores": [
+        {
+          "trees": 200,
+          "train": 0.5145748054901016,
+          "validation": 0.4833846255115015
+        },
+        {
+          "trees": 400,
+          "train": 0.5505405493883349,
+          "validation": 0.48608291486867033
+        },
+        {
+          "trees": 800,
+          "train": 0.6013568781961415,
+          "validation": 0.4865964136335242
+        }
+      ]
+    },
+    {
+      "config": "leaves63reg",
+      "params": {
+        "objective": "lambdarank",
+        "metric": "ndcg",
+        "eval_at": [
+          10
+        ],
+        "num_leaves": 63,
+        "learning_rate": 0.05,
+        "min_data_in_leaf": 100,
+        "lambda_l2": 5,
+        "feature_fraction": 0.8,
+        "bagging_fraction": 0.8,
+        "bagging_freq": 1,
+        "seed": 0,
+        "data_random_seed": 0,
+        "feature_fraction_seed": 0,
+        "bagging_seed": 0,
+        "deterministic": true,
+        "force_row_wise": true,
+        "verbose": -1,
+        "num_threads": 4
+      },
+      "fold": 0,
+      "seconds": 160.35765739999988,
+      "scores": [
+        {
+          "trees": 200,
+          "train": 0.5501578927243284,
+          "validation": 0.48382127538254904
+        },
+        {
+          "trees": 400,
+          "train": 0.5987495708832778,
+          "validation": 0.48781970261595253
+        },
+        {
+          "trees": 800,
+          "train": 0.6649423976997118,
+          "validation": 0.4858172279516374
+        }
+      ]
+    },
+    {
+      "config": "leaves15",
+      "params": {
+        "objective": "lambdarank",
+        "metric": "ndcg",
+        "eval_at": [
+          10
+        ],
+        "num_leaves": 15,
+        "learning_rate": 0.05,
+        "min_data_in_leaf": 50,
+        "lambda_l2": 1,
+        "feature_fraction": 0.8,
+        "bagging_fraction": 0.8,
+        "bagging_freq": 1,
+        "seed": 0,
+        "data_random_seed": 0,
+        "feature_fraction_seed": 0,
+        "bagging_seed": 0,
+        "deterministic": true,
+        "force_row_wise": true,
+        "verbose": -1,
+        "num_threads": 4
+      },
+      "fold": 1,
+      "seconds": 118.75718399999823,
+      "scores": [
+        {
+          "trees": 200,
+          "train": 0.4887969674828527,
+          "validation": 0.4575327560789786
+        },
+        {
+          "trees": 400,
+          "train": 0.5121670646989329,
+          "validation": 0.4659684690551373
+        },
+        {
+          "trees": 800,
+          "train": 0.5447559245819966,
+          "validation": 0.46694417743294037
+        }
+      ]
+    },
+    {
+      "config": "leaves15",
+      "params": {
+        "objective": "lambdarank",
+        "metric": "ndcg",
+        "eval_at": [
+          10
+        ],
+        "num_leaves": 15,
+        "learning_rate": 0.05,
+        "min_data_in_leaf": 50,
+        "lambda_l2": 1,
+        "feature_fraction": 0.8,
+        "bagging_fraction": 0.8,
+        "bagging_freq": 1,
+        "seed": 0,
+        "data_random_seed": 0,
+        "feature_fraction_seed": 0,
+        "bagging_seed": 0,
+        "deterministic": true,
+        "force_row_wise": true,
+        "verbose": -1,
+        "num_threads": 4
+      },
+      "fold": 2,
+      "seconds": 107.07810039999822,
+      "scores": [
+        {
+          "trees": 200,
+          "train": 0.48659709258062106,
+          "validation": 0.4621501302146885
+        },
+        {
+          "trees": 400,
+          "train": 0.5105854300703822,
+          "validation": 0.46959566086162613
+        },
+        {
+          "trees": 800,
+          "train": 0.5445514061336387,
+          "validation": 0.47222303457748876
+        }
+      ]
+    },
+    {
+      "config": "leaves15",
+      "params": {
+        "objective": "lambdarank",
+        "metric": "ndcg",
+        "eval_at": [
+          10
+        ],
+        "num_leaves": 15,
+        "learning_rate": 0.05,
+        "min_data_in_leaf": 50,
+        "lambda_l2": 1,
+        "feature_fraction": 0.8,
+        "bagging_fraction": 0.8,
+        "bagging_freq": 1,
+        "seed": 0,
+        "data_random_seed": 0,
+        "feature_fraction_seed": 0,
+        "bagging_seed": 0,
+        "deterministic": true,
+        "force_row_wise": true,
+        "verbose": -1,
+        "num_threads": 4
+      },
+      "fold": 3,
+      "seconds": 117.89074640000035,
+      "scores": [
+        {
+          "trees": 200,
+          "train": 0.48784511422808813,
+          "validation": 0.45999767544685416
+        },
+        {
+          "trees": 400,
+          "train": 0.5119710724143722,
+          "validation": 0.46288067809976413
+        },
+        {
+          "trees": 800,
+          "train": 0.5441464746399675,
+          "validation": 0.4669436125991889
+        }
+      ]
+    },
+    {
+      "config": "leaves15",
+      "params": {
+        "objective": "lambdarank",
+        "metric": "ndcg",
+        "eval_at": [
+          10
+        ],
+        "num_leaves": 15,
+        "learning_rate": 0.05,
+        "min_data_in_leaf": 50,
+        "lambda_l2": 1,
+        "feature_fraction": 0.8,
+        "bagging_fraction": 0.8,
+        "bagging_freq": 1,
+        "seed": 0,
+        "data_random_seed": 0,
+        "feature_fraction_seed": 0,
+        "bagging_seed": 0,
+        "deterministic": true,
+        "force_row_wise": true,
+        "verbose": -1,
+        "num_threads": 4
+      },
+      "fold": 4,
+      "seconds": 114.31692320000002,
+      "scores": [
+        {
+          "trees": 200,
+          "train": 0.48792685627433474,
+          "validation": 0.46303141245500756
+        },
+        {
+          "trees": 400,
+          "train": 0.5115158717234409,
+          "validation": 0.4659426545835466
+        },
+        {
+          "trees": 800,
+          "train": 0.545009522909379,
+          "validation": 0.46945942871048496
+        }
+      ]
+    },
+    {
+      "config": "leaves31",
+      "params": {
+        "objective": "lambdarank",
+        "metric": "ndcg",
+        "eval_at": [
+          10
+        ],
+        "num_leaves": 31,
+        "learning_rate": 0.05,
+        "min_data_in_leaf": 50,
+        "lambda_l2": 1,
+        "feature_fraction": 0.8,
+        "bagging_fraction": 0.8,
+        "bagging_freq": 1,
+        "seed": 0,
+        "data_random_seed": 0,
+        "feature_fraction_seed": 0,
+        "bagging_seed": 0,
+        "deterministic": true,
+        "force_row_wise": true,
+        "verbose": -1,
+        "num_threads": 4
+      },
+      "fold": 1,
+      "seconds": 166.18941919999997,
+      "scores": [
+        {
+          "trees": 200,
+          "train": 0.5191481324440489,
+          "validation": 0.46308328657596187
+        },
+        {
+          "trees": 400,
+          "train": 0.554258883049098,
+          "validation": 0.46791879132545505
+        },
+        {
+          "trees": 800,
+          "train": 0.6053763278153601,
+          "validation": 0.46945457630949816
+        }
+      ]
+    },
+    {
+      "config": "leaves31",
+      "params": {
+        "objective": "lambdarank",
+        "metric": "ndcg",
+        "eval_at": [
+          10
+        ],
+        "num_leaves": 31,
+        "learning_rate": 0.05,
+        "min_data_in_leaf": 50,
+        "lambda_l2": 1,
+        "feature_fraction": 0.8,
+        "bagging_fraction": 0.8,
+        "bagging_freq": 1,
+        "seed": 0,
+        "data_random_seed": 0,
+        "feature_fraction_seed": 0,
+        "bagging_seed": 0,
+        "deterministic": true,
+        "force_row_wise": true,
+        "verbose": -1,
+        "num_threads": 4
+      },
+      "fold": 2,
+      "seconds": 176.45664000000033,
+      "scores": [
+        {
+          "trees": 200,
+          "train": 0.5177173368352781,
+          "validation": 0.4683658884266062
+        },
+        {
+          "trees": 400,
+          "train": 0.5538914293401935,
+          "validation": 0.4744781235839402
+        },
+        {
+          "trees": 800,
+          "train": 0.6051632356035074,
+          "validation": 0.4745500006784164
+        }
+      ]
+    }
+  ]
+}

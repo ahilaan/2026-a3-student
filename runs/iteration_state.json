@@ -1,26 +1,34 @@
 {
-  "goal": "Fix real-DEV learning floor, then improve leaderboard position",
-  "current_submission": 17,
-  "checks_passed": 9,
+  "goal": "Reach top current leaderboard within the assignment rules",
+  "current_submission": 22,
+  "checks_passed": 10,
   "checks_total": 10,
-  "cause": "Toy-trained pairwise model does not beat real-DEV BM25",
+  "cause": null,
   "required_authorized_files": [
     "data/train/train.txt",
     "data/dev/vali.txt"
   ],
-  "public_archive_downloaded": false,
+  "public_archive_downloaded": true,
   "new_submission_uploaded": true,
   "next_steps": [
-    "Wait for submission #17 and verify its correctness result",
-    "Report real DEV metrics, artifact sizes, ZIP and exact test outcomes"
+    "Monitor submission 22",
+    "Complete larger-tree TRAIN CV",
+    "Keep iterating within assignment rules until current rank 1"
   ],
   "required_data_available": true,
   "data_source": "checksum-verified official MSLR-WEB10K archive",
   "held_out_files_opened": false,
   "pointwise_real_dev_ndcg": 0.4247482873621245,
-  "pairwise_real_dev_ndcg": 0.4364209245373557,
+  "pairwise_real_dev_ndcg": 0.4455778279773657,
   "bm25_real_dev_ndcg": 0.28848678060708594,
   "local_learning_floor_passes": true,
   "current_submission_status": "queued",
-  "real_ltr_dev_ndcg": 0.4711961419084681
+  "real_ltr_dev_ndcg": 0.48094237067274986,
+  "server_correctness_passed": 10,
+  "server_correctness_total": 10,
+  "server_pairwise_heldout_ndcg": 0.43414861580877345,
+  "status": "active",
+  "original_cause": "Toy-trained pairwise model did not beat real-DEV BM25",
+  "best_submission": 20,
+  "current_rank": 2
 }
