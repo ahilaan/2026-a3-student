@@ -3,13 +3,13 @@
 Fuse four base rankers, then train pointwise / RankNet / LambdaMART rankers on MSLR-WEB10K Fold1 without overfitting. Full spec: the assignment PDF. Held-out data is **not** here and must not be sought (honor code).
 
 Current optimization declarations and measured results are in
-[submission notes](docs/SUBMISSION_NOTES.md). The first optimization candidate
-uses TRAIN-tuned weighted square-root CombSUM (DEV nDCG@10 0.309807) and a
-128/64-unit label-trained LambdaRank MLP (DEV 0.445578). The tree and pointwise
-model uses 800 trees and 15 leaves selected by five TRAIN query folds (DEV
-0.480942); pointwise remains the validated baseline. Larger-tree comparisons
-continue separately. No held-out labels are used; DEV selects neural epochs
-but supplies no training gradients.
+[submission notes](docs/SUBMISSION_NOTES.md). The current candidate uses
+TRAIN-tuned power-1.5 weighted CombSUM (DEV nDCG@10 0.309080), a 128/64-unit
+label-trained LambdaRank MLP (DEV 0.445578), and a 200-tree/31-leaf LambdaMART
+(DEV 0.477777). Five TRAIN query folds quantify the tree's fit/generalization
+tradeoff; normal aggregate C2 feedback motivates shorter training. Pointwise
+remains the validated baseline. No held-out labels are used; DEV selects neural
+epochs but supplies no training gradients.
 
 ## Quick start
 ```

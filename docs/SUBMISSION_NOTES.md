@@ -3,16 +3,25 @@
 ## Current optimization candidate (18 October 2026)
 
 This section supersedes the historical baseline descriptions below. The current
-LambdaMART artifact has 800 trees and 15 leaves, trained on full TRAIN only.
+LambdaMART artifact has 200 trees and 31 leaves, trained on full TRAIN only.
 Other hyperparameters and the pointwise artifact retain baseline #17 settings.
-DEV remains reporting-only for the tree. Expanded comparisons with 31 and 63
-leaves run separately; experimental models are never loaded implicitly.
+DEV remains reporting-only for the tree. The fixed 200-tree prefix is saved
+from the full-TRAIN 800-round fit; no reported fold supplies early stopping.
+Experimental models are never loaded implicitly.
+
+The 31-leaf five-fold TRAIN sweep gives validation means 0.469399 (200),
+0.473163 (400), 0.473860 (800); corresponding validation/TRAIN ratios are
+0.906412, 0.854637, 0.783787. The shorter model trades some validation accuracy
+for a smaller fit gap. The public aggregate C2 score also regressed for the
+800-tree/15-leaf upload (#22: 0.346337 versus #20: 0.357101), motivating this
+regularization choice. Only normal portal aggregates were consulted; no held-out
+labels or hidden construction details were sought. Current tree DEV=0.477777411.
 
 Completed five-query-fold TRAIN sweep (mean validation nDCG@10 / population
 standard deviation / uncapped validation-to-training ratio): 200 trees
 0.464036 / 0.006981 / 0.952781; 400 trees 0.469620 / 0.007361 / 0.919540;
 800 trees 0.472344 / 0.007172 / 0.868185. All five folds prefer 800 trees over
-200. Counts are fixed; no reported fold supplies early stopping. The selected
+200. Counts are fixed; no reported fold supplies early stopping. This screened
 full-TRAIN fit scores 0.480942371 on real DEV, versus baseline 0.471196142.
 The generic transfer recipe now allows 800 rounds with validation patience 50;
 its gradients still use only the supplied training file and it uses four threads.
@@ -20,10 +29,15 @@ its gradients still use only the supplied training file and it uses four threads
 Fusion was tuned using TRAIN only: 4,800 tuning and 1,200 reserved confirmation
 queries, seed 0, all documents of a query together. A finite grid compared
 weighted RRF constants 0/5/20/60/100/300/1000 and weighted min-max CombSUM powers
-0.5/1/2. Nonnegative integer weights sum to four. The selected square-root
-min-max rule weights whole-document BM25=2, title BM25=1, Dirichlet LMIR=1 and
-JM LMIR=0. Tuning nDCG@10=0.301608; confirmation=0.291043. Constants were fixed
-before DEV evaluation. Real DEV nDCG@10=0.309807338, MAP@10=0.130272851.
+0.5/1/2. Nonnegative integer weights sum to four. The initial square-root rule
+weights whole-document BM25=2, title BM25=1, Dirichlet LMIR=1, JM LMIR=0,
+giving tuning 0.301608 and confirmation 0.291043. A finer TRAIN-only grid
+(integer weights summing to eight and powers 0.25/0.5/0.75/1/1.5/2) selected
+power 1.5 and weights 2/3/3/0: tuning 0.302205, confirmation 0.292748.
+A predeclared TRAIN-only adoption rule required tuning gain >=0.0005 and
+confirmation improvement; this passed before DEV was read. Current DEV
+nDCG@10=0.309080471, MAP@10=0.129081911, slightly below the initial rule but
+within the same leaderboard bands. No DEV score chose fusion settings.
 The graded textbook fusion functions retain their definitions.
 
 The current pairwise artifact is a staff-compatible 136 -> 128 ReLU -> 64 ReLU
@@ -45,7 +59,7 @@ Dropout adds no inference layers; the staff artifact format is unchanged.
 Expanded LambdaMART CV compares 15/31/63 leaves and fixed 200/400/800 prefixes of
 an 800-tree fit in each TRAIN query fold. No reported fold supplies early
 stopping. Results are saved after each fit in runs/optimization/tree_cv.json.
-The currently shipped 800-tree model uses the completed 15-leaf CV above.
+The currently shipped 200-tree/31-leaf model uses completed query CV above.
 Each tree fit uses at most four threads; neural fits use two.
 
 Reproduce tuning with scripts/optimize_rankers.py (modes cache/fusion/trees).

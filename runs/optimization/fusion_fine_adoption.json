@@ -1,0 +1,12 @@
+{
+  "decision": "adopt",
+  "basis": "TRAIN tuning gain >0.0005 and reserved TRAIN confirmation gain",
+  "DEV_seen_for_this_setting": false,
+  "weights": {
+    "bm25_whole_document": 2.0,
+    "bm25_title": 3.0,
+    "lmir_dir_whole_document": 3.0,
+    "lmir_jm_whole_document": 0.0
+  },
+  "power": 1.5
+}

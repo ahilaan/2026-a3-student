@@ -74,7 +74,7 @@ def combmnz_scores(base_scores: Dict[str, Dict[str, float]],
 
 
 def weighted_power_combsum(base_scores, weights, power=0.5):
-    """TRAIN-tuned weighted fusion with a concave min-max normalization.
+    """TRAIN-tuned weighted fusion with a power of min-max normalization.
 
     The textbook functions above retain their original definitions. Constants
     and channel weights are selected offline using released TRAIN queries.

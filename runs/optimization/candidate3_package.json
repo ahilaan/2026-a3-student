@@ -1,0 +1,10 @@
+{
+  "files": 60,
+  "bytes": 801286,
+  "sha256": "c206710cb28e53a8d53b394bb0a75b272144184d4e07f64ab54d2cb9c31b19c7",
+  "models": {
+    "C:\\Users\\HP\\Downloads\\col764_a3\\2026-a3-student\\data\\cache\\optimization\\candidate3\\model.txt": "88abc7bf85e1a108ac9a28f55517807064eb2f2011a6dfdeef19652d1ce2eae5",
+    "C:\\Users\\HP\\Downloads\\col764_a3\\2026-a3-student\\data\\cache\\optimization\\candidate3\\pointwise_model.pt": "cfbff50b8290bb112912256e29b36dbd5f62669b66d0f69fb44f17c547279495",
+    "C:\\Users\\HP\\Downloads\\col764_a3\\2026-a3-student\\data\\cache\\optimization\\candidate3\\pairwise_model.pt": "91d3c2a55fe28c50b38784d0b0f82cce6c2ffdb1dc8fabea266f11b9131bc3c7"
+  }
+}

@@ -142,7 +142,7 @@ def train_tree(name, count):
     print(json.dumps(result), flush=True)
 
 
-def fusion():
+def fusion(fine=False):
     X, y, q = cached("train")
     starts = np.r_[0, np.flatnonzero(q[1:] != q[:-1]) + 1, len(q)]
     # Tune on 4800 TRAIN queries; reserve 1200 TRAIN queries for a confirmation.
@@ -152,9 +152,13 @@ def fusion():
     discounts = 1 / np.log2(np.arange(2, 12))
     settings = [("rrf", c) for c in (0, 5, 20, 60, 100, 300, 1000)]
     settings += [("minmax", power) for power in (0.5, 1, 2)]
+    if fine:
+        settings = [("rrf", c) for c in (20, 100, 1000)]
+        settings += [("minmax", power) for power in (0.25, 0.5, 0.75, 1, 1.5, 2)]
     # Integer simplex includes sparse and balanced mixtures; ratios, not scale,
     # determine rankings. No DEV labels used to choose constants or weights.
-    weights = np.array([w for w in itertools.product(range(5), repeat=4) if sum(w) == 4], float)
+    units = 8 if fine else 4
+    weights = np.array([w for w in itertools.product(range(units + 1), repeat=4) if sum(w) == units], float)
     weights = np.vstack([weights, [1, 1, 1, 1]])
     totals = np.zeros((len(settings), len(weights), 2))
     names = list(BASE_RANKER_CHANNELS)
@@ -189,7 +193,12 @@ def fusion():
               "candidates": [{"family": family, "constant": value, "weights": weights[w].tolist(), "tune": means[i, w, 1],
                                "confirmation": means[i, w, 0]}
                               for i, (family, value) in enumerate(settings) for w in range(len(weights))]}
-    write_json(RUNS / "fusion.json", result)
+    if fine:
+        baseline = json.loads((RUNS / "fusion.json").read_text())
+        result["adopt_by_TRAIN_only"] = bool(
+            result["tune_ndcg@10"] >= baseline["tune_ndcg@10"] + 0.0005 and
+            result["confirmation_ndcg@10"] >= baseline["confirmation_ndcg@10"])
+    write_json(RUNS / ("fusion_fine.json" if fine else "fusion.json"), result)
     print(json.dumps({k: v for k, v in result.items() if k != "candidates"}), flush=True)
 
 
@@ -199,6 +208,7 @@ def main():
     ap.add_argument("--configs", nargs="+", choices=list(CONFIGS), default=list(CONFIGS))
     ap.add_argument("--folds", nargs="+", type=int, default=[0, 1, 2, 3, 4])
     ap.add_argument("--trees", type=int, default=800)
+    ap.add_argument("--fine", action="store_true", help="finer TRAIN-only fusion grid")
     args = ap.parse_args()
     snapshot()
     if args.mode == "cache":
@@ -206,7 +216,7 @@ def main():
             arrays = cached(split)
             print(split, [a.shape for a in arrays], flush=True)
     elif args.mode == "fusion":
-        fusion()
+        fusion(fine=args.fine)
     elif args.mode == "trees":
         trees(args.configs, args.folds)
     else:

@@ -23,8 +23,9 @@ import numpy as np
 from submission.fusion import weighted_power_combsum
 
 _MODEL = None
-_FUSION_WEIGHTS = {"bm25_whole_document": 2.0, "bm25_title": 1.0,
-                   "lmir_dir_whole_document": 1.0, "lmir_jm_whole_document": 0.0}
+_FUSION_WEIGHTS = {"bm25_whole_document": 2.0, "bm25_title": 3.0,
+                   "lmir_dir_whole_document": 3.0, "lmir_jm_whole_document": 0.0}
+_FUSION_POWER = 1.5
 
 
 def prepare(model_path: str) -> None:
@@ -52,7 +53,7 @@ def fuse_candidates(qid: str, candidate_doc_ids: List[str], base_scores: Dict[st
     if k <= 0:
         return []
     ids = _unique(candidate_doc_ids)
-    fused = weighted_power_combsum({d: base_scores[d] for d in ids}, _FUSION_WEIGHTS, power=0.5)
+    fused = weighted_power_combsum({d: base_scores[d] for d in ids}, _FUSION_WEIGHTS, power=_FUSION_POWER)
     ranked = sorted(ids, key=lambda d: -fused[d])  # stable: ties keep candidate order
     return [(d, float(fused[d])) for d in ranked[:k]]
 

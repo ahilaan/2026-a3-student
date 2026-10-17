@@ -8,6 +8,7 @@ from submission.fusion import weighted_power_combsum
 from scripts.blend_neural import blend
 from harness.neural import ScoringNetwork, make_scorer, save_scorer, load_scorer
 from harness.preprocessing import Standardizer
+from scripts.blend_trees import blend_models
 
 
 def test_weighted_loss_matches_manual_and_has_finite_gradients():
@@ -50,3 +51,28 @@ def test_blend_staff_loader_reproduces_weighted_original_scores(tmp_path):
     save_scorer(str(pc), network, standardizer)
     expected = 0.25 * make_scorer(a, std)(X) + 0.75 * make_scorer(b, std)(X)
     np.testing.assert_allclose(load_scorer(str(pc))(X), expected, atol=1e-6, rtol=1e-5)
+
+
+def test_tree_blend_roundtrip_preserves_convex_scores(tmp_path):
+    import lightgbm as lgb
+    rng = np.random.RandomState(3)
+    X = rng.randn(60, 7)
+    y = rng.randint(0, 5, 60)
+    paths, models = [], []
+    for seed in (0, 1):
+        model = lgb.train({"objective": "lambdarank", "verbosity": -1, "num_threads": 2,
+                           "num_leaves": 5, "min_data_in_leaf": 2, "feature_fraction": 0.7, "seed": seed},
+                          lgb.Dataset(X, label=y, group=[10]*6), num_boost_round=5)
+        path = tmp_path / f"tree{seed}.txt"
+        model.save_model(str(path))
+        paths.append(path)
+        models.append(model)
+    merged = blend_models(*paths, weight=0.25, first_trees=3, second_trees=4)
+    out = tmp_path / "merged.txt"
+    merged.save_model(str(out))
+    loaded = lgb.Booster(model_file=str(out))
+    assert loaded.num_trees() == 7 and loaded.num_feature() == 7
+    probe = rng.randn(25, 7)
+    expected = 0.25*models[0].predict(probe, num_iteration=3, num_threads=2)
+    expected += 0.75*models[1].predict(probe, num_iteration=4, num_threads=2)
+    np.testing.assert_allclose(loaded.predict(probe, num_threads=2), expected, atol=1e-12, rtol=1e-12)

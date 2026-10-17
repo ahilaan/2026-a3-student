@@ -1,0 +1,23 @@
+[
+  {
+    "trees": 200,
+    "train_mean": 0.5178649226784818,
+    "validation_mean": 0.4693992181249286,
+    "validation_std": 0.007239322277598689,
+    "validation_train_ratio": 0.9064124592511871
+  },
+  {
+    "trees": 400,
+    "train_mean": 0.5536420445302875,
+    "validation_mean": 0.4731630463069244,
+    "validation_std": 0.006888283187630435,
+    "validation_train_ratio": 0.8546371269695713
+  },
+  {
+    "trees": 800,
+    "train_mean": 0.6045775738682466,
+    "validation_mean": 0.4738603106589544,
+    "validation_std": 0.006774302759390278,
+    "validation_train_ratio": 0.783787442903433
+  }
+]
