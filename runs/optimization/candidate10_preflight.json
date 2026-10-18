@@ -1,0 +1,22 @@
+{
+  "features": "C:\\Users\\HP\\Downloads\\col764_a3\\2026-a3-student\\data\\dev\\vali.txt",
+  "rows": 235259,
+  "queries": 2000,
+  "artifact_sha256": {
+    "C:\\Users\\HP\\Downloads\\col764_a3\\2026-a3-student\\data\\cache\\optimization\\candidate10\\model.txt": "671a6332bfe3649727f7eed4e904bcc607d69322b9db71bcd100a93f797bcddd",
+    "C:\\Users\\HP\\Downloads\\col764_a3\\2026-a3-student\\data\\cache\\optimization\\candidate10\\pointwise_model.pt": "cfbff50b8290bb112912256e29b36dbd5f62669b66d0f69fb44f17c547279495",
+    "C:\\Users\\HP\\Downloads\\col764_a3\\2026-a3-student\\data\\cache\\optimization\\candidate10\\pairwise_model.pt": "91d3c2a55fe28c50b38784d0b0f82cce6c2ffdb1dc8fabea266f11b9131bc3c7"
+  },
+  "prepare_seconds": 0.012980500003322959,
+  "tree_feature_schema": "raw",
+  "ltr_ndcg@10": 0.4889287982430805,
+  "pointwise_ndcg@10": 0.4247482873621245,
+  "pairwise_ndcg@10": 0.4455778279773657,
+  "bm25_ndcg@10": 0.28848678060708594,
+  "pairwise_beats_bm25": true,
+  "ltr_beats_bm25": true,
+  "largest_query_seconds": 0.012851999999838881,
+  "passes": true,
+  "tree_gradients": "TRAIN+DEV combined",
+  "tree_dev_is_training": true
+}
