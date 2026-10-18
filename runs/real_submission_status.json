@@ -1,20 +1,20 @@
 {
-  "id": 17,
+  "id": 28,
   "filename": "2023CS10076.zip",
   "status": "success",
   "message": "Graded",
-  "submitted_at": "2026-10-17T18:21:21+00:00",
-  "finished_at": "2026-10-17T18:26:19+00:00",
+  "submitted_at": "2026-10-17T19:50:39+00:00",
+  "finished_at": "2026-10-17T20:02:36+00:00",
   "grade_status": "OK",
   "files_ok": true,
   "missing_files": [],
-  "fusion_ndcg": 0.2994576030495318,
-  "fusion_map": 0.1246368916157123,
-  "ltr_dev_ndcg": 0.4711961419084688,
-  "pairwise_dev_ndcg": 0.4364209245373557,
+  "fusion_ndcg": 0.30908047122957255,
+  "fusion_map": 0.12908191098377725,
+  "ltr_dev_ndcg": 0.4773891594142883,
+  "pairwise_dev_ndcg": 0.4455778279773657,
   "pairwise_status": "OK",
-  "pairwise_heldout_ndcg": 0.42204574862319416,
-  "c2_mean": 0.3571005180865656,
+  "pairwise_heldout_ndcg": 0.43414861580877345,
+  "c2_mean": 0.35662771061481974,
   "checks_passed": 10,
   "checks_total": 10,
   "checks": [
@@ -66,8 +66,8 @@
     {
       "check": "(e) pointwise & pairwise artifacts load and the pairwise model beats a single BM25 feature on DEV",
       "ok": true,
-      "detail": "bm25=0.2885 pairwise=0.4364 pointwise=0.4247"
+      "detail": "bm25=0.2885 pairwise=0.4456 pointwise=0.4247"
     }
   ],
-  "counts_on_leaderboard": true
+  "counts_on_leaderboard": false
 }

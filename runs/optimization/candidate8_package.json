@@ -1,0 +1,18 @@
+{
+  "files": 64,
+  "bytes": 656195,
+  "sha256": "9f96d56332e104a7b91ba57645e7b2b0125e23e68811a1eed034693e3a540198",
+  "required_sha256": {
+    "submission/ranking.py": "b0c98301227feba9c4ff411442ccafcd459506c69506d3d4c0b45f5fb3f82ab3",
+    "submission/fusion.py": "5e02144071ac43458b85bd9dbb769a30bdf2ad261c21ed259771877f7aaa1620",
+    "submission/pointwise_pairwise.py": "644692f6042717910538485e5ad8d9eab1df49f702ceebad2dc65c7b7c449b2b",
+    "submission/recipe.py": "d33e3653bcfc84740f2583bc841889f2441b4fc692eb4803492206f00facf693",
+    "submission/model.txt": "992309d7f75e2d3988eadff1c3b8e826124a8aa4386599ca586b4e30ba6b3eb6",
+    "submission/pointwise_model.pt": "cfbff50b8290bb112912256e29b36dbd5f62669b66d0f69fb44f17c547279495",
+    "submission/pairwise_model.pt": "91d3c2a55fe28c50b38784d0b0f82cce6c2ffdb1dc8fabea266f11b9131bc3c7"
+  },
+  "preflight": "candidate8_preflight.json",
+  "tree_gradients": "TRAIN+DEV combined (declared in README and submission notes)",
+  "CV": "five whole-query folds within the combined released data",
+  "tests": "65 passed; stock toy-accuracy test runs with its CI toy fixture"
+}

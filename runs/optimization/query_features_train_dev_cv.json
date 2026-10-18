@@ -1,0 +1,125 @@
+{
+  "split": "Fold1 TRAIN+DEV combined",
+  "feature_schema": "raw plus per-query average-tie percentiles v1",
+  "params": {
+    "objective": "lambdarank",
+    "metric": "ndcg",
+    "eval_at": [
+      10
+    ],
+    "num_leaves": 15,
+    "learning_rate": 0.05,
+    "min_data_in_leaf": 50,
+    "lambda_l2": 1.0,
+    "feature_fraction": 0.8,
+    "bagging_fraction": 0.8,
+    "bagging_freq": 1,
+    "seed": 0,
+    "data_random_seed": 0,
+    "feature_fraction_seed": 0,
+    "bagging_seed": 0,
+    "deterministic": true,
+    "force_row_wise": true,
+    "verbose": -1,
+    "num_threads": 4
+  },
+  "folds": 5,
+  "seed": 0,
+  "counts": [
+    100,
+    200
+  ],
+  "fits": [
+    {
+      "fold": 0,
+      "scores": [
+        {
+          "trees": 100,
+          "train": 0.47230907097923613,
+          "validation": 0.46462022331617214
+        },
+        {
+          "trees": 200,
+          "train": 0.4920428752651791,
+          "validation": 0.47506552792477946
+        }
+      ]
+    },
+    {
+      "fold": 1,
+      "scores": [
+        {
+          "trees": 100,
+          "train": 0.4716960540088628,
+          "validation": 0.46425893121233125
+        },
+        {
+          "trees": 200,
+          "train": 0.49071269701845105,
+          "validation": 0.47728867894306887
+        }
+      ]
+    },
+    {
+      "fold": 2,
+      "scores": [
+        {
+          "trees": 100,
+          "train": 0.4732652655504117,
+          "validation": 0.46405344839264423
+        },
+        {
+          "trees": 200,
+          "train": 0.49192802812206815,
+          "validation": 0.4741990976823388
+        }
+      ]
+    },
+    {
+      "fold": 3,
+      "scores": [
+        {
+          "trees": 100,
+          "train": 0.4715597299701198,
+          "validation": 0.46896965433293253
+        },
+        {
+          "trees": 200,
+          "train": 0.4905900959159647,
+          "validation": 0.4776760048691911
+        }
+      ]
+    },
+    {
+      "fold": 4,
+      "scores": [
+        {
+          "trees": 100,
+          "train": 0.4765996390030394,
+          "validation": 0.4500181283279958
+        },
+        {
+          "trees": 200,
+          "train": 0.493784034640549,
+          "validation": 0.4604709520844895
+        }
+      ]
+    }
+  ],
+  "summary": [
+    {
+      "trees": 100,
+      "train_mean": 0.47308595190233393,
+      "validation_mean": 0.46238407711641516,
+      "validation_std": 0.006443426803775801,
+      "validation_train_ratio": 0.9773785825960689
+    },
+    {
+      "trees": 200,
+      "train_mean": 0.49181154619244233,
+      "validation_mean": 0.4729400523007735,
+      "validation_std": 0.006370574581765762,
+      "validation_train_ratio": 0.9616286074660709
+    }
+  ]
+}

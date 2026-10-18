@@ -1,0 +1,6 @@
+{
+  "trees": 300,
+  "leaves": 15,
+  "fit_split": "TRAIN only",
+  "dev_ndcg@10": 0.4742038747999608
+}

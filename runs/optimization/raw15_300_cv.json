@@ -1,0 +1,37 @@
+{
+  "fit_split": "TRAIN only",
+  "trees": 300,
+  "leaves": 15,
+  "fixed_prefix_of_800": true,
+  "fold_scores": [
+    {
+      "fold": 0,
+      "train": 0.4973976484681959,
+      "validation": 0.4817303737291963
+    },
+    {
+      "fold": 1,
+      "train": 0.5017693434410764,
+      "validation": 0.4622429272664027
+    },
+    {
+      "fold": 2,
+      "train": 0.4996241912621024,
+      "validation": 0.4671958086790113
+    },
+    {
+      "fold": 3,
+      "train": 0.5009220391807685,
+      "validation": 0.46254803794007243
+    },
+    {
+      "fold": 4,
+      "train": 0.5005642285320594,
+      "validation": 0.46475235888445854
+    }
+  ],
+  "train_mean": 0.5000554901768405,
+  "validation_mean": 0.46769390129982824,
+  "validation_std": 0.007240391618291071,
+  "validation_train_ratio": 0.9352840044500504
+}

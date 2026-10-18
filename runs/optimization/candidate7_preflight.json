@@ -1,0 +1,20 @@
+{
+  "features": "data/dev/vali.txt",
+  "rows": 235259,
+  "queries": 2000,
+  "artifact_sha256": {
+    "C:\\Users\\HP\\Downloads\\col764_a3\\2026-a3-student\\data\\cache\\optimization\\candidate7\\model.txt": "5c9e8b7608634e6c871ec9866dbca4daf9d3c64f95c46a64d17ff4db61479ea2",
+    "C:\\Users\\HP\\Downloads\\col764_a3\\2026-a3-student\\data\\cache\\optimization\\candidate7\\pointwise_model.pt": "cfbff50b8290bb112912256e29b36dbd5f62669b66d0f69fb44f17c547279495",
+    "C:\\Users\\HP\\Downloads\\col764_a3\\2026-a3-student\\data\\cache\\optimization\\candidate7\\pairwise_model.pt": "91d3c2a55fe28c50b38784d0b0f82cce6c2ffdb1dc8fabea266f11b9131bc3c7"
+  },
+  "prepare_seconds": 0.04398539999965578,
+  "tree_feature_schema": "raw_plus_query_percentiles",
+  "ltr_ndcg@10": 0.4817959153411214,
+  "pointwise_ndcg@10": 0.4247482873621245,
+  "pairwise_ndcg@10": 0.4455778279773657,
+  "bm25_ndcg@10": 0.28848678060708594,
+  "pairwise_beats_bm25": true,
+  "ltr_beats_bm25": true,
+  "largest_query_seconds": 0.11575789999915287,
+  "passes": true
+}

@@ -1,6 +1,6 @@
 {
   "goal": "Reach top current leaderboard within the assignment rules",
-  "current_submission": 22,
+  "current_submission": 28,
   "checks_passed": 10,
   "checks_total": 10,
   "cause": null,
@@ -11,9 +11,9 @@
   "public_archive_downloaded": true,
   "new_submission_uploaded": true,
   "next_steps": [
-    "Monitor submission 22",
-    "Complete larger-tree TRAIN CV",
-    "Keep iterating within assignment rules until current rank 1"
+    "Run CI and submit declared TRAIN+DEV candidate8",
+    "Check current rank",
+    "Continue generic regularization if below rank 1"
   ],
   "required_data_available": true,
   "data_source": "checksum-verified official MSLR-WEB10K archive",
@@ -22,13 +22,26 @@
   "pairwise_real_dev_ndcg": 0.4455778279773657,
   "bm25_real_dev_ndcg": 0.28848678060708594,
   "local_learning_floor_passes": true,
-  "current_submission_status": "queued",
-  "real_ltr_dev_ndcg": 0.48094237067274986,
+  "current_submission_status": "success",
+  "real_ltr_dev_ndcg": 0.4951378658757309,
   "server_correctness_passed": 10,
   "server_correctness_total": 10,
   "server_pairwise_heldout_ndcg": 0.43414861580877345,
   "status": "active",
   "original_cause": "Toy-trained pairwise model did not beat real-DEV BM25",
-  "best_submission": 20,
-  "current_rank": 2
+  "best_submission": 25,
+  "current_rank": 2,
+  "score": 0.5272,
+  "latest_correctness_verified_submission": 28,
+  "local_tests_passed": 65,
+  "tree_feature_schema": "raw plus per-query percentiles",
+  "tree_dev_is_training": true,
+  "tree_gradient_splits": [
+    "TRAIN",
+    "DEV"
+  ],
+  "neural_gradient_splits": [
+    "TRAIN"
+  ],
+  "fusion_tuning_split": "TRAIN"
 }

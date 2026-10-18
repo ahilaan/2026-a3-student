@@ -3,14 +3,16 @@
 Fuse four base rankers, then train pointwise / RankNet / LambdaMART rankers on MSLR-WEB10K Fold1 without overfitting. Full spec: the assignment PDF. Held-out data is **not** here and must not be sought (honor code).
 
 Current declarations and results are in [submission notes](docs/SUBMISSION_NOTES.md).
-The current candidate is a 400-tree/15-leaf LambdaMART with generic raw-plus-query-
-percentile features (real DEV nDCG@10 0.482551), a label-trained 128/64-unit
-LambdaRank MLP (0.445578), and the validated pointwise baseline (0.424748).
-Five TRAIN query folds select the tree count. Fusion is TRAIN-tuned weighted
-power CombSUM (0.309080). No held-out labels are used; DEV selects neural epochs
-but supplies no training gradients. The graded training helper fixes one CPU
-thread for bitwise seed reproducibility; optimized neural artifact training uses
-its explicitly declared two threads.
+The current tree is a 200-tree/15-leaf LambdaMART with generic raw-plus-query-
+percentile features, fitted on **released Fold1 TRAIN+DEV** (958,671 rows / 8,000
+queries), as explicitly allowed by the spec when declared. Its DEV nDCG@10
+**0.495138 is an in-training metric**. Five query folds within the combined data
+give validation nDCG@10 0.472940 (std 0.006371, validation/TRAIN ratio 0.961629).
+Neural models still use TRAIN gradients only: label-trained 128/64-unit
+LambdaRank MLP DEV 0.445578 and pointwise DEV 0.424748. Fusion is TRAIN-only-tuned
+weighted power CombSUM (DEV 0.309080). Held-out labels remain untouched.
+The graded neural helper fixes one CPU thread for bitwise seed reproducibility;
+optimized neural artifact training uses explicitly fixed two threads.
 
 ## Quick start
 ```

@@ -1,13 +1,14 @@
 # Submission notes
 
-## Current query-relative candidate (18 October 2026)
+## Current TRAIN+DEV query-relative candidate (18 October 2026)
 
-This section supersedes the historical baseline below. All artifact gradients
-use released MSLR-WEB10K Fold1 TRAIN only. No held-out file, other fold, hidden
-benchmark identity or hidden version construction was consulted. DEV supplies
-neural epoch/configuration selection and reports tree quality; no DEV gradients.
+This section supersedes the historical baseline below. The tree fits released Fold1 TRAIN+DEV labels, explicitly allowed by the spec
+when declared: 958,671 rows / 8,000 complete queries. Neural gradients still use
+TRAIN only (723,412 rows / 6,000 queries); DEV selects neural epochs. Tree DEV
+is now an in-training metric. No held-out file, other fold, hidden benchmark
+identity or hidden version construction was consulted.
 
-The current LambdaMART artifact uses 400 trees, 15 leaves, learning rate 0.05,
+The current LambdaMART artifact uses 200 trees, 15 leaves, learning rate 0.05,
 minimum leaf size 50, L2=1, feature and bagging fractions 0.8, bagging frequency
 1, deterministic row-wise training, four threads, seed 0. Each provided feature
 is retained and its within-query average-tie percentile is appended. Constant
@@ -20,18 +21,21 @@ Inference helpers are inside required ranking.py, with no extra runtime file.
 Raw-feature models remain supported by their explicit ordinary feature schema.
 No dataset name, query ID or input distribution selects the preprocessing.
 
-Completed five-query-fold TRAIN sweep, seed 0, fixed counts, no early stopping
-on a reported fold (validation mean / population std / validation-TRAIN ratio):
+Completed five-query-fold CV WITHIN the combined TRAIN+DEV data, seed 0,
+fixed counts and no early stopping on reported folds (validation mean /
+population std / validation-TRAIN ratio):
 
-- 100 trees: 0.460784 / 0.006551 / 0.972331.
-- 200 trees: 0.470400 / 0.007418 / 0.950846.
-- 400 trees: 0.474710 / 0.007516 / 0.909374.
+- 100 trees: 0.462384 / 0.006443 / 0.977379.
+- 200 trees: 0.472940 / 0.006371 / 0.961629.
 
-400 trees has the strongest mean validation score. Its fit gap is smaller than
-raw-feature long models (31 leaves / 800 trees: validation 0.473860, ratio
-0.783787). The public aggregate C2 regression in upload #22 also motivates
-controlling fit rather than maximizing TRAIN accuracy. C2 aggregate feedback
-was read through the normal portal; no held-out labels were used locally.
+200 trees wins on mean validation score. The released TRAIN and DEV query sets
+were verified disjoint; all rows and appended features of each query remain in
+one fold. The percentile transform fits no corpus statistics. Public DEV is
+included in the final tree fit, so it is not an unseen generalization estimate.
+The separate TRAIN-only control scored 0.482551 on unseen DEV at 400 trees;
+its TRAIN query-fold validation was 0.474710. The combined CV uses a different
+query pool and fold assignment. Normal aggregate portal feedback motivates
+controlling fit; no held-out labels were used locally.
 Full configurations and all five fold scores are in runs/optimization/.
 
 The pointwise artifact is retained from baseline #17: TRAIN-fitted standardizer,
@@ -59,7 +63,7 @@ initial rule. Subsequent DEV 0.309080 is slightly below the initial rule's
 0.309807, within the same leaderboard bands. DEV did not choose fusion settings.
 The graded RRF, CombSUM and CombMNZ definitions remain unchanged.
 
-Current real DEV nDCG@10: LambdaMART 0.482551116, pointwise 0.424748287,
+Current real DEV nDCG@10: LambdaMART 0.495137866 (DEV in training), pointwise 0.424748287,
 pairwise 0.445577828, BM25 0.288486781; fusion 0.309080471 and MAP 0.129081911.
 Fresh staff-loader preflight confirms finite/repeatable scores and runtime.
 The largest query takes approximately 0.03 seconds. The transfer recipe remains
@@ -73,7 +77,8 @@ thread state can change weights by about 3e-7 despite an identical seed. The
 graded train_model helper now fixes one CPU thread. Regression tests exercise
 both pointwise and pairwise training across different incoming thread states.
 Offline optimized artifacts retain their explicitly fixed two-thread path.
-The correction was uploaded separately as #24 for server confirmation.
+The correction was uploaded separately as #24 and passed all 10 server checks;
+#25 also passed all 10. No graded function was weakened.
 
 Reproduction:
 
@@ -82,8 +87,8 @@ python scripts/setup_mslr.py
 python scripts/optimize_rankers.py cache
 python scripts/optimize_rankers.py fusion
 python scripts/optimize_rankers.py fusion --fine
-python scripts/cv_query_features.py
-python scripts/cv_query_features.py --full --trees 400
+python scripts/cv_query_features.py --include-dev --counts 100 200
+python scripts/cv_query_features.py --include-dev --counts 100 200 --full --trees 200
 python scripts/optimize_neural.py --name lambda128x64 --threads 2
 python scripts/optimize_neural.py --name lambda128x64_finetune --threads 2 --lr 0.0002 --weight-decay 0.001 --input-dropout 0.03 --init data/cache/optimization/lambda128x64/pairwise_model.pt
 ```
