@@ -8,8 +8,9 @@ TRAIN only (723,412 rows / 6,000 queries); DEV selects neural epochs. Tree DEV
 is now an in-training metric. No held-out file, other fold, hidden benchmark
 identity or hidden version construction was consulted.
 
-The current LambdaMART artifact uses 200 trees, 15 leaves, learning rate 0.05,
-minimum leaf size 50, L2=1, feature and bagging fractions 0.8, bagging frequency
+The current LambdaMART artifact uses 200 trees, 31 leaves, learning rate 0.05,
+minimum leaf size 100, L2=5, feature fraction 0.7 and bagging fraction 0.8,
+random split thresholds (extra_trees=True), max_bin=63, bagging frequency
 1, deterministic row-wise training, four threads, seed 0. Each provided feature
 is retained and its within-query average-tie percentile is appended. Constant
 columns and single-document queries get zero percentiles. This label-free,
@@ -25,10 +26,15 @@ Completed five-query-fold CV WITHIN the combined TRAIN+DEV data, seed 0,
 fixed counts and no early stopping on reported folds (validation mean /
 population std / validation-TRAIN ratio):
 
-- 100 trees: 0.462384 / 0.006443 / 0.977379.
-- 200 trees: 0.472940 / 0.006371 / 0.961629.
+- 100 trees: 0.461986 / 0.004823 / 0.973882.
+- 200 trees: 0.472384 / 0.004721 / 0.957007.
 
-200 trees wins on mean validation score. The released TRAIN and DEV query sets
+200 trees wins in all five folds. This randomized regularization alternative
+has a slightly lower mean but lower fold variability than the ordinary
+15-leaf combined-data control (0.472940 mean / 0.006371 std). It is tested as
+a separate candidate; the control remains preserved as submission #38, which
+passed all 10 correctness checks and reached rank 2 (score 0.5522).
+The released TRAIN and DEV query sets
 were verified disjoint; all rows and appended features of each query remain in
 one fold. The percentile transform fits no corpus statistics. Public DEV is
 included in the final tree fit, so it is not an unseen generalization estimate.
@@ -63,7 +69,7 @@ initial rule. Subsequent DEV 0.309080 is slightly below the initial rule's
 0.309807, within the same leaderboard bands. DEV did not choose fusion settings.
 The graded RRF, CombSUM and CombMNZ definitions remain unchanged.
 
-Current real DEV nDCG@10: LambdaMART 0.495137866 (DEV in training), pointwise 0.424748287,
+Current real DEV nDCG@10: LambdaMART 0.494854944 (DEV in training), pointwise 0.424748287,
 pairwise 0.445577828, BM25 0.288486781; fusion 0.309080471 and MAP 0.129081911.
 Fresh staff-loader preflight confirms finite/repeatable scores and runtime.
 The largest query takes approximately 0.03 seconds. The transfer recipe remains
@@ -87,8 +93,8 @@ python scripts/setup_mslr.py
 python scripts/optimize_rankers.py cache
 python scripts/optimize_rankers.py fusion
 python scripts/optimize_rankers.py fusion --fine
-python scripts/cv_query_features.py --include-dev --counts 100 200
-python scripts/cv_query_features.py --include-dev --counts 100 200 --full --trees 200
+python scripts/cv_query_features.py --include-dev --variant extra --counts 100 200
+python scripts/cv_query_features.py --include-dev --variant extra --counts 100 200 --full --trees 200
 python scripts/optimize_neural.py --name lambda128x64 --threads 2
 python scripts/optimize_neural.py --name lambda128x64_finetune --threads 2 --lr 0.0002 --weight-decay 0.001 --input-dropout 0.03 --init data/cache/optimization/lambda128x64/pairwise_model.pt
 ```

@@ -1,6 +1,6 @@
 {
   "goal": "Reach top current leaderboard within the assignment rules",
-  "current_submission": 28,
+  "current_submission": 38,
   "checks_passed": 10,
   "checks_total": 10,
   "cause": null,
@@ -11,9 +11,8 @@
   "public_archive_downloaded": true,
   "new_submission_uploaded": true,
   "next_steps": [
-    "Run CI and submit declared TRAIN+DEV candidate8",
-    "Check current rank",
-    "Continue generic regularization if below rank 1"
+    "Validate and submit randomized extra-trees candidate with completed grouped CV",
+    "Keep server cooldown and one-active-submission limits"
   ],
   "required_data_available": true,
   "data_source": "checksum-verified official MSLR-WEB10K archive",
@@ -29,10 +28,10 @@
   "server_pairwise_heldout_ndcg": 0.43414861580877345,
   "status": "active",
   "original_cause": "Toy-trained pairwise model did not beat real-DEV BM25",
-  "best_submission": 25,
+  "best_submission": 38,
   "current_rank": 2,
-  "score": 0.5272,
-  "latest_correctness_verified_submission": 28,
+  "score": 0.5522,
+  "latest_correctness_verified_submission": 38,
   "local_tests_passed": 65,
   "tree_feature_schema": "raw plus per-query percentiles",
   "tree_dev_is_training": true,
@@ -43,5 +42,10 @@
   "neural_gradient_splits": [
     "TRAIN"
   ],
-  "fusion_tuning_split": "TRAIN"
+  "fusion_tuning_split": "TRAIN",
+  "current_candidate": "candidate8",
+  "current_candidate_ci": "success",
+  "current_candidate_commit": "1d6b2ddd66292dfa811f7566b8567de4807a84ce",
+  "current_candidate_ci_url": "https://github.com/ahilaan/2026-a3-student/actions/runs/39096489913",
+  "server_tree_c2_mean": 0.3563652383213275
 }

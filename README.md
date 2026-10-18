@@ -3,11 +3,13 @@
 Fuse four base rankers, then train pointwise / RankNet / LambdaMART rankers on MSLR-WEB10K Fold1 without overfitting. Full spec: the assignment PDF. Held-out data is **not** here and must not be sought (honor code).
 
 Current declarations and results are in [submission notes](docs/SUBMISSION_NOTES.md).
-The current tree is a 200-tree/15-leaf LambdaMART with generic raw-plus-query-
+The current tree is a 200-tree/31-leaf randomized LambdaMART with generic raw-plus-query-
 percentile features, fitted on **released Fold1 TRAIN+DEV** (958,671 rows / 8,000
 queries), as explicitly allowed by the spec when declared. Its DEV nDCG@10
-**0.495138 is an in-training metric**. Five query folds within the combined data
-give validation nDCG@10 0.472940 (std 0.006371, validation/TRAIN ratio 0.961629).
+**0.494855 is an in-training metric**. Five query folds within the combined data
+give validation nDCG@10 0.472384 (std 0.004721, validation/TRAIN ratio 0.957007).
+The regularized alternative uses random split thresholds, minimum leaf size 100,
+L2=5, 63 histogram bins and feature fraction 0.7; its learning rate is 0.05.
 Neural models still use TRAIN gradients only: label-trained 128/64-unit
 LambdaRank MLP DEV 0.445578 and pointwise DEV 0.424748. Fusion is TRAIN-only-tuned
 weighted power CombSUM (DEV 0.309080). Held-out labels remain untouched.
