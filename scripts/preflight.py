@@ -42,10 +42,19 @@ def check(features_path, model_dir, *, data=None):
     if ranking._QUERY_RANK_FEATURES:
         from submission.query_features import augment_grouped
         tree_X = augment_grouped(X, q)
+    elif ranking._QUERY_MINMAX_FEATURES or ranking._QUERY_COMBINED_FEATURES:
+        blocks = 3 if ranking._QUERY_COMBINED_FEATURES else 2
+        transform = ranking._augment_query_union if ranking._QUERY_COMBINED_FEATURES else ranking._augment_query_minmax
+        tree_X = np.empty((len(X), blocks * X.shape[1]), dtype=np.float32)
+        starts = np.r_[0, np.flatnonzero(q[1:] != q[:-1]) + 1, len(q)]
+        for lo, hi in zip(starts[:-1], starts[1:]):
+            tree_X[lo:hi] = transform(X[lo:hi])
     else:
         tree_X = X
     predicted = model.predict(tree_X, num_threads=4)
-    result["tree_feature_schema"] = "raw_plus_query_percentiles" if ranking._QUERY_RANK_FEATURES else "raw"
+    result["tree_feature_schema"] = ("raw_percentile_minmax_union" if ranking._QUERY_COMBINED_FEATURES else
+                                     "raw_plus_query_percentiles" if ranking._QUERY_RANK_FEATURES else
+                                     "raw_plus_query_minmax" if ranking._QUERY_MINMAX_FEATURES else "raw")
     del tree_X
     if not np.isfinite(predicted).all():
         raise ValueError("non-finite LambdaMART scores")

@@ -1,57 +1,74 @@
-# A3 -- Rank Fusion + LTR Arena (student starter)
+# COL7364 Assignment 3 - Ahilaan Saxena (2023CS10076)
 
-Fuse four base rankers, then train pointwise / RankNet / LambdaMART rankers on MSLR-WEB10K Fold1 without overfitting. Full spec: the assignment PDF. Held-out data is **not** here and must not be sought (honor code).
+Competition ZIP: `2023CS10076.zip`, due 22 October 2026 at 11:59 PM.
+The report and statements are a separate Moodle submission due 24 October
+at 11:59 PM (assignment Version 1.5, pages 1 and 12).
+See [package verification](docs/COMPETITION_PACKAGE.md) and
+[Moodle deliverables](docs/MOODLE_SUBMISSION.md). Raw datasets are excluded
+from the ZIP; local tests require the supplied toy/transfer fixtures.
 
-Current declarations and results are in [submission notes](docs/SUBMISSION_NOTES.md).
-The current tree is a 200-tree/31-leaf randomized LambdaMART with generic raw-plus-query-
-percentile features, fitted on **released Fold1 TRAIN+DEV** (958,671 rows / 8,000
-queries), as explicitly allowed by the spec when declared. Its DEV nDCG@10
-**0.494855 is an in-training metric**. Five query folds within the combined data
-give validation nDCG@10 0.472384 (std 0.004721, validation/TRAIN ratio 0.957007).
-The regularized alternative uses random split thresholds, minimum leaf size 100,
-L2=5, 63 histogram bins and feature fraction 0.7; its learning rate is 0.05.
-Neural models still use TRAIN gradients only: label-trained 128/64-unit
-LambdaRank MLP DEV 0.445578 and pointwise DEV 0.424748. Fusion is TRAIN-only-tuned
-weighted power CombSUM (DEV 0.309080). Held-out labels remain untouched.
-The graded neural helper fixes one CPU thread for bitwise seed reproducibility;
-optimized neural artifact training uses explicitly fixed two threads.
+The current main LambdaMART artifact uses released Fold1 TRAIN+DEV labels:
+958,671 original rows / 8,000 queries. DEV scores are trained-on measurements.
+TEST is excluded from current fitting and new local evaluation. Historical
+TEST-label experiments and model-selection exposure remain disclosed in
+[docs/COMPLIANCE.md](docs/COMPLIANCE.md); refitting does not erase that exposure.
 
-## Quick start
+The native LightGBM artifact has 4,400 trees and 272 features: 136 raw plus
+136 label-free within-query average-tie percentiles. Two augmented components
+have 2,000 trees / 127 leaves / seed 0 and 2,400 trees / 63 leaves / seed 23,
+weighted 0.65/0.35. Both use LambdaRank, rate .05, minimum leaf 100, L2 10,
+extra randomized splits, 63 bins, feature/row fractions .8, row sampling every
+round and four threads. There is no early stopping in these fixed-count fits.
+Augmentation doubles query blocks using seed 76420 + component seed, noise
+.02 times within-query range, log-normal feature scaling (sigma .5), and
+14-40 dropped raw columns; transforms are recomputed after augmentation.
+TRAIN grouped CV, trained-on DEV and portal feedback informed selection.
+
+Reproduce the current pipeline without replacing submitted artifacts:
+
+```bash
+python scripts/train_model.py --config current-main --train data/train --dev data/dev --use-dev --work-dir runs/current_reproduction --out runs/current_reproduction/model.txt
 ```
-pip install -r requirements.txt
-bash scripts/smoke_test.sh                 # toy data, trains, runs the harness, runs tests
-python scripts/setup_mslr.py              # checksum-verified archive; extract ONLY Fold1 TRAIN/DEV
-python scripts/prepare_mslr.py --fold-dir <MSLR-WEB10K/Fold1>     # real data -> data/train, data/dev
-python scripts/run_recipe.py                      # Track C1 dry run on toy data (synthetic transfer sets; see docs/TRANSFER_TRACK.md)
-python scripts/cv_lambdamart.py --train data/train --trees 50 100 200 400   # local train-vs-validation gap
-python scripts/train_model.py --train data/train --out submission/model.txt --trees 200
-python -m harness.run_harness --features data/dev/vali.txt --model submission/model.txt
-```
 
-## What you write
-| file | what |
-|---|---|
-| `submission/fusion.py` | Hand-written RRF (default, c=60), CombSUM and CombMNZ, with stable ties |
-| `submission/pointwise_pairwise.py` | Seeded pointwise MSE and plain RankNet training, query-local pair sampling, minibatching and best-validation-state early stopping |
-| `submission/ranking.py` | the competition entry: keep the shape, improve the internals |
-| `scripts/train_model.py` | your reproducible LambdaMART training script |
-| `submission/recipe.py` | your training recipe, run by staff on undisclosed benchmarks for Track C1 (working default provided; tune it so it transfers) |
+This preserves each component's 1,200-tree save/reload boundary before
+continuation and verifies output against the submitted model. Use `--dry-run`
+to inspect commands. `--assembly-only` verifies retained component receipts
+and rebuilds just the blend; those local receipts are not packaged.
+`--config submitted` remains the legacy 200-tree configuration for CLI
+compatibility; it does not reproduce the current model. Measured reproduction
+status and limitations are in [docs/FINAL_C1_PASS.md](docs/FINAL_C1_PASS.md).
+Configuration is in [docs/CURRENT_MODEL.json](docs/CURRENT_MODEL.json).
 
-Self-check your parts: `python -m pytest tests/test_student_todos.py`. CI gates the interface (`tests/` minus that file). Additional edge checks live in `tests/test_baseline_edges.py`.
+C1 reads only supplied TRAIN/validation and fits the original shallow raw
+LambdaRank baseline first (15 leaves, minimum leaf 50, L2 1, rate .05,
+feature/row fractions .8, maximum 800 rounds, patience 50, four threads).
+It saves a valid raw fallback, then, if time remains, fits the same ranker
+with label-free query percentiles appended. Only an inner-validation gain
+above .001 selects that alternative; validation never supplies gradients.
+The chosen single native artifact encodes its feature schema for inference.
+A shared 960-second soft deadline includes parsing and optional transforms;
+native calls cannot be preempted. Oversized queries use within-query native
+blocks and whole-query validation. The final report records the 39-condition
+comparison, 12 confirmation conditions, weak/noisy-data regressions, runtime
+limits and stress tests. Hidden C1 accuracy remains unknown.
 
-Docs: `docs/SUBMISSION_INTERFACE.md`, `docs/GRADING.md`, `docs/RANKNET_PRIMER.md`, `docs/DATA.md`, `docs/TRANSFER_TRACK.md`, `docs/SUBMISSION_NOTES.md` (fill in and keep as your README section).
+Fusion is handwritten equal-weight, query-min-max CombSUM over BM25 whole,
+BM25 title and LMIR DIR whole (TRAIN-only selection). Pointwise uses TRAIN
+MSE gradients, TRAIN standardization and DEV epoch selection. Pairwise is a
+plain 256/128 ReLU MLP refined for four fixed epochs on TRAIN+DEV relevance
+labels, seed 71, rate .00003, dropout .03 and averaging from epoch 1. It keeps
+TRAIN-only standardization and uses no teacher scores. Exact initialization
+and history are in docs/CURRENT_NEURAL.json and docs/NEURAL_PROVENANCE.md.
 
-## Layout
-`harness/` metrics, I/O, CV, leaderboard formulas, runner (do not edit; staff run an identical copy) - `submission/` your entry - `scripts/` tooling - `data/toy/` and `data/toy_transfer/` synthetic data - `tests/`.
+Install requirements.txt. Run `python -m pytest tests -q -k "not test_end_to_end_toy"`
+and `python scripts/preflight.py`. The toy quality threshold expects a toy-trained
+model; run that smoke workflow in a disposable copy because its training
+command overwrites model.txt. The builder excludes raw data and run outputs
+and verifies the seven required files and 50 MB ZIP cap. docs/REPORT.pdf is
+the existing three-page assignment report; the new pass is documented separately.
 
-The original real-data baseline `submission/model.txt`, `pointwise_model.pt`, and `pairwise_model.pt` are trained on **actual MSLR-WEB10K Fold1 TRAIN only** (723,412 rows / 6,000 queries). LambdaMART uses 200 trees selected by five-fold query-grouped CV within TRAIN. DEV (235,259 rows / 2,000 queries) is reporting-only for LambdaMART and selects the neural early-stopping epoch. No DEV labels supply training gradients. Only Fold1 TRAIN and validation were extracted from the checksum-verified dataset archive; no held-out file was opened.
-
-Real DEV nDCG@10: LambdaMART **0.471196**, pointwise **0.424748**, RankNet **0.436421**, single BM25 feature **0.288487**. RankNet now clears the learning floor that the previous toy-trained upload failed.
-
-The baseline uses all supplied features: an input-dimension -> 64 ReLU -> 1 MLP, Adam at 0.001, batches of 1024, up to 20 epochs and patience 3. RankNet samples up to 300 distinct pairs per query per epoch. LambdaMART uses 15 leaves, learning rate 0.05, minimum leaf size 50, L2=1, and feature/bagging fractions 0.8. The transfer recipe uses the same regularization, at most 200 rounds and validation patience 30, with four threads. CLI readers align sparse feature widths and group queries without retaining a large Python object per feature.
-
-Reproduction commands, split declarations, measured real DEV results and limitations are in [submission notes](docs/SUBMISSION_NOTES.md); JSON results are in `runs/`, and neural epoch histories accompany the artifacts. Run `python scripts/preflight.py` and `python scripts/build_submission.py` to verify the loaded models on real DEV and build the data-free `2023CS10076.zip`. **Run the toy smoke test before final real-data training: it overwrites `submission/model.txt`.** Exclude `.venv/`, caches and data from the submission ZIP.
-
-AI-use disclosure: Codex assisted with implementation, testing and documentation. ChatGPT assisted with assignment analysis and the implementation prompt. The student must verify and complete any other personal disclosure details. Code/formula sources consulted were the supplied assignment, starter repository and its documentation; no external implementation was copied.
-
-CI checks the committed models' interface contracts first, then runs the unchanged smoke/full tests with their toy-trained LambdaMART fixture in a disposable CI working copy. The stock `test_end_to_end_toy` assumes a toy-trained model and fails its synthetic accuracy threshold for the real-trained model; real artifact quality is checked on actual DEV. See the notes for exact test outcomes.
+AI-use disclosure: Codex assisted with implementation, experiments, testing,
+documentation and earlier authorized portal submissions. ChatGPT assisted with
+assignment analysis. Code/formula provenance: assignment and starter repository;
+no external implementation copied in this pass. The student must verify these
+disclosures. This pass does not submit to the leaderboard.

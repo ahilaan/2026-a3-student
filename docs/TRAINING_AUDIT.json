@@ -1,0 +1,20 @@
+{
+  "verified_splits": {
+    "train": {
+      "source_sha256": "6eb3fae4e1186e1242a6520f53a98abdbcde5b926dd19a28e51239284b1d55dc",
+      "rows": 723412,
+      "queries": 6000,
+      "raw_labels_queries_match_source": true,
+      "query_transforms_recomputed_and_equal": true
+    },
+    "dev": {
+      "source_sha256": "e86fb3fe7e8a5f16479da7ce04f783ae85735f17f66016786c3ffc797dd9d4db",
+      "rows": 235259,
+      "queries": 2000,
+      "raw_labels_queries_match_source": true,
+      "query_transforms_recomputed_and_equal": true
+    }
+  },
+  "combined_exactly_train_then_dev": true,
+  "TEST_opened": false
+}

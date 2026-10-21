@@ -1,0 +1,12 @@
+{
+  "model_sha256": "9f0d6bf8bfcedc76b70c309da327bd2ddaa1391e8a5430741179dffcd21cd49b",
+  "cv_source_sha256": "4100ef9a9d2db9ef47819df6fbfb5da09e917dbdd15c7d6a9916bf6583a73823",
+  "artifact_sha256": {
+    "model.txt": "9f0d6bf8bfcedc76b70c309da327bd2ddaa1391e8a5430741179dffcd21cd49b",
+    "pointwise_model.pt": "cfbff50b8290bb112912256e29b36dbd5f62669b66d0f69fb44f17c547279495",
+    "pairwise_model.pt": "b277efea96a1830c26f537de7259fa43dc52cb1d2ac90a7aac13e97f51a4cf9e"
+  },
+  "report_sha256": "fe779d387828387e6bc720b6cfbcb36a3df870f2ca26af5de89836d1cbd95e25",
+  "pages": 3,
+  "training_audit_sha256": "047902ef2e35e8b594fb008321b70b01a9d577415aec6c8b7e9556c5fdc42e61"
+}

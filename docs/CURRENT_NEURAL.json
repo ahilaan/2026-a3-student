@@ -1,0 +1,67 @@
+{
+  "args": {
+    "name": "campaign4_pair_trusted_refine4",
+    "full": true,
+    "epochs": 4,
+    "lr": 3e-05,
+    "dropout": 0.03,
+    "fresh": false,
+    "seed": 71,
+    "swa_start": 1,
+    "patience": 4,
+    "weight_power": 1.0,
+    "init": "runs/compliant_campaign/stages/campaign4_extra127075_seedmean025/pairwise_model.pt",
+    "hidden": null
+  },
+  "initial_reserved_dev": 0.4709184440704995,
+  "selection_warning": "Final refit trains on all DEV; the reported DEV subset supplies gradients.",
+  "gradients": "TRAIN+DEV",
+  "training_rows": 958671,
+  "training_queries": 8000,
+  "reported_dev_supplied_gradients": true,
+  "standardization": "Frozen original TRAIN-only statistics",
+  "TEST_used": false,
+  "history": [
+    {
+      "epoch": 1,
+      "reserved_dev": 0.48124060260563584,
+      "loss": 0.4217855131476783,
+      "seconds": 71.78768669999408,
+      "averaged_reserved_dev": 0.48124060260563584
+    },
+    {
+      "epoch": 2,
+      "reserved_dev": 0.4861510708889426,
+      "loss": 0.41629775221762233,
+      "seconds": 167.11631689999922,
+      "averaged_reserved_dev": 0.4865877666781893
+    },
+    {
+      "epoch": 3,
+      "reserved_dev": 0.4860025404604808,
+      "loss": 0.4135982704025149,
+      "seconds": 249.42067709999537,
+      "averaged_reserved_dev": 0.48704526049053903
+    },
+    {
+      "epoch": 4,
+      "reserved_dev": 0.4870596689288152,
+      "loss": 0.4098357989028574,
+      "seconds": 318.82222949999414,
+      "averaged_reserved_dev": 0.48694178249587017
+    }
+  ],
+  "best_epoch": 4,
+  "best_reserved_dev": 0.4870596689288152,
+  "initial_artifact_sha256": "00568f30451537e0592dcc37d4444a1333382cbd54205d4e7c3bbddd62691140",
+  "best_kind": "epoch",
+  "saved_fixed_epoch": 4,
+  "model": "runs/compliant_campaign/models/campaign4_pair_trusted_refine4/pairwise_model.pt",
+  "sha256": "b277efea96a1830c26f537de7259fa43dc52cb1d2ac90a7aac13e97f51a4cf9e",
+  "hidden": [
+    256,
+    128
+  ],
+  "supervision": "Relevance labels only; no teacher scores",
+  "standardizer_sha256": "2c9249191a9cf44e4158c4f49c4e8bfcc483baad883161414184d03bae59fca7"
+}

@@ -27,13 +27,17 @@ def weighted_ranknet_loss(preferred, other, weights):
     return (F.softplus(-(preferred - other)) * weights).sum() / weights.sum().clamp_min(1e-12)
 
 
-def lambda_pairs(starts, labels, predictions, cap, rng):
+def lambda_pairs(starts, labels, predictions, cap, rng, weight_power=1.):
     """Sample unequal-label pairs touching current top 20, weighted by |dNDCG@10|.
 
     A small unweighted component supplies a learning signal below rank 10.
     Query-normalized weights keep queries comparable rather than emphasizing
     queries with more documents. Only relevance labels supervise learning.
+    An optional power below one smooths extreme weights before restoring each
+    query's mean weight; the default preserves the original weighting exactly.
     """
+    if not 0 <= weight_power <= 1:
+        raise ValueError('pair-weight power must be between zero and one')
     pairs, weights = [], []
     for a, b in zip(starts[:-1], starts[1:]):
         y = labels[a:b]
@@ -52,7 +56,11 @@ def lambda_pairs(starts, labels, predictions, cap, rng):
         discount = np.where(ranks < 10, 1 / np.log2(ranks + 2), 0)
         ideal = (np.sort(gains)[::-1][:10] / np.log2(np.arange(2, min(n, 10) + 2))).sum()
         delta = np.abs((gains[hi] - gains[lo]) * (discount[hi] - discount[lo])) / max(ideal, 1e-12)
-        weight = delta / max(delta.mean(), 1e-12) + 0.1
+        scaled = delta / max(delta.mean(), 1e-12)
+        if weight_power != 1:
+            scaled = scaled ** weight_power
+            scaled = scaled / max(scaled.mean(), 1e-12)
+        weight = scaled + 0.1
         pairs.append(np.column_stack((hi + a, lo + a)))
         weights.append(weight.astype(np.float32))
     return np.concatenate(pairs), np.concatenate(weights)

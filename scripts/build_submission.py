@@ -1,5 +1,7 @@
 """Build 2023CS10076.zip only after the released-DEV artifact preflight passes."""
 import argparse
+import hashlib
+import json
 import os
 from pathlib import Path
 import sys
@@ -19,8 +21,17 @@ REQUIRED = (
 def source_files(root):
     """Keep starter sources/docs and required weights; exclude data and run outputs."""
     selected = set(REQUIRED)
-    selected.update(("README.md", "requirements.txt", "conftest.py", "data/README.md",
-                     "a3-rankfusion-LTR.pdf", "a3-rankfusion-LTR.tex"))
+    selected.update(("README.md", "requirements.txt", "conftest.py", "data/README.md", ".gitignore",
+                     "a3-rankfusion-LTR.pdf", "a3-rankfusion-LTR.tex", "docs/REPORT.pdf",
+                     "docs/CV_RESULTS.json", "docs/REPORT_MANIFEST.json"))
+    for name in ("docs/CURRENT_MODEL.json", "docs/CURRENT_NEURAL.json", "docs/TRAINING_AUDIT.json",
+                 "docs/FINAL_C1_RESULTS.json", "docs/COMPETITION_MANIFEST.json",
+                 "docs/REPRODUCTION_VERIFICATION.json"):
+        if (root / name).is_file():
+            selected.add(name)
+    for path in (root / ".github").rglob("*"):
+        if path.is_file() and path.suffix in (".yml", ".yaml", ".md"):
+            selected.add(path.relative_to(root).as_posix())
     for folder in ("submission", "harness", "scripts", "tests", "docs"):
         for path in (root / folder).rglob("*"):
             if path.is_file() and path.suffix in (".py", ".md", ".sh") and "__pycache__" not in path.parts:
@@ -31,7 +42,37 @@ def source_files(root):
     return sorted(selected)
 
 
+def verify_report(root):
+    """Reject a report that describes different weights or changed PDF bytes."""
+    manifest = json.loads((root/'docs/REPORT_MANIFEST.json').read_text())
+    cv = json.loads((root/'docs/CV_RESULTS.json').read_text())
+    model_hash = hashlib.sha256((root/'submission/model.txt').read_bytes()).hexdigest()
+    report = root/'docs/REPORT.pdf'
+    if model_hash != manifest['model_sha256']:
+        raise ValueError('Report describes a different model; regenerate it')
+    artifacts = manifest['artifact_sha256']
+    if set(artifacts) != {'model.txt', 'pointwise_model.pt', 'pairwise_model.pt'}:
+        raise ValueError('Report must bind all three scoring artifacts')
+    for name, expected in artifacts.items():
+        if hashlib.sha256((root/'submission'/name).read_bytes()).hexdigest() != expected:
+            raise ValueError('Report describes a different scoring artifact; regenerate it')
+    if hashlib.sha256(report.read_bytes()).hexdigest() != manifest['report_sha256']:
+        raise ValueError('Report PDF bytes changed after verification')
+    # Generation checks the actual page count and binds the inspected PDF hash.
+    # Grading/build verification needs only the original runtime dependencies.
+    if not 2 <= manifest['pages'] <= 3:
+        raise ValueError('Report must contain two or three verified pages')
+    if (cv['split'] != 'Fold1 TRAIN only' or cv['folds'] != 5
+            or cv['source_sha256'] != manifest['cv_source_sha256']):
+        raise ValueError('Report requires matching TRAIN-only five-fold evidence')
+    if manifest.get('training_audit_sha256'):
+        if hashlib.sha256((root/'docs/TRAINING_AUDIT.json').read_bytes()).hexdigest() != manifest['training_audit_sha256']:
+            raise ValueError('Input-audit bytes changed after report generation')
+    return manifest
+
+
 def build(root, out):
+    verify_report(root)
     files = source_files(root)
     temporary = out.with_suffix(".zip.tmp")
     with zipfile.ZipFile(temporary, "w", zipfile.ZIP_DEFLATED, compresslevel=9) as package:

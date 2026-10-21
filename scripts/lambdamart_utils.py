@@ -34,7 +34,7 @@ def default_params(num_leaves=15, learning_rate=0.05, min_data_in_leaf=50, lambd
     return p
 
 
-def fit(X, y, qids, params, num_trees):
+def fit(X, y, qids, params, num_trees, feature_names="auto"):
     import lightgbm as lgb
     # Regroup stably even if a caller supplies interleaved query rows. Move
     # features and labels with the IDs, preserving document order within a query.
@@ -42,8 +42,13 @@ def fit(X, y, qids, params, num_trees):
     groups = np.array([codes.setdefault(q, len(codes)) for q in qids])
     order = np.argsort(groups, kind="stable")
     qids = np.asarray(qids)[order]
-    return lgb.train(params, lgb.Dataset(np.asarray(X)[order], label=np.asarray(y)[order],
-                                       group=group_sizes(qids)), num_boost_round=num_trees)
+    # Avoid a second full matrix allocation for already grouped inputs.
+    grouped = np.array_equal(order, np.arange(len(order)))
+    inputs = np.asarray(X) if grouped else np.asarray(X)[order]
+    labels = np.asarray(y) if grouped else np.asarray(y)[order]
+    return lgb.train(params, lgb.Dataset(inputs, label=labels,
+                                       group=group_sizes(qids), feature_name=feature_names),
+                     num_boost_round=num_trees)
 
 
 def ndcg10(model, X, y, qids):

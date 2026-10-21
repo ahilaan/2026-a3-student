@@ -24,10 +24,12 @@ from submission.fusion import weighted_power_combsum
 
 _MODEL = None
 _QUERY_RANK_FEATURES = False
+_QUERY_MINMAX_FEATURES = False
+_QUERY_COMBINED_FEATURES = False
 _RAW_WIDTH = None
-_FUSION_WEIGHTS = {"bm25_whole_document": 2.0, "bm25_title": 3.0,
-                   "lmir_dir_whole_document": 3.0, "lmir_jm_whole_document": 0.0}
-_FUSION_POWER = 1.5
+_FUSION_WEIGHTS = {"bm25_whole_document": 1.0, "bm25_title": 1.0,
+                   "lmir_dir_whole_document": 1.0, "lmir_jm_whole_document": 0.0}
+_FUSION_POWER = 1.0
 
 
 def _query_feature_names(width):
@@ -51,10 +53,41 @@ def _augment_query(X):
     return result
 
 
+def _augment_query_minmax(X):
+    """Append per-query min-max values; preserve missing values and raw columns."""
+    raw = np.asarray(X, dtype=np.float32)
+    if raw.ndim != 2:
+        raise ValueError('query features must be a matrix')
+    n, width = raw.shape
+    out = np.zeros((n, 2 * width), dtype=np.float32)
+    out[:, :width] = raw
+    if not n:
+        return out
+    values = raw.astype(np.float64)
+    finite = np.isfinite(values)
+    lo = np.min(np.where(finite, values, np.inf), axis=0)
+    hi = np.max(np.where(finite, values, -np.inf), axis=0)
+    span = hi - lo
+    active = np.isfinite(span) & (span > 0)
+    normalized = out[:, width:]
+    normalized[:, active] = ((values[:, active] - lo[active]) / span[active]).astype(np.float32)
+    normalized[~finite] = np.nan
+    return out
+
+
+def _augment_query_union(X):
+    """The declared union contains raw, percentile and min-max columns once."""
+    ranked = _augment_query(X)
+    minmax = _augment_query_minmax(X)
+    return np.column_stack([ranked, minmax[:, minmax.shape[1] // 2:]])
+
+
 def prepare(model_path: str) -> None:
-    global _MODEL, _QUERY_RANK_FEATURES, _RAW_WIDTH
+    global _MODEL, _QUERY_RANK_FEATURES, _QUERY_MINMAX_FEATURES, _QUERY_COMBINED_FEATURES, _RAW_WIDTH
     _MODEL = None  # a failed load must not leave a previous dataset's model active
     _QUERY_RANK_FEATURES, _RAW_WIDTH = False, None
+    _QUERY_MINMAX_FEATURES = False
+    _QUERY_COMBINED_FEATURES = False
     if not os.path.isfile(model_path):
         raise FileNotFoundError(
             f"trained model artifact not found at {model_path!r}; run scripts/train_model.py and "
@@ -69,7 +102,14 @@ def prepare(model_path: str) -> None:
     # inferred from a dataset name, dimension, query ID or feature distribution.
     names = model.feature_name()
     _QUERY_RANK_FEATURES = (len(names) % 2 == 0 and names == _query_feature_names(len(names) // 2))
-    _RAW_WIDTH = model.num_feature() // 2 if _QUERY_RANK_FEATURES else model.num_feature()
+    width = len(names) // 2
+    minmax_names = [f'raw_{i}' for i in range(width)] + [f'qmin_{i}' for i in range(width)]
+    _QUERY_MINMAX_FEATURES = len(names) % 2 == 0 and names == minmax_names
+    union_width = len(names) // 3
+    union_names = (_query_feature_names(union_width) + [f'qmin_{i}' for i in range(union_width)])
+    _QUERY_COMBINED_FEATURES = len(names) % 3 == 0 and names == union_names
+    _RAW_WIDTH = (model.num_feature() // 3 if _QUERY_COMBINED_FEATURES else
+                  model.num_feature() // 2 if (_QUERY_RANK_FEATURES or _QUERY_MINMAX_FEATURES) else model.num_feature())
     _MODEL = model
 
 
@@ -97,9 +137,17 @@ def rerank_with_ltr(qid: str, candidate_doc_ids: List[str], features: Dict[str, 
     X = np.asarray([features[d] for d in ids], dtype=np.float32)
     if X.ndim != 2 or X.shape[1] != _RAW_WIDTH:
         raise ValueError(f"expected {_RAW_WIDTH} features per candidate, got shape {X.shape}")
-    if _QUERY_RANK_FEATURES:
+    if _QUERY_COMBINED_FEATURES:
+        X = _augment_query_union(X)
+    elif _QUERY_RANK_FEATURES:
         X = _augment_query(X)
-    preds = _MODEL.predict(X, num_threads=1)
+    elif _QUERY_MINMAX_FEATURES:
+        X = _augment_query_minmax(X)
+    # Prediction partitions rows across threads, so each document's tree sum
+    # is unchanged. Keep small pools cheap and bound larger pools to four CPUs.
+    work = len(ids) * _MODEL.num_trees()
+    threads = min(4, (work + 32767) // 32768)
+    preds = _MODEL.predict(X, num_threads=threads)
     if not np.isfinite(preds).all():
         raise ValueError("LightGBM returned non-finite ranking scores")
     order = np.argsort(-preds, kind="stable")

@@ -1,0 +1,6 @@
+# Keep artifact and provenance hashes identical on Windows and Linux.
+# Shell scripts already use LF; preserve their checked-in bytes as well.
+* -text
+*.pdf binary
+*.pt binary
+*.zip binary

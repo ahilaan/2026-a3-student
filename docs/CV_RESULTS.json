@@ -1,0 +1,63 @@
+{
+  "split": "Fold1 TRAIN only",
+  "folds": 5,
+  "params": {
+    "objective": "lambdarank",
+    "metric": "ndcg",
+    "eval_at": [
+      10
+    ],
+    "num_leaves": 127,
+    "learning_rate": 0.05,
+    "min_data_in_leaf": 100,
+    "lambda_l2": 10,
+    "feature_fraction": 0.8,
+    "bagging_fraction": 0.8,
+    "bagging_freq": 1,
+    "seed": 0,
+    "data_random_seed": 0,
+    "feature_fraction_seed": 0,
+    "bagging_seed": 0,
+    "deterministic": true,
+    "force_row_wise": true,
+    "verbose": -1,
+    "num_threads": 4,
+    "extra_trees": true,
+    "max_bin": 63
+  },
+  "summary": [
+    {
+      "trees": 400,
+      "train_mean": 0.5536583683574243,
+      "validation_mean": 0.47525838967286627,
+      "validation_std": 0.007771698715661548,
+      "validation_train_ratio": 0.8583964712442574
+    },
+    {
+      "trees": 800,
+      "train_mean": 0.6033151380633047,
+      "validation_mean": 0.4775249510890719,
+      "validation_std": 0.007944559625951218,
+      "validation_train_ratio": 0.7915016895182996
+    },
+    {
+      "trees": 1200,
+      "train_mean": 0.6384602916740902,
+      "validation_mean": 0.4777405420021652,
+      "validation_std": 0.008594250450132797,
+      "validation_train_ratio": 0.7482697800195124
+    }
+  ],
+  "source": "C:\\Users\\HP\\Downloads\\col764_a3\\2026-a3-student\\runs\\compliant_campaign\\top3_extra127_cv1200.json",
+  "source_sha256": "4100ef9a9d2db9ef47819df6fbfb5da09e917dbdd15c7d6a9916bf6583a73823",
+  "dev_fixed_count_curve": [
+    {
+      "trees": 600,
+      "ndcg": 0.5259064110188709
+    },
+    {
+      "trees": 1200,
+      "ndcg": 0.5532925918455471
+    }
+  ]
+}

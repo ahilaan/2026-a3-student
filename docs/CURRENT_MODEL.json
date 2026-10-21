@@ -1,0 +1,40 @@
+{
+  "training_splits": "Fold1 TRAIN+DEV only",
+  "model": "runs/compliant_campaign/models/campaign4_high065_new63035.txt",
+  "sha256": "9f0d6bf8bfcedc76b70c309da327bd2ddaa1391e8a5430741179dffcd21cd49b",
+  "constituent_receipts": [
+    "runs/compliant_campaign/campaign4_extra127_extend2000.json",
+    "runs/compliant_campaign/campaign4_extra63_seed23_extend2400.json"
+  ],
+  "first_weight": 0.65,
+  "union": false,
+  "trees": 4400,
+  "features": 272,
+  "reproduction": [
+    "python scripts/compliant_train.py full --name top3_extra127_full1200 --config extra127 --rounds 1200 --normalization rank --seed 0 --threads 4 --augment --checkpoints 400 800 1200",
+    "python scripts/compliant_train.py full --name campaign4_extra127_extend2000 --config extra127 --rounds 2000 --normalization rank --seed 0 --threads 4 --augment --init-receipt runs/compliant_campaign/top3_extra127_full1200.json --checkpoints 1200 1600 2000",
+    "python scripts/compliant_train.py full --name aug63_seed23_1200 --config extra63 --rounds 1200 --normalization rank --seed 23 --threads 4 --augment",
+    "python scripts/compliant_train.py full --name campaign4_extra63_seed23_extend2400 --config extra63 --rounds 2400 --normalization rank --seed 23 --threads 4 --augment --init-receipt runs/compliant_campaign/aug63_seed23_1200.json --checkpoints 1200 1800 2400",
+    "python scripts/compliant_blend.py --first runs/compliant_campaign/campaign4_extra127_extend2000.json --second runs/compliant_campaign/campaign4_extra63_seed23_extend2400.json --first-weight 0.65 --name campaign4_high065_new63035"
+  ],
+  "report_cv_receipt": "runs/compliant_campaign/top3_extra127_cv1200.json",
+  "standard_entry_point": "python scripts/train_model.py --config current-main --train data/train --dev data/dev --use-dev --work-dir runs/current_reproduction --out runs/current_reproduction/model.txt",
+  "verification_report": "docs/FINAL_C1_PASS.md",
+  "verified_fresh_reproduction": {
+    "byte_equal": true,
+    "prediction_equal": true,
+    "ranking_equal": true,
+    "maximum_prediction_difference": 0.0,
+    "trees": 4400,
+    "features": 272,
+    "seconds": 5984.706665200007
+  },
+  "verified_environment": {
+    "python": "3.13.7 (tags/v3.13.7:bcee1c3, Aug 14 2025, 14:15:11) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "numpy": "2.5.4",
+    "lightgbm": "4.7.0",
+    "torch": "2.14.1+cpu"
+  },
+  "cross_platform_byte_identity": "Not verified; local Windows reproduction only."
+}

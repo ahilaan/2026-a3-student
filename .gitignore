@@ -6,3 +6,34 @@ tmp/
 data/train/
 data/dev/
 data/cache/
+
+# Public C1 research model/data artifacts; keep reports and receipts reviewable.
+runs/c1_research/models/
+runs/c1_research/api_models/
+runs/c1_research/verification_models/
+runs/c1_research/baseline/*.txt
+runs/c1_research/baseline/*.pt
+runs/c1_research/baseline/*.zip
+runs/c1_research/stress_*_model.txt
+runs/c1_research/edge_large_queries.txt
+runs/c1_research/diagnostic_*_model.txt
+runs/c1_research/api_incidents/*.txt
+runs/c1_research/api_incidents/*.tmp
+runs/score_push/baseline/
+runs/score_push/models/
+runs/score_push/packages/
+runs/score_push/candidate*/
+runs/score_campaign2/baseline/
+runs/score_campaign2/models/
+runs/score_campaign2/packages/
+runs/score_campaign2/stages/
+runs/score_campaign3/baseline/
+runs/score_campaign3/models/
+runs/score_campaign3/packages/
+runs/score_campaign3/stages/
+
+# Local preserved history and new campaign artifacts
+runs/compliant_campaign/archive/
+runs/compliant_campaign/models/
+runs/compliant_campaign/stages/
+runs/compliant_campaign/packages/
